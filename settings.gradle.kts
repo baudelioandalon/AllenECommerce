@@ -1,0 +1,5 @@
+include (":app")
+include(":commonutils")
+include(":library:core")
+include(":library:ui-system")
+include(":features:login")
