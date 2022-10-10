@@ -1,4 +1,3 @@
-val kotlin_version: String by extra
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
@@ -7,7 +6,6 @@ apply {
     plugin(Dependency.pluginKotlinApp)
     plugin(Dependency.pluginKotlinKapt)
     plugin(Dependency.pluginKotlinParcelize)
-    plugin("kotlin-android")
 }
 
 android {
@@ -64,5 +62,11 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0")
 }
 repositories {
+    google()
+    gradlePluginPortal()
     mavenCentral()
+    maven(url = "https://www.jitpack.io")
+    maven(
+        url = ("https://maven.google.com")
+    )
 }
