@@ -85,7 +85,6 @@ dependencies {
     androidTestImplementation(Dependency.testAndroidJEspressoCore)
     implementation("androidx.core:core-ktx:+")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0")
-    implementation(kotlinModule("stdlib-jdk7", kotlin_version))
 }
 repositories {
     mavenCentral()

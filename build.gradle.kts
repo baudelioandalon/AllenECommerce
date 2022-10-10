@@ -16,7 +16,6 @@ buildscript {
         classpath(Dependency.pluginSageArgs)
         classpath(Dependency.pluginFirebaseCrashlyticsGradle)
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.10")
-        classpath(kotlinModule("gradle-plugin", kotlin_version))
     }
 }
 allprojects {
