@@ -83,6 +83,7 @@ dependencies {
     androidTestImplementation(Dependency.testAndroidJEspressoCore)
     implementation("androidx.core:core-ktx:+")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0")
+    implementation(Dependency.splashGoogle)
 }
 repositories {
     google()

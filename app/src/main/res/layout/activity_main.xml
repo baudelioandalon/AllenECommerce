@@ -7,20 +7,139 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        android:fillViewport="true">
 
-        <TextView
-            android:id="@+id/txtHello"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hello World!"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".MainActivity">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:id="@+id/imgHello"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-80dp"
+                android:layout_marginTop="120dp"
+                android:src="@drawable/login_shopping"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvWelcomeMessage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="49dp"
+                android:layout_marginEnd="50dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="Bienvenido a tu Tienda local"
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imgHello" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:src="@drawable/ic_allen_blue"
+                app:layout_constraintStart_toStartOf="@+id/tvWelcomeMessage"
+                app:layout_constraintTop_toBottomOf="@+id/tvWelcomeMessage" />
+
+            <TextView
+                android:id="@+id/tvStatusAllen"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="50dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="En linea"
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+            <TextView
+                android:id="@+id/tvMessage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="27dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="Puedes comenzar a hacer compras o publicar tus productos, incluso sin ubicacion fija y sin local"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="@id/tvWelcomeMessage"
+                app:layout_constraintStart_toStartOf="@+id/imageView"
+                app:layout_constraintTop_toBottomOf="@+id/tvStatusAllen" />
+
+            <com.boreal.commonutils.component.roundablelayout.CURoundableLayout
+                android:id="@+id/CURoundableLayout"
+                android:layout_width="0dp"
+                android:layout_height="54dp"
+                android:layout_marginTop="45dp"
+                app:cu_backgroundColor="@color/colorPrimary"
+                app:cu_cornerAll="5dp"
+                app:layout_constraintEnd_toEndOf="@+id/tvMessage"
+                app:layout_constraintStart_toStartOf="@+id/tvMessage"
+                app:layout_constraintTop_toBottomOf="@+id/tvMessage">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="Entrar"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </com.boreal.commonutils.component.roundablelayout.CURoundableLayout>
+
+            <com.boreal.commonutils.component.roundablelayout.CURoundableLayout
+                android:id="@+id/btnBeSeller"
+                android:layout_width="0dp"
+                android:layout_height="54dp"
+                android:layout_marginTop="26dp"
+                app:cu_backgroundColor="@color/white"
+                app:cu_cornerAll="5dp"
+                app:cu_strokeLineColor="@color/corner_gray"
+                app:cu_strokeLineWidth="1dp"
+                app:layout_constraintEnd_toEndOf="@+id/tvMessage"
+                app:layout_constraintStart_toStartOf="@+id/tvMessage"
+                app:layout_constraintTop_toBottomOf="@+id/CURoundableLayout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="Quiero ser socio vendedor"
+                    android:textColor="@color/black_text"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </com.boreal.commonutils.component.roundablelayout.CURoundableLayout>
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="11dp"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/ic_allen_blue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnBeSeller" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 </layout>
