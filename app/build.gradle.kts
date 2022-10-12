@@ -1,6 +1,6 @@
 plugins {
     id("com.android.application")
-    id("kotlin-android")
+    id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
 }
 
@@ -16,7 +16,7 @@ android {
     signingConfigs {
         getByName("debug") {
             val properties =
-                org.jetbrains.kotlin.konan.properties.loadProperties(project.rootProject.file("local.properties").path)
+                    org.jetbrains.kotlin.konan.properties.loadProperties(project.rootProject.file("local.properties").path)
             storeFile = file("../gradle/keystoreboreal.jks")
             storePassword = properties.getProperty("STORE_PASSWORD")
             keyAlias = properties.getProperty("KEY_ALIAS")
@@ -24,7 +24,7 @@ android {
         }
         create("release") {
             val properties =
-                org.jetbrains.kotlin.konan.properties.loadProperties(project.rootProject.file("local.properties").path)
+                    org.jetbrains.kotlin.konan.properties.loadProperties(project.rootProject.file("local.properties").path)
             storeFile = file("../gradle/keystoreboreal.jks")
             storePassword = properties.getProperty("STORE_PASSWORD")
             keyPassword = properties.getProperty("KEY_PASSWORD")
@@ -41,31 +41,42 @@ android {
         versionCode = AndroidConfig.versionCode
         versionName = AndroidConfig.versionName
 
-        signingConfig = signingConfigs.getByName("release")
+//        signingConfig = signingConfigs.getByName("release")
         testInstrumentationRunner = AndroidConfig.testRunner
+        vectorDrawables {
+            useSupportLibrary = true
+        }
     }
-
 
     buildTypes {
         getByName("debug") {
             isMinifyEnabled = false
             isDebuggable = true
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+                    getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
 
     buildFeatures {
         dataBinding = true
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = Dependency.composePlugin
+    }
+    packagingOptions {
+        resources {
+            excludes.add("/META-INF/{AL2.0,LGPL2.1}")
+        }
     }
 }
 
@@ -81,16 +92,15 @@ dependencies {
     testImplementation(Dependency.testJunit)
     androidTestImplementation(Dependency.testAndroidJunit)
     androidTestImplementation(Dependency.testAndroidJEspressoCore)
-    implementation("androidx.core:core-ktx:+")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0")
     implementation(Dependency.splashGoogle)
-}
-repositories {
-    google()
-    gradlePluginPortal()
-    mavenCentral()
-    maven(url = "https://www.jitpack.io")
-    maven(
-        url = ("https://maven.google.com")
-    )
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")
+    implementation("androidx.compose.ui:ui:1.2.1")
+    implementation("androidx.compose.ui:ui-tooling:1.2.1")
+    implementation("androidx.compose.foundation:foundation:1.2.1")
+    implementation("androidx.compose.material:material:1.2.1")
+    implementation("androidx.compose.material:material-icons-core:1.2.1")
+    implementation("androidx.compose.material:material-icons-extended:1.2.1")
+    implementation("androidx.activity:activity-compose:1.6.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1")
+    implementation("androidx.compose.runtime:runtime-livedata:1.2.1")
 }

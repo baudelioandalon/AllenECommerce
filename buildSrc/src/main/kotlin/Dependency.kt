@@ -1,6 +1,7 @@
 object Dependency {
 
     const val pluginKotlinApp = "kotlin-android"
+    const val composePlugin = "1.3.0"
     const val pluginKotlinKapt = "kotlin-kapt"
     const val pluginKotlinParcelize = "kotlin-parcelize"
     const val pluginSafeArgs = "androidx.navigation.safeargs.kotlin"

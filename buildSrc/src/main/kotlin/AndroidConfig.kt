@@ -2,7 +2,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 object AndroidConfig {
-    const val minSdk = 23
+    const val minSdk = 26
     const val targetSdk = 33
     const val compileSdk = 33
     const val appId = "com.boreal.allen"
