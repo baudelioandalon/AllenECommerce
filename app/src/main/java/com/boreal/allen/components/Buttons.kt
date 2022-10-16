@@ -11,24 +11,84 @@ import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Black
 import androidx.compose.ui.graphics.Color.Companion.White
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.ExperimentalUnitApi
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import com.boreal.allen.R
-import com.boreal.allen.theme.GrayBorder
-import com.boreal.allen.theme.GrayBorderLight
-import com.boreal.allen.theme.SemiBold
+import com.boreal.allen.theme.*
 
+@Preview(showBackground = true)
+@Composable
+fun PreviewBottons() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(horizontal = 20.dp)
+    ) {
+        BackButton()
+        BlueButton(labelId = R.string.welcome_button_enter)
+        CornerButton(labelId = R.string.welcome_button_enter)
+        CornerImgButton(
+            imgId = R.drawable.ic_google_logo,
+            labelId = R.string.google_name,
+            modifier = Modifier.fillMaxWidth()
+        )
+        LittleAddButton()
+    }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Preview
+@Composable
+fun LittleAddButton(onClick: (() -> Unit)? = null) {
+    Box(
+        modifier = Modifier
+            .size(52.dp)
+            .background(
+                alpha = 0.7f,
+                brush = Brush.radialGradient(
+                    colors = listOf(
+                        GreenStrong,
+                        GreenTransparent
+                    )
+                ), shape = RoundedCornerShape(20.dp)
+            )
+            .padding(bottom = 4.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        Card(
+            shape = RoundedCornerShape(5.dp),
+            modifier = Modifier
+                .size(40.dp)
+                .background(Color.Transparent),
+            backgroundColor = GreenStrong, elevation = 0.dp,
+            onClick = { onClick?.invoke() }
+        ) {
+            Box(contentAlignment = Alignment.Center) {
+                Icon(
+                    modifier = Modifier.size(15.dp),
+                    imageVector = ImageVector.Companion.vectorResource(id = R.drawable.ic_more_icon),
+                    contentDescription = "moreIcon",
+                    tint = White
+                )
+            }
+        }
+    }
+}
 
 @OptIn(ExperimentalMaterialApi::class)
 @Preview(showBackground = true)
@@ -44,25 +104,6 @@ fun BackButton(modifier: Modifier = Modifier, onClick: (() -> Unit)? = null) {
             modifier = Modifier.wrapContentSize(),
             painter = painterResource(id = R.drawable.ic_back_arrow),
             contentDescription = ""
-        )
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewBlueButton() {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(horizontal = 20.dp)
-    ) {
-        BackButton()
-        BlueButton(labelId = R.string.welcome_button_enter)
-        CornerButton(labelId = R.string.welcome_button_enter)
-        CornerImgButton(
-            imgId = R.drawable.ic_google_logo,
-            labelId = R.string.google_name,
-            modifier = Modifier.fillMaxWidth()
         )
     }
 }

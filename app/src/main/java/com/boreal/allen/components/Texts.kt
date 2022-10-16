@@ -12,6 +12,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.DpSize
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 import com.boreal.allen.R
 import com.boreal.allen.theme.Bold
@@ -91,6 +93,27 @@ fun MediumTextBold(
 }
 
 @Composable
+fun BoldText(
+    text: String? = null,
+    labelId: Int? = null,
+    modifier: Modifier = Modifier,
+    size: TextUnit = 25.sp,
+    color: Color = Color.Black,
+    align: TextAlign? = null
+) {
+    Text(
+        modifier = modifier,
+        text = text ?: stringResource(id = labelId ?: R.string.empty_string),
+        fontSize = size,
+        color = color,
+        letterSpacing = 0.sp,
+        fontWeight = Bold,
+        textAlign = align,
+        fontFamily = MaterialTheme.typography.caption.fontFamily
+    )
+}
+
+@Composable
 fun RegularText(
     text: String? = null,
     labelId: Int? = null,
@@ -123,6 +146,46 @@ fun SeeAll(
         color = color,
         letterSpacing = 0.sp,
         fontWeight = Bold,
+        textAlign = align,
+        fontFamily = MaterialTheme.typography.caption.fontFamily
+    )
+}
+
+@Composable
+fun NameProductText(
+    text: String? = null,
+    labelId: Int? = null,
+    modifier: Modifier = Modifier,
+    color: Color = Color.Black,
+    align: TextAlign? = null
+) {
+    Text(
+        modifier = modifier,
+        text = text ?: stringResource(id = labelId ?: R.string.empty_string),
+        fontSize = 17.sp,
+        color = color,
+        letterSpacing = 0.sp,
+        fontWeight = SemiBold,
+        textAlign = align,
+        fontFamily = MaterialTheme.typography.caption.fontFamily
+    )
+}
+
+@Composable
+fun CategoryProductText(
+    text: String? = null,
+    labelId: Int? = null,
+    modifier: Modifier = Modifier,
+    color: Color = Color.Black,
+    align: TextAlign? = null
+) {
+    Text(
+        modifier = modifier,
+        text = text ?: stringResource(id = labelId ?: R.string.empty_string),
+        fontSize = 10.sp,
+        color = color,
+        letterSpacing = 0.sp,
+        fontWeight = SemiBold,
         textAlign = align,
         fontFamily = MaterialTheme.typography.caption.fontFamily
     )

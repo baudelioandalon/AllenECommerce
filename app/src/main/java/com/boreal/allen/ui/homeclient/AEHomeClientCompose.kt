@@ -4,18 +4,25 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Red
 import androidx.compose.ui.graphics.Color.Companion.White
+import androidx.compose.ui.graphics.Color.Companion.Yellow
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
+import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.ConstraintSet
+import androidx.constraintlayout.compose.Dimension
+import androidx.constraintlayout.compose.layoutId
 import com.boreal.allen.R
 import com.boreal.allen.components.*
 import com.boreal.allen.domain.model.PromotionItem
@@ -42,33 +49,59 @@ fun AEHomeClientComposable() {
         )
     }
     val scrollState = rememberScrollState()
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(GrayBackgroundMain)
-            .verticalScroll(scrollState)
-    ) {
-        TopContainer()
-        BrandingContainer()
-        LastItemsContainer()
+
+    ConstraintLayout(modifier = Modifier
+        .fillMaxSize()
+        .background(White), constraintSet = ConstraintSet {
+        val search = createRefFor("searchHome")
+        val content = createRefFor("content")
+        constrain(search) {
+            top.linkTo(parent.top)
+            start.linkTo(parent.start)
+            end.linkTo(parent.end)
+            width = Dimension.fillToConstraints
+            height = Dimension.wrapContent
+        }
+        constrain(content) {
+            top.linkTo(search.bottom, margin = 5.dp)
+            start.linkTo(parent.start)
+            end.linkTo(parent.end)
+            bottom.linkTo(parent.bottom)
+            width = Dimension.fillToConstraints
+            height = Dimension.fillToConstraints
+        }
+    }) {
+        Card(
+            modifier = Modifier
+                .layoutId("searchHome")
+                .wrapContentSize(), backgroundColor = Red,
+            elevation = 5.dp
+        ) {
+            ToolbarSearchHome()
+        }
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .layoutId("content")
+                .background(GrayBackgroundMain)
+                .verticalScroll(scrollState)
+        ) {
+            TopContainer()
+            BrandingContainer()
+            LastItemsContainer()
+        }
     }
+
 }
 
 @Composable
 fun TopContainer() {
-    Column(modifier = Modifier.background(White)) {
-        ToolbarSearchHome()
-        AutoSliding()
-        LazyRow(
-            modifier = Modifier
-                .padding(
-                    top = 23.dp,
-                    bottom = 35.dp
-                )
-        ) {
-            items(4) {
-                CategoryItem()
-            }
+    AutoSliding()
+    LazyRow(
+        modifier = Modifier.background(White)
+    ) {
+        items(4) {
+            CategoryItem()
         }
     }
 }
@@ -150,7 +183,8 @@ fun AutoSliding() {
     }
     Column(
         modifier = Modifier
-            .wrapContentSize(),
+            .wrapContentSize()
+            .background(White),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
@@ -184,6 +218,7 @@ fun AutoSliding() {
         HorizontalPagerIndicator(
             pagerState = pagerState,
             modifier = Modifier
+                .background(White)
                 .align(Alignment.CenterHorizontally),
             inactiveColor = GrayInactiveIndicator,
             activeColor = PrimaryColor
