@@ -12,7 +12,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Red
 import androidx.compose.ui.graphics.Color.Companion.White
-import androidx.compose.ui.graphics.Color.Companion.Yellow
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -89,6 +88,8 @@ fun AEHomeClientComposable() {
             TopContainer()
             BrandingContainer()
             LastItemsContainer()
+            CategoryListContainer()
+            OffersItemsContainer()
         }
     }
 
@@ -143,6 +144,72 @@ fun LastItemsContainer() {
             MediumTextBold(
                 modifier = Modifier.padding(start = 30.dp, top = 20.dp),
                 text = "Ultimos articulos"
+            )
+            SeeAll(
+                modifier = Modifier.padding(top = 20.dp, end = 9.dp),
+                text = "Ver todos"
+            )
+        }
+        LazyRow(
+            modifier = Modifier
+                .padding(
+                    top = 30.dp,
+                    bottom = 35.dp
+                )
+        ) {
+            items(10) {
+                HomeItem()
+            }
+        }
+    }
+}
+
+@Composable
+fun CategoryListContainer() {
+    Column(
+        modifier = Modifier
+            .padding(top = 30.dp)
+            .background(White)
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            MediumTextBold(
+                modifier = Modifier.padding(start = 30.dp, top = 20.dp),
+                text = "Tecnologia"
+            )
+        }
+        LazyRow(
+            modifier = Modifier
+                .padding(
+                    top = 30.dp,
+                    bottom = 35.dp
+                )
+        ) {
+            items(10) { index ->
+                CategorySelectorItem(index % 2 != 0)
+            }
+        }
+    }
+}
+
+@Composable
+fun OffersItemsContainer() {
+    Column(
+        modifier = Modifier
+            .padding(top = 30.dp, bottom = 100.dp)
+            .background(White)
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            MediumTextBold(
+                modifier = Modifier.padding(start = 30.dp, top = 20.dp),
+                text = "Ofertas"
             )
             SeeAll(
                 modifier = Modifier.padding(top = 20.dp, end = 9.dp),

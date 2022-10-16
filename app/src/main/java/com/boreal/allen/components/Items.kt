@@ -12,9 +12,11 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -22,10 +24,19 @@ import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import androidx.constraintlayout.compose.layoutId
 import com.boreal.allen.R
-import com.boreal.allen.theme.GrayBrandingBackground
-import com.boreal.allen.theme.GrayCategoryBackground
-import com.boreal.allen.theme.GrayLetterCategoryProduct
-import com.boreal.allen.theme.SemiBold
+import com.boreal.allen.theme.*
+
+@Preview
+@Composable
+fun TestItems() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(White)
+    ) {
+        CategorySelectorItem()
+    }
+}
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -198,6 +209,83 @@ fun HomeItem() {
                 painter = painterResource(id = R.drawable.ic_favorite_unselected),
                 contentDescription = ""
             )
+        }
+
+    }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun CategorySelectorItem(maxBackground: Boolean = false) {
+    ConstraintLayout(
+        modifier = Modifier
+            .padding(start = 30.dp, end = 4.dp)
+            .height(144.dp)
+            .width(134.dp), constraintSet = ConstraintSet {
+            val background = createRefFor("background")
+            val favSelector = createRefFor("favorite_selector")
+            val item = createRefFor("item")
+            constrain(background) {
+                start.linkTo(parent.start)
+                end.linkTo(parent.end)
+                bottom.linkTo(parent.bottom)
+                width = Dimension.wrapContent
+                height = Dimension.wrapContent
+            }
+            constrain(favSelector) {
+                top.linkTo(parent.top, 10.dp)
+                start.linkTo(parent.start, 14.dp)
+                width = Dimension.wrapContent
+                height = Dimension.wrapContent
+            }
+            constrain(item) {
+                start.linkTo(parent.start)
+                top.linkTo(parent.top)
+                end.linkTo(parent.end)
+                width = Dimension.fillToConstraints
+                height = Dimension.wrapContent
+            }
+        }
+    ) {
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(if (maxBackground) 144.dp else 76.dp)
+                .layoutId("background"),
+            shape = RoundedCornerShape(15.dp),
+            elevation = 0.dp,
+            backgroundColor = CategoryBackgroundSelectorOne
+        ) {
+
+        }
+        Card(
+            modifier = Modifier
+                .layoutId("item"), onClick = {},
+            elevation = 0.dp,
+            shape = RoundedCornerShape(corner = CornerSize(10.dp)),
+            backgroundColor = Color.Transparent
+        ) {
+            Column(
+                modifier = Modifier
+                    .padding(horizontal = 10.dp)
+                    .fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                Image(
+                    modifier = Modifier
+                        .padding(top = 10.dp)
+                        .fillMaxWidth()
+                        .height(80.dp),
+                    painter = painterResource(id = R.drawable.laptop_test),
+                    contentDescription = "item"
+                )
+                BoldText(
+                    modifier = Modifier
+                        .fillMaxWidth(), text = "Laptops", align = TextAlign.Center,
+                    size = 15.sp
+                )
+            }
         }
 
     }
