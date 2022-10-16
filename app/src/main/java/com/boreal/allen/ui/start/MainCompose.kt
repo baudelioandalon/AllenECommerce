@@ -13,7 +13,7 @@ import com.boreal.allen.ui.welcome.AEWelcomeCompose
 @Composable
 fun MainCompose() {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = Screen.WelcomeScreen.route) {
+    NavHost(navController = navController, startDestination = Screen.HomeClientScreen.route) {
         composable(route = Screen.WelcomeScreen.route) {
             AEWelcomeCompose(navController)
         }
