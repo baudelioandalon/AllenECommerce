@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Allen</string>
+    <string name="welcome_start_message_second_part">sin ubicación fija y sin local.</string>
+    <string name="welcome_button_enter">Entrar</string>
+    <string name="welcome_start_message">"Puedes comenzar a hacer compras o publicar tus productos, incluso "</string>
+    <string name="welcome_i_want_to_be_seller">Quiero ser socio vendedor</string>
+    <string name="google_name">Google</string>
+    <string name="facebook_name">Facebook</string>
 </resources>

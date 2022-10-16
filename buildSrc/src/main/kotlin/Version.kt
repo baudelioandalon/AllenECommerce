@@ -23,7 +23,7 @@ object Version {
     const val testAndroidRunnerVersion = "1.1.0"
     const val testAndroidRulesVersion = "1.1.0"
     const val testTruthVersion = "1.1.3"
-    const val viewmodelVersion = "2.3.1"
+    const val viewmodelVersion = "2.5.1"
     const val gmsGoogleServicesVersion = "4.3.10"
 
     const val lottieVersion = "5.0.3"
@@ -37,6 +37,11 @@ object Version {
     const val lifecycleExtensionsVersion = "1.1.1"
     const val activityKtxVersion = "1.3.1"
     const val lifecycleKtxVersion = "2.3.1"
+
+    //COMPOSE
+    const val composeUiVersion = "1.2.1"
+    const val composeActivityVersion = "1.6.0"
+    const val composeViewModelVersion = "2.5.1"
 
     //DESIGN
     const val circularProgressVersion = "1.2.0"

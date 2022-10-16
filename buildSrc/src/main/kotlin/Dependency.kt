@@ -60,6 +60,17 @@ object Dependency {
     const val lifecycleKtx =
         "androidx.lifecycle:lifecycle-livedata-ktx:${Version.lifecycleKtxVersion}"
 
+    //Compose
+    const val composeUiUi = "androidx.compose.ui:ui:${Version.composeUiVersion}"
+    const val composeUiTooling = "androidx.compose.ui:ui-tooling:${Version.composeUiVersion}"
+    const val composeFoundation = "androidx.compose.foundation:foundation:${Version.composeUiVersion}"
+    const val composeMaterial = "androidx.compose.material:material:${Version.composeUiVersion}"
+    const val composeIconsCore = "androidx.compose.material:material-icons-core:${Version.composeUiVersion}"
+    const val composeIconsExtended = "androidx.compose.material:material-icons-extended:${Version.composeUiVersion}"
+    const val composeRuntimeLiveData= "androidx.compose.runtime:runtime-livedata:${Version.composeUiVersion}"
+    const val composeActivity= "androidx.activity:activity-compose:${Version.composeActivityVersion}"
+    const val composeLifecycleViewModel= "androidx.lifecycle:lifecycle-viewmodel-compose:${Version.composeViewModelVersion}"
+
     //DESIGN
     const val circularProgress =
         "com.jackandphantom.android:circularprogressbar:${Version.circularProgressVersion}"
