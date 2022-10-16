@@ -89,6 +89,7 @@ fun BlueButton(
             text = stringResource(id = labelId),
             fontSize = 15.sp,
             color = White,
+            fontWeight = SemiBold,
             letterSpacing = 0.sp,
             fontFamily = MaterialTheme.typography.caption.fontFamily,
             textAlign = TextAlign.Center
@@ -133,7 +134,6 @@ fun CornerButton(
     }
 }
 
-@OptIn(ExperimentalUnitApi::class)
 @Composable
 fun CornerImgButton(
     modifier: Modifier = Modifier,
