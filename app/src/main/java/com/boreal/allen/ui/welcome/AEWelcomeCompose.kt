@@ -3,7 +3,6 @@ package com.boreal.allen.ui.welcome
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.ClickableText
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -19,15 +18,18 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.boreal.allen.R
 import com.boreal.allen.components.BlueButton
 import com.boreal.allen.components.CornerButton
+import com.boreal.allen.components.LargeText
+import com.boreal.allen.components.LogoBlue
 import com.boreal.allen.theme.PrimaryColor
+import com.boreal.allen.ui.start.Screen
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
-@Preview(showBackground = true)
 @Composable
-fun AEWelcomeCompose() {
+fun AEWelcomeCompose(navController: NavHostController) {
     val systemUiController = rememberSystemUiController()
     if (isSystemInDarkTheme()) {
         systemUiController.setSystemBarsColor(
@@ -58,26 +60,16 @@ fun AEWelcomeCompose() {
                 .fillMaxSize()
                 .padding(horizontal = 30.dp)
         ) {
-            Text(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                text = "Bienvenido a tu Tienda local",
-                fontSize = 30.sp,
-                color = Black,
-                fontWeight = FontWeight.W700
-            )
+            LargeText(text = "Bienvenido a tu Tienda local")
             Image(
                 modifier = Modifier.padding(top = 7.dp),
                 painter = painterResource(
                     id = R.drawable.allen_blue_logo
                 ), contentDescription = "allenIcon"
             )
-            Text(
+            LargeText(
                 modifier = Modifier.padding(top = 16.dp),
-                text = "En linea",
-                fontSize = 30.sp,
-                color = Black,
-                fontWeight = FontWeight.W700
+                text = "En linea"
             )
             val annotatedText = buildAnnotatedString {
                 withStyle(
@@ -114,22 +106,26 @@ fun AEWelcomeCompose() {
                 }
             )
 
-            BlueButton(labelId = R.string.welcome_button_enter) {
-
+            BlueButton(
+                modifier = Modifier.padding(top = 40.dp),
+                labelId = R.string.welcome_button_enter
+            ) {
+                navController.navigate(Screen.LoginScreen.route)
             }
-            CornerButton(labelId = R.string.welcome_i_want_to_be_seller) {
-
+            CornerButton(
+                labelId = R.string.welcome_i_want_to_be_seller, modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 26.dp)
+            ) {
+                navController.navigate(Screen.RegisterScreen.route)
             }
 
-            Image(
+            LogoBlue(
                 modifier = Modifier
                     .padding(top = 15.dp, bottom = 50.dp)
                     .width(35.dp)
                     .height(11.dp)
-                    .align(alignment = Alignment.CenterHorizontally),
-                painter = painterResource(
-                    id = R.drawable.allen_blue_logo
-                ), contentDescription = "allenIcon"
+                    .align(alignment = Alignment.CenterHorizontally)
             )
         }
     }

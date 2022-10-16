@@ -17,9 +17,9 @@ import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.ExperimentalUnitApi
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -27,6 +27,7 @@ import androidx.constraintlayout.compose.ConstraintSet
 import com.boreal.allen.R
 import com.boreal.allen.theme.GrayBorder
 import com.boreal.allen.theme.GrayBorderLight
+import com.boreal.allen.theme.SemiBold
 
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -40,8 +41,7 @@ fun BackButton(modifier: Modifier = Modifier, onClick: (() -> Unit)? = null) {
         elevation = 0.dp,
         shape = CircleShape, onClick = { onClick?.invoke() }) {
         Image(
-            modifier = Modifier
-                .wrapContentSize(),
+            modifier = Modifier.wrapContentSize(),
             painter = painterResource(id = R.drawable.ic_back_arrow),
             contentDescription = ""
         )
@@ -68,10 +68,13 @@ fun PreviewBlueButton() {
 }
 
 @Composable
-fun BlueButton(@StringRes labelId: Int, onClick: (() -> Unit)? = null) {
+fun BlueButton(
+    @StringRes labelId: Int,
+    modifier: Modifier = Modifier,
+    onClick: (() -> Unit)? = null
+) {
     Button(
-        modifier = Modifier
-            .padding(top = 40.dp)
+        modifier = modifier
             .fillMaxWidth()
             .height(54.dp),
         elevation = ButtonDefaults.elevation(
@@ -86,17 +89,21 @@ fun BlueButton(@StringRes labelId: Int, onClick: (() -> Unit)? = null) {
             text = stringResource(id = labelId),
             fontSize = 15.sp,
             color = White,
-            fontWeight = FontWeight.W600,
+            letterSpacing = 0.sp,
+            fontFamily = MaterialTheme.typography.caption.fontFamily,
             textAlign = TextAlign.Center
         )
     }
 }
 
 @Composable
-fun CornerButton(@StringRes labelId: Int, onClick: (() -> Unit)? = null) {
+fun CornerButton(
+    @StringRes labelId: Int,
+    modifier: Modifier = Modifier,
+    onClick: (() -> Unit)? = null
+) {
     Card(
-        modifier = Modifier
-            .padding(top = 26.dp)
+        modifier = modifier
             .fillMaxWidth(), elevation = 0.dp,
         border = BorderStroke(1.dp, GrayBorder)
     ) {
@@ -117,13 +124,16 @@ fun CornerButton(@StringRes labelId: Int, onClick: (() -> Unit)? = null) {
                 text = stringResource(id = labelId),
                 fontSize = 15.sp,
                 color = Black,
-                fontWeight = FontWeight.W600,
-                textAlign = TextAlign.Center
+                fontWeight = SemiBold,
+                letterSpacing = 0.sp,
+                textAlign = TextAlign.Center,
+                fontFamily = MaterialTheme.typography.caption.fontFamily
             )
         }
     }
 }
 
+@OptIn(ExperimentalUnitApi::class)
 @Composable
 fun CornerImgButton(
     modifier: Modifier = Modifier,
@@ -132,8 +142,7 @@ fun CornerImgButton(
     onClick: (() -> Unit)? = null
 ) {
     Card(
-        modifier = modifier
-            .padding(top = 26.dp), elevation = 0.dp,
+        modifier = modifier, elevation = 0.dp,
         border = BorderStroke(1.dp, GrayBorderLight)
     ) {
         Button(
@@ -161,8 +170,9 @@ fun CornerImgButton(
                     modifier = Modifier.layoutId("text"),
                     text = stringResource(id = labelId),
                     fontSize = 15.sp,
+                    letterSpacing = 0.sp,
                     color = Black,
-                    fontWeight = FontWeight.W500,
+                    fontWeight = SemiBold,
                     textAlign = TextAlign.Center
                 )
             }
