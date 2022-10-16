@@ -15,8 +15,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.boreal.allen.R
 import com.boreal.allen.components.*
+import com.boreal.allen.domain.Screen
 import com.boreal.allen.theme.SemiBold
-import com.boreal.allen.ui.start.Screen
 
 @Composable
 fun AELoginCompose(navController: NavHostController) {
@@ -111,7 +111,7 @@ fun AELoginCompose(navController: NavHostController) {
                     .padding(vertical = 22.dp)
             )
 
-            CornerButton(labelId = R.string.welcome_i_want_to_be_seller){
+            CornerButton(labelId = R.string.welcome_i_want_to_be_seller) {
                 navController.navigate(Screen.RegisterScreen.route)
             }
             LogoBlue(

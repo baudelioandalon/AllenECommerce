@@ -15,7 +15,6 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -24,8 +23,8 @@ import com.boreal.allen.components.BlueButton
 import com.boreal.allen.components.CornerButton
 import com.boreal.allen.components.LargeText
 import com.boreal.allen.components.LogoBlue
+import com.boreal.allen.domain.Screen
 import com.boreal.allen.theme.PrimaryColor
-import com.boreal.allen.ui.start.Screen
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @Composable
