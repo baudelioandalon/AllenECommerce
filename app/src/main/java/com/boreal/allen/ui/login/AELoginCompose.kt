@@ -17,6 +17,7 @@ import com.boreal.allen.R
 import com.boreal.allen.components.*
 import com.boreal.allen.domain.Screen
 import com.boreal.allen.theme.SemiBold
+import com.boreal.allen.ui.homeclient.AEHomeClientComposable
 
 @Composable
 fun AELoginCompose(navController: NavHostController) {
@@ -97,7 +98,9 @@ fun AELoginCompose(navController: NavHostController) {
             BlueButton(
                 modifier = Modifier.padding(top = 25.dp),
                 labelId = R.string.welcome_button_enter
-            )
+            ){
+                navController.navigate(Screen.HomeClientScreen.route)
+            }
 
             RegularText(
                 modifier = Modifier
