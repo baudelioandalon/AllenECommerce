@@ -39,6 +39,7 @@ object Version {
     const val lifecycleKtxVersion = "2.3.1"
 
     //COMPOSE
+    const val composeUiUtilVersion = "1.0.1"
     const val composeUiVersion = "1.2.1"
     const val composeActivityVersion = "1.6.0"
     const val composeViewModelVersion = "2.5.1"

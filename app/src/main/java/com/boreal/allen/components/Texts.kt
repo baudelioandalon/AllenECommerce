@@ -15,8 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.boreal.allen.R
 import com.boreal.allen.theme.Bold
-import com.boreal.allen.theme.Montserrat
-import com.boreal.allen.theme.MontserratTypo
+import com.boreal.allen.theme.GrayLetterSeeAll
 import com.boreal.allen.theme.SemiBold
 
 
@@ -63,8 +62,29 @@ fun MediumText(
         modifier = modifier,
         text = text ?: stringResource(id = labelId ?: R.string.empty_string),
         fontSize = 20.sp,
+        letterSpacing = 0.sp,
         color = color,
         fontWeight = SemiBold,
+        textAlign = align,
+        fontFamily = MaterialTheme.typography.caption.fontFamily
+    )
+}
+
+@Composable
+fun MediumTextBold(
+    text: String? = null,
+    labelId: Int? = null,
+    modifier: Modifier = Modifier,
+    color: Color = Color.Black,
+    align: TextAlign? = null
+) {
+    Text(
+        modifier = modifier,
+        text = text ?: stringResource(id = labelId ?: R.string.empty_string),
+        fontSize = 20.sp,
+        color = color,
+        letterSpacing = 0.sp,
+        fontWeight = Bold,
         textAlign = align,
         fontFamily = MaterialTheme.typography.caption.fontFamily
     )
@@ -85,5 +105,25 @@ fun RegularText(
         color = color,
         fontWeight = SemiBold,
         textAlign = align
+    )
+}
+
+@Composable
+fun SeeAll(
+    text: String? = null,
+    labelId: Int? = null,
+    modifier: Modifier = Modifier,
+    color: Color = GrayLetterSeeAll,
+    align: TextAlign? = null
+) {
+    Text(
+        modifier = modifier,
+        text = text ?: stringResource(id = labelId ?: R.string.empty_string),
+        fontSize = 18.sp,
+        color = color,
+        letterSpacing = 0.sp,
+        fontWeight = Bold,
+        textAlign = align,
+        fontFamily = MaterialTheme.typography.caption.fontFamily
     )
 }

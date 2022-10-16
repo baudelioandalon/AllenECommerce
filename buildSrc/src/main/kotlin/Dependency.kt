@@ -62,6 +62,7 @@ object Dependency {
 
     //Compose
     const val composeUiUi = "androidx.compose.ui:ui:${Version.composeUiVersion}"
+    const val composeUiUtil = "androidx.compose.ui:ui-util:${Version.composeUiUtilVersion}"
     const val composeUiTooling = "androidx.compose.ui:ui-tooling:${Version.composeUiVersion}"
     const val composeFoundation = "androidx.compose.foundation:foundation:${Version.composeUiVersion}"
     const val composeMaterial = "androidx.compose.material:material:${Version.composeUiVersion}"
