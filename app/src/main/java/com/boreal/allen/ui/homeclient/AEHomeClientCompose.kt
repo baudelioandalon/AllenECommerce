@@ -28,6 +28,7 @@ import com.boreal.allen.domain.model.PromotionItem
 import com.boreal.allen.theme.GrayBackgroundMain
 import com.boreal.allen.theme.GrayInactiveIndicator
 import com.boreal.allen.theme.PrimaryColor
+import com.boreal.allen.theme.categorySelectorColors
 import com.google.accompanist.pager.*
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import kotlinx.coroutines.delay
@@ -188,8 +189,12 @@ fun CategoryListContainer() {
                     bottom = 35.dp
                 )
         ) {
+
             items(10) { index ->
-                CategorySelectorItem(index % 2 != 0)
+                CategorySelectorItem(
+                    index % 2 != 0,
+                    categorySelectorColors[index % categorySelectorColors.size]
+                )
             }
         }
     }

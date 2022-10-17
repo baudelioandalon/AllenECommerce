@@ -216,7 +216,7 @@ fun HomeItem() {
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun CategorySelectorItem(maxBackground: Boolean = false) {
+fun CategorySelectorItem(maxBackground: Boolean = false, color: Color = CategoryBackgroundSelectorOne) {
     ConstraintLayout(
         modifier = Modifier
             .padding(start = 30.dp, end = 4.dp)
@@ -254,7 +254,7 @@ fun CategorySelectorItem(maxBackground: Boolean = false) {
                 .layoutId("background"),
             shape = RoundedCornerShape(15.dp),
             elevation = 0.dp,
-            backgroundColor = CategoryBackgroundSelectorOne
+            backgroundColor = color
         ) {
 
         }

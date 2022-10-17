@@ -21,3 +21,11 @@ val GrayLetterCategoryProduct = Color(0xFFDBDBDB)
 val GreenStrong = Color(0xFF51BC9D)
 val GreenTransparent = Color(0x379FFAA9)
 val CategoryBackgroundSelectorOne = Color(0xFFE6EDDB)
+val CategoryBackgroundSelectorTwo = Color(0xFFDAE1F4)
+val CategoryBackgroundSelectorThree = Color(0xFFF2DFE6)
+
+val categorySelectorColors = listOf(
+    CategoryBackgroundSelectorOne,
+    CategoryBackgroundSelectorTwo,
+    CategoryBackgroundSelectorThree
+)
