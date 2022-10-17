@@ -6,8 +6,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material.Card
 import androidx.compose.material.Scaffold
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -35,6 +33,7 @@ import com.boreal.allen.theme.PrimaryColor
 import com.boreal.allen.theme.categorySelectorColors
 import com.boreal.allen.ui.welcome.DrawerBody
 import com.boreal.allen.ui.welcome.DrawerHeader
+import com.boreal.allen.ui.welcome.DrawerOptions
 import com.boreal.allen.ui.welcome.MenuItem
 import com.google.accompanist.pager.*
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
@@ -61,21 +60,58 @@ fun AEHomeClientComposable() {
     val scope = rememberCoroutineScope()
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         Scaffold(modifier = Modifier
-            .fillMaxWidth()
-            .layoutId("drawer"),
+            .fillMaxWidth(),
             drawerGesturesEnabled = scaffoldState.drawerState.isOpen,
             scaffoldState = scaffoldState,
             drawerContent = {
-                DrawerHeader()
+                DrawerHeader {
+                    scope.launch {
+                        scaffoldState.drawerState.close()
+                    }
+                }
                 DrawerBody(
                     items = listOf(
-                        MenuItem("sss", icon = Icons.Default.Add, "ss"),
-                        MenuItem("sssss", icon = Icons.Default.Add, "s3s")
+                        MenuItem(
+                            "Compras",
+                            icon = R.drawable.ic_cart_icon,
+                            contentDescription = "Cart",
+                            option = DrawerOptions.Buys
+                        ),
+                        MenuItem(
+                            "Favoritos",
+                            icon = R.drawable.ic_heart_icon,
+                            contentDescription = "Favorites",
+                            option = DrawerOptions.Favorites
+                        ),
+                        MenuItem(
+                            "Tiendas",
+                            icon = R.drawable.ic_stores_icon,
+                            contentDescription = "Stores",
+                            option = DrawerOptions.Stores
+                        ),
+                        MenuItem(
+                            "Notificaciónes",
+                            icon = R.drawable.ic_bell_icon,
+                            contentDescription = "Notifications",
+                            option = DrawerOptions.Notifications
+                        ),
+                        MenuItem(
+                            "Salir",
+                            icon = R.drawable.ic_arrow_right,
+                            contentDescription = "Exit",
+                            option = DrawerOptions.Exit,
+                            close = 0
+                        ),
+                        MenuItem(
+                            "Cerrar sesión",
+                            icon = R.drawable.ic_bell_icon,
+                            contentDescription = "Close session",
+                            option = DrawerOptions.CloseSession
+                        )
                     ),
-                    onItemClick = {
-                        println("Clicked on ${it.contentDescription}")
-                    }
-                )
+                ) {
+                    println("Clicked on ${it.option.name}")
+                }
             },
             content = {
                 ConstraintLayout(modifier = Modifier
@@ -83,7 +119,6 @@ fun AEHomeClientComposable() {
                     .background(White), constraintSet = ConstraintSet {
                     val search = createRefFor("searchHome")
                     val content = createRefFor("content")
-                    val drawer = createRefFor("drawer")
                     constrain(search) {
                         top.linkTo(parent.top)
                         start.linkTo(parent.start)
@@ -99,20 +134,12 @@ fun AEHomeClientComposable() {
                         width = Dimension.fillToConstraints
                         height = Dimension.fillToConstraints
                     }
-//        constrain(drawer) {
-//            top.linkTo(parent.top)
-//            start.linkTo(parent.start)
-//            end.linkTo(parent.end)
-//            bottom.linkTo(parent.bottom)
-//            width = Dimension.fillToConstraints
-//            height = Dimension.fillToConstraints
-//        }
                 }) {
 
                     Card(
                         modifier = Modifier
                             .layoutId("searchHome")
-                            .wrapContentSize(), backgroundColor = Color.Red,
+                            .wrapContentSize(),
                         elevation = 5.dp
                     ) {
                         ToolbarSearchHome(menuClicked = {
@@ -139,8 +166,6 @@ fun AEHomeClientComposable() {
             })
 
     }
-
-
 }
 
 @Composable
