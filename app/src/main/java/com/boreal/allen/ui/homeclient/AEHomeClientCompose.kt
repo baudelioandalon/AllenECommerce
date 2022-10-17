@@ -5,12 +5,16 @@ import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material.Card
+import androidx.compose.material.Scaffold
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Color.Companion.Red
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
@@ -29,9 +33,13 @@ import com.boreal.allen.theme.GrayBackgroundMain
 import com.boreal.allen.theme.GrayInactiveIndicator
 import com.boreal.allen.theme.PrimaryColor
 import com.boreal.allen.theme.categorySelectorColors
+import com.boreal.allen.ui.welcome.DrawerBody
+import com.boreal.allen.ui.welcome.DrawerHeader
+import com.boreal.allen.ui.welcome.MenuItem
 import com.google.accompanist.pager.*
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.yield
 import kotlin.math.absoluteValue
 
@@ -49,50 +57,89 @@ fun AEHomeClientComposable() {
         )
     }
     val scrollState = rememberScrollState()
+    val scaffoldState = rememberScaffoldState()
+    val scope = rememberCoroutineScope()
+    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+        Scaffold(modifier = Modifier
+            .fillMaxWidth()
+            .layoutId("drawer"),
+            drawerGesturesEnabled = scaffoldState.drawerState.isOpen,
+            scaffoldState = scaffoldState,
+            drawerContent = {
+                DrawerHeader()
+                DrawerBody(
+                    items = listOf(
+                        MenuItem("sss", icon = Icons.Default.Add, "ss"),
+                        MenuItem("sssss", icon = Icons.Default.Add, "s3s")
+                    ),
+                    onItemClick = {
+                        println("Clicked on ${it.contentDescription}")
+                    }
+                )
+            },
+            content = {
+                ConstraintLayout(modifier = Modifier
+                    .fillMaxSize()
+                    .background(White), constraintSet = ConstraintSet {
+                    val search = createRefFor("searchHome")
+                    val content = createRefFor("content")
+                    val drawer = createRefFor("drawer")
+                    constrain(search) {
+                        top.linkTo(parent.top)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                        width = Dimension.fillToConstraints
+                        height = Dimension.wrapContent
+                    }
+                    constrain(content) {
+                        top.linkTo(search.bottom, margin = 5.dp)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                        bottom.linkTo(parent.bottom)
+                        width = Dimension.fillToConstraints
+                        height = Dimension.fillToConstraints
+                    }
+//        constrain(drawer) {
+//            top.linkTo(parent.top)
+//            start.linkTo(parent.start)
+//            end.linkTo(parent.end)
+//            bottom.linkTo(parent.bottom)
+//            width = Dimension.fillToConstraints
+//            height = Dimension.fillToConstraints
+//        }
+                }) {
 
-    ConstraintLayout(modifier = Modifier
-        .fillMaxSize()
-        .background(White), constraintSet = ConstraintSet {
-        val search = createRefFor("searchHome")
-        val content = createRefFor("content")
-        constrain(search) {
-            top.linkTo(parent.top)
-            start.linkTo(parent.start)
-            end.linkTo(parent.end)
-            width = Dimension.fillToConstraints
-            height = Dimension.wrapContent
-        }
-        constrain(content) {
-            top.linkTo(search.bottom, margin = 5.dp)
-            start.linkTo(parent.start)
-            end.linkTo(parent.end)
-            bottom.linkTo(parent.bottom)
-            width = Dimension.fillToConstraints
-            height = Dimension.fillToConstraints
-        }
-    }) {
-        Card(
-            modifier = Modifier
-                .layoutId("searchHome")
-                .wrapContentSize(), backgroundColor = Red,
-            elevation = 5.dp
-        ) {
-            ToolbarSearchHome()
-        }
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .layoutId("content")
-                .background(GrayBackgroundMain)
-                .verticalScroll(scrollState)
-        ) {
-            TopContainer()
-            BrandingContainer()
-            LastItemsContainer()
-            CategoryListContainer()
-            OffersItemsContainer()
-        }
+                    Card(
+                        modifier = Modifier
+                            .layoutId("searchHome")
+                            .wrapContentSize(), backgroundColor = Color.Red,
+                        elevation = 5.dp
+                    ) {
+                        ToolbarSearchHome(menuClicked = {
+                            scope.launch {
+                                scaffoldState.drawerState.open()
+                            }
+                        })
+                    }
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .layoutId("content")
+                            .background(GrayBackgroundMain)
+                            .verticalScroll(scrollState)
+                    ) {
+                        TopContainer()
+                        BrandingContainer()
+                        LastItemsContainer()
+                        CategoryListContainer()
+                        OffersItemsContainer()
+                    }
+                }
+                it.calculateBottomPadding()
+            })
+
     }
+
 
 }
 
