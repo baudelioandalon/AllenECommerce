@@ -1,4 +1,4 @@
-package com.boreal.allen.ui.logingraph.start
+package com.boreal.allen.ui.main
 
 import android.os.Bundle
 import android.view.Window

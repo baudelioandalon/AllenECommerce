@@ -1,4 +1,4 @@
-package com.boreal.allen.ui.logingraph.start
+package com.boreal.allen.ui.main
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
