@@ -138,7 +138,7 @@ fun DrawerHeader(closeClicked: (() -> Unit)? = null) {
         Row(
             modifier = Modifier
                 .background(White)
-                .height(100.dp)
+                .height(110.dp)
                 .padding(top = 13.dp, start = 30.dp)
         ) {
             Card(
