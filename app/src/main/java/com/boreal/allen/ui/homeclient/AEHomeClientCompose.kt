@@ -17,13 +17,13 @@ import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import androidx.constraintlayout.compose.layoutId
+import androidx.navigation.NavHostController
 import com.boreal.allen.R
 import com.boreal.allen.components.*
 import com.boreal.allen.domain.model.PromotionItem
@@ -42,9 +42,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.yield
 import kotlin.math.absoluteValue
 
-@Preview
 @Composable
-fun AEHomeClientComposable() {
+fun AEHomeClientComposable(navController: NavHostController, closeApp: () -> Unit) {
     val systemUiController = rememberSystemUiController()
     if (isSystemInDarkTheme()) {
         systemUiController.setSystemBarsColor(
@@ -111,6 +110,9 @@ fun AEHomeClientComposable() {
                     ),
                 ) {
                     println("Clicked on ${it.option.name}")
+                    if (it.option == DrawerOptions.Exit) {
+                        closeApp()
+                    }
                 }
             },
             content = {

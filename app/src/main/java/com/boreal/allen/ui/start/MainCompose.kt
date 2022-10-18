@@ -11,7 +11,7 @@ import com.boreal.allen.ui.register.AERegisterCompose
 import com.boreal.allen.ui.welcome.AEWelcomeCompose
 
 @Composable
-fun MainCompose() {
+fun MainCompose(closeApp: () -> Unit) {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = Screen.WelcomeScreen.route) {
         composable(route = Screen.WelcomeScreen.route) {
@@ -24,7 +24,7 @@ fun MainCompose() {
             AERegisterCompose(navController)
         }
         composable(route = Screen.HomeClientScreen.route) {
-            AEHomeClientComposable()
+            AEHomeClientComposable(navController, closeApp)
         }
     }
 }

@@ -12,7 +12,9 @@ class MainActivity : ComponentActivity() {
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         setContent {
             AllenEcommerceTheme {
-                MainCompose()
+                MainCompose{
+                    finish()
+                }
             }
         }
     }
