@@ -1,4 +1,4 @@
-package com.boreal.allen.ui.welcome
+package com.boreal.allen.ui.logingraph.welcome
 
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
@@ -23,7 +23,7 @@ import com.boreal.allen.components.BlueButton
 import com.boreal.allen.components.CornerButton
 import com.boreal.allen.components.LargeText
 import com.boreal.allen.components.LogoBlue
-import com.boreal.allen.domain.Screen
+import com.boreal.allen.domain.LoginScreen
 import com.boreal.allen.theme.PrimaryColor
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
@@ -109,14 +109,14 @@ fun AEWelcomeCompose(navController: NavHostController) {
                 modifier = Modifier.padding(top = 40.dp),
                 labelId = R.string.welcome_button_enter
             ) {
-                navController.navigate(Screen.LoginScreen.route)
+                navController.navigate(LoginScreen.LoginLoginScreen.route)
             }
             CornerButton(
                 labelId = R.string.welcome_i_want_to_be_seller, modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 26.dp)
             ) {
-                navController.navigate(Screen.RegisterScreen.route)
+                navController.navigate(LoginScreen.RegisterLoginScreen.route)
             }
 
             LogoBlue(

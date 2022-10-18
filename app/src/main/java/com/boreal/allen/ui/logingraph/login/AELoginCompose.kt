@@ -1,4 +1,4 @@
-package com.boreal.allen.ui.login
+package com.boreal.allen.ui.logingraph.login
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -15,9 +15,9 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.boreal.allen.R
 import com.boreal.allen.components.*
-import com.boreal.allen.domain.Screen
+import com.boreal.allen.domain.HOME_CLIENT_GRAPH
+import com.boreal.allen.domain.LoginScreen
 import com.boreal.allen.theme.SemiBold
-import com.boreal.allen.ui.homeclient.AEHomeClientComposable
 
 @Composable
 fun AELoginCompose(navController: NavHostController) {
@@ -99,7 +99,7 @@ fun AELoginCompose(navController: NavHostController) {
                 modifier = Modifier.padding(top = 25.dp),
                 labelId = R.string.welcome_button_enter
             ){
-                navController.navigate(Screen.HomeClientScreen.route)
+                navController.navigate(HOME_CLIENT_GRAPH)
             }
 
             RegularText(
@@ -115,7 +115,7 @@ fun AELoginCompose(navController: NavHostController) {
             )
 
             CornerButton(labelId = R.string.welcome_i_want_to_be_seller) {
-                navController.navigate(Screen.RegisterScreen.route)
+                navController.navigate(LoginScreen.RegisterLoginScreen.route)
             }
             LogoBlue(
                 modifier = Modifier

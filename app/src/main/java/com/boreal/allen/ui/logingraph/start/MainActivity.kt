@@ -1,4 +1,4 @@
-package com.boreal.allen.ui.start
+package com.boreal.allen.ui.logingraph.start
 
 import android.os.Bundle
 import android.view.Window
@@ -12,7 +12,7 @@ class MainActivity : ComponentActivity() {
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         setContent {
             AllenEcommerceTheme {
-                MainCompose{
+                MainCompose {
                     finish()
                 }
             }

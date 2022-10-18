@@ -1,4 +1,4 @@
-package com.boreal.allen.ui.welcome
+package com.boreal.allen.ui.logingraph.welcome
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image

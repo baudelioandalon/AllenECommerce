@@ -33,6 +33,7 @@ fun TestToolbars() {
         TopTitle(titleText = "Socio vendedor") {
 
         }
+        ToolbarTitle(titleText = "Articulo")
     }
 }
 
@@ -111,8 +112,89 @@ fun ToolbarSearchHome(
             }
         }
     }
+}
 
-
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun ToolbarTitle(
+    modifier: Modifier = Modifier,
+    titleText: String? = null,
+    @IdRes labelId: Int? = null,
+    menuClicked: (() -> Unit)? = null,
+    cartClicked: (() -> Unit)? = null,
+    showEndImage: Boolean = true
+) {
+    Row(modifier = modifier) {
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(80.dp)
+                .layoutId("imageMenu"),
+            elevation = 5.dp
+        ) {
+            ConstraintLayout(
+                modifier = Modifier
+                    .fillMaxSize(),
+                constraintSet = ConstraintSet {
+                    val imageBack = createRefFor("imageBack")
+                    val title = createRefFor("title")
+                    val imageCart = createRefFor("imageCart")
+                    constrain(imageBack) {
+                        start.linkTo(parent.start, margin = 28.dp)
+                        top.linkTo(parent.top)
+                        bottom.linkTo(parent.bottom)
+                    }
+                    constrain(title) {
+                        start.linkTo(imageBack.end)
+                        top.linkTo(parent.top)
+                        end.linkTo(imageCart.start)
+                        bottom.linkTo(parent.bottom)
+                        width = Dimension.fillToConstraints
+                        height = Dimension.wrapContent
+                    }
+                    constrain(imageCart) {
+                        end.linkTo(parent.end, margin = 28.dp)
+                        top.linkTo(parent.top)
+                        bottom.linkTo(parent.bottom)
+                    }
+                }) {
+                Card(
+                    modifier = Modifier
+                        .width(35.dp)
+                        .height(35.dp)
+                        .layoutId("imageBack"),
+                    elevation = 0.dp,
+                    shape = CircleShape, onClick = { menuClicked?.invoke() }) {
+                    Image(
+                        modifier = Modifier.wrapContentSize(),
+                        painter = painterResource(id = R.drawable.ic_back_arrow),
+                        contentDescription = ""
+                    )
+                }
+                MediumText(
+                    modifier = Modifier
+                        .layoutId("title"),
+                    text = titleText ?: stringResource(id = labelId ?: R.string.empty_string),
+                    align = TextAlign.Center
+                )
+                if (showEndImage) {
+                    Card(
+                        modifier = Modifier
+                            .width(35.dp)
+                            .height(35.dp)
+                            .layoutId("imageCart"),
+                        elevation = 0.dp,
+                        shape = CircleShape, onClick = { cartClicked?.invoke() }) {
+                        Image(
+                            modifier = Modifier.wrapContentSize(),
+                            painter = painterResource(id = R.drawable.ic_cart_icon),
+                            contentDescription = ""
+                        )
+                    }
+                }
+            }
+        }
+    }
 }
 
 @Composable

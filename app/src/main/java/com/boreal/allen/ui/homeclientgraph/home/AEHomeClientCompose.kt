@@ -1,4 +1,4 @@
-package com.boreal.allen.ui.homeclient
+package com.boreal.allen.ui.homeclientgraph.home
 
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.*
@@ -31,10 +31,10 @@ import com.boreal.allen.theme.GrayBackgroundMain
 import com.boreal.allen.theme.GrayInactiveIndicator
 import com.boreal.allen.theme.PrimaryColor
 import com.boreal.allen.theme.categorySelectorColors
-import com.boreal.allen.ui.welcome.DrawerBody
-import com.boreal.allen.ui.welcome.DrawerHeader
-import com.boreal.allen.ui.welcome.DrawerOptions
-import com.boreal.allen.ui.welcome.MenuItem
+import com.boreal.allen.ui.logingraph.welcome.DrawerBody
+import com.boreal.allen.ui.logingraph.welcome.DrawerHeader
+import com.boreal.allen.ui.logingraph.welcome.DrawerOptions
+import com.boreal.allen.ui.logingraph.welcome.MenuItem
 import com.google.accompanist.pager.*
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import kotlinx.coroutines.delay

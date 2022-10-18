@@ -1,4 +1,4 @@
-package com.boreal.allen.ui.register
+package com.boreal.allen.ui.logingraph.register
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
