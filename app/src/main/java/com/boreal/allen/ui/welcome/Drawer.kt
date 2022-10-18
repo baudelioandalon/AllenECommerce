@@ -11,6 +11,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color.Companion.White
@@ -19,8 +20,11 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.boreal.allen.BuildConfig
 import com.boreal.allen.R
 import com.boreal.allen.components.BoldText
+import com.boreal.allen.components.LogoBlue
+import com.boreal.allen.components.MediumText
 import com.boreal.allen.theme.*
 
 data class MenuItem(
@@ -31,13 +35,13 @@ data class MenuItem(
     val close: Int = -1
 )
 
-sealed class DrawerOptions(val name: String){
-    object Buys: DrawerOptions("BUYS")
-    object Favorites: DrawerOptions("FAVORITES")
-    object Stores: DrawerOptions("STORES")
-    object Notifications: DrawerOptions("NOTIFICATIONS")
-    object Exit: DrawerOptions("EXIT")
-    object CloseSession: DrawerOptions("CLOSE_SESSION")
+sealed class DrawerOptions(val name: String) {
+    object Buys : DrawerOptions("BUYS")
+    object Favorites : DrawerOptions("FAVORITES")
+    object Stores : DrawerOptions("STORES")
+    object Notifications : DrawerOptions("NOTIFICATIONS")
+    object Exit : DrawerOptions("EXIT")
+    object CloseSession : DrawerOptions("CLOSE_SESSION")
 }
 
 @Preview(showBackground = true)
@@ -83,7 +87,7 @@ fun TestDrawer() {
             ),
             MenuItem(
                 "Cerrar sesión",
-                icon = R.drawable.ic_bell_icon,
+                icon = R.drawable.ic_close_session_icon,
                 contentDescription = "Close session",
                 option = DrawerOptions.CloseSession
             )
@@ -219,7 +223,7 @@ fun DrawerBody(
                     .clickable {
                         onItemClick(item)
                     },
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = CenterVertically
             ) {
                 Icon(
                     modifier = Modifier
@@ -233,7 +237,7 @@ fun DrawerBody(
                 Text(
                     text = item.title,
                     style = TextStyle(
-                        fontSize = 20.sp, letterSpacing = 0.sp,
+                        fontSize = 15.sp, letterSpacing = 0.sp,
                         fontFamily = MaterialTheme.typography.caption.fontFamily,
                         fontWeight = Medium
                     ),
@@ -259,6 +263,29 @@ fun DrawerBody(
                         contentDescription = ""
                     )
                 }
+            }
+        }
+
+        item {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 25.dp),
+                verticalAlignment = CenterVertically,
+                horizontalArrangement = Arrangement.Center
+            ) {
+                LogoBlue(
+                    modifier = Modifier
+                        .padding(end = 8.dp)
+                        .align(CenterVertically)
+                        .width(38.dp)
+                        .fillMaxHeight()
+                )
+                MediumText(
+                    text = "v. ${BuildConfig.VERSION_NAME}",
+                    color = GrayLetterDrawer,
+                    size = 13.sp
+                )
             }
         }
     }

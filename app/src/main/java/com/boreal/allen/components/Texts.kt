@@ -58,12 +58,13 @@ fun MediumText(
     labelId: Int? = null,
     modifier: Modifier = Modifier,
     color: Color = Color.Black,
-    align: TextAlign? = null
+    align: TextAlign? = null,
+    size: TextUnit = 20.sp
 ) {
     Text(
         modifier = modifier,
         text = text ?: stringResource(id = labelId ?: R.string.empty_string),
-        fontSize = 20.sp,
+        fontSize = size,
         letterSpacing = 0.sp,
         color = color,
         fontWeight = SemiBold,

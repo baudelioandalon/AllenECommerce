@@ -104,7 +104,7 @@ fun AEHomeClientComposable() {
                         ),
                         MenuItem(
                             "Cerrar sesión",
-                            icon = R.drawable.ic_bell_icon,
+                            icon = R.drawable.ic_close_session_icon,
                             contentDescription = "Close session",
                             option = DrawerOptions.CloseSession
                         )
