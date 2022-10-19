@@ -12,7 +12,7 @@ const val PRODUCT_GRAPH = "PRODUCT_GRAPH"
 fun NavGraphBuilder.productGraph(navController: NavHostController, closeApp: () -> Unit) {
     navigation(startDestination = ProductScreen.ViewProductScreen.route, route = PRODUCT_GRAPH) {
         composable(route = ProductScreen.ViewProductScreen.route) {
-            ViewProductCompose()
+            ViewProductCompose(navController)
         }
     }
 }

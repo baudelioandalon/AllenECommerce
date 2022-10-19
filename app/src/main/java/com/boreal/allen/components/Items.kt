@@ -10,7 +10,6 @@ import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -37,6 +36,7 @@ fun TestItems() {
             .fillMaxSize()
             .background(White)
     ) {
+        CategorySeller()
         SellerItemsItem()
         SellerItem()
         CategoryItem()
@@ -124,11 +124,6 @@ fun BrandingItem() {
             }
         }
     }
-}
-
-@Composable
-fun HomeItem() {
-    ProductItem()
 }
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -265,12 +260,12 @@ fun SellerItem() {
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun ProductItem() {
+fun ProductItem(productClicked: (() -> Unit)? = null) {
     Card(
         modifier = Modifier
             .padding(start = 30.dp, end = 4.dp)
             .height(240.dp)
-            .width(178.dp), onClick = {},
+            .width(178.dp), onClick = { productClicked?.invoke() },
         elevation = 6.dp,
         shape = RoundedCornerShape(corner = CornerSize(10.dp)),
         backgroundColor = White
@@ -364,4 +359,100 @@ fun SellerItemsItem(modifier: Modifier = Modifier) {
         }
     }
 
+}
+
+@Composable
+fun CategorySeller() {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 45.dp)
+            .background(White),
+        verticalAlignment = Alignment.Bottom,
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(top = 20.dp, start = 30.dp, end = 30.dp)
+        ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 35.dp, top = 22.dp)
+                    .wrapContentHeight()
+                    .clickable { },
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Card(
+                    modifier = Modifier
+                        .size(53.dp),
+                    backgroundColor = GrayBackgroundDrawerDismiss,
+                    elevation = 0.dp,
+                    shape = RoundedCornerShape(10.dp)
+                ) {
+
+                }
+                Column(
+                    modifier = Modifier
+                        .padding(start = 19.dp)
+                        .weight(1f)
+                        .fillMaxHeight()
+                ) {
+                    MediumText(
+                        text = "Para",
+                        color = GrayLetterSeeAll,
+                        size = 15.sp
+                    )
+                    BoldText(text = "Casa y Hogar", size = 15.sp)
+                }
+                RightRoundedButton()
+            }
+        }
+    }
+    LazyRow(
+        modifier = Modifier
+            .background(White)
+            .padding(bottom = 35.dp)
+    ) {
+        items(10) {
+            ProductItem()
+        }
+    }
+}
+
+@Composable
+fun SellersItem() {
+    Column(
+        modifier = Modifier
+            .padding(top = 30.dp)
+            .fillMaxWidth()
+            .background(White)
+    ) {
+        Row(
+            modifier = Modifier
+                .padding(end = 30.dp, start = 30.dp, top = 20.dp)
+                .fillMaxWidth()
+                .clickable { },
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            MediumTextBold(
+                text = "Más vendedores"
+            )
+            RightRoundedButton()
+        }
+        LazyRow(
+            modifier = Modifier
+                .padding(
+                    top = 30.dp,
+                    bottom = 35.dp
+                )
+        ) {
+            items(10) {
+                BrandingItem()
+            }
+        }
+    }
 }

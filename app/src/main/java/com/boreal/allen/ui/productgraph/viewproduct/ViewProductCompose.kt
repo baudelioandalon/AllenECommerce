@@ -25,6 +25,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import androidx.constraintlayout.compose.layoutId
+import androidx.navigation.NavController
 import com.boreal.allen.R
 import com.boreal.allen.components.*
 import com.boreal.allen.theme.*
@@ -32,9 +33,8 @@ import com.boreal.allen.ui.logingraph.welcome.StarStatus
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @OptIn(ExperimentalMaterialApi::class)
-@Preview
 @Composable
-fun ViewProductCompose() {
+fun ViewProductCompose(navController: NavController) {
     val systemUiController = rememberSystemUiController()
     if (isSystemInDarkTheme()) {
         systemUiController.setSystemBarsColor(
@@ -250,18 +250,24 @@ fun ViewProductCompose() {
                     iconRes = R.drawable.ic_questions_icon
                 )
             }
-
             item {
                 SellerItem()
             }
-
             item {
                 SellerItemsItem()
+            }
+            item {
+                CategorySeller()
+            }
+            item {
+                SellersItem()
             }
         }
         ToolbarTitle(
             modifier = Modifier.layoutId("toolbarTitle"),
-            titleText = "Articulo"
+            titleText = "Articulo", backClicked = {
+                navController.navigateUp()
+            }
         )
     }
 }

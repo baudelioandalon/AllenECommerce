@@ -26,6 +26,7 @@ import androidx.constraintlayout.compose.layoutId
 import androidx.navigation.NavHostController
 import com.boreal.allen.R
 import com.boreal.allen.components.*
+import com.boreal.allen.domain.PRODUCT_GRAPH
 import com.boreal.allen.domain.model.PromotionItem
 import com.boreal.allen.theme.GrayBackgroundMain
 import com.boreal.allen.theme.GrayInactiveIndicator
@@ -159,7 +160,7 @@ fun AEHomeClientComposable(navController: NavHostController, closeApp: () -> Uni
                     ) {
                         TopContainer()
                         BrandingContainer()
-                        LastItemsContainer()
+                        LastItemsContainer(navController)
                         CategoryListContainer()
                         OffersItemsContainer()
                     }
@@ -205,7 +206,7 @@ fun BrandingContainer() {
 }
 
 @Composable
-fun LastItemsContainer() {
+fun LastItemsContainer(navController: NavHostController) {
     Column(
         modifier = Modifier
             .padding(top = 30.dp)
@@ -233,7 +234,9 @@ fun LastItemsContainer() {
                 )
         ) {
             items(10) {
-                HomeItem()
+                ProductItem {
+                    navController.navigate(PRODUCT_GRAPH)
+                }
             }
         }
     }
@@ -302,7 +305,7 @@ fun OffersItemsContainer() {
                 )
         ) {
             items(10) {
-                HomeItem()
+                ProductItem()
             }
         }
     }
