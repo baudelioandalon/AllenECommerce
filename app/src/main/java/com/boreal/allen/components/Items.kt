@@ -426,7 +426,7 @@ fun CategorySeller() {
 fun SellersItem() {
     Column(
         modifier = Modifier
-            .padding(top = 30.dp)
+            .padding(top = 30.dp, bottom = 30.dp)
             .fillMaxWidth()
             .background(White)
     ) {
