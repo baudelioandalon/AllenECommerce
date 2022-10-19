@@ -164,28 +164,28 @@ fun DrawerHeader(closeClicked: (() -> Unit)? = null) {
                     size = 15.sp
                 )
                 BoldText("Luna")
-                UserStarStatus()
+                StarStatus()
             }
         }
     }
 }
 
 @Composable
-fun UserStarStatus() {
+fun StarStatus(modifier: Modifier = Modifier,text: String = "(12 Compras)", stars: String = "4.6") {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .padding(top = 4.dp)
-            .fillMaxSize()
+            .fillMaxSize(), verticalAlignment = CenterVertically
     ) {
         Icon(
             painter = painterResource(id = R.drawable.ic_start_icon),
             contentDescription = "star User",
             tint = StarColor
         )
-        BoldText(modifier = Modifier.padding(start = 5.dp), size = 15.sp, text = "4.6")
+        BoldText(modifier = Modifier.padding(start = 5.dp), size = 15.sp, text = stars)
         BoldText(
             modifier = Modifier.padding(start = 10.dp),
-            text = "(12 Compras)",
+            text = text,
             color = GrayLetterDrawer,
             size = 15.sp
         )

@@ -12,12 +12,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 import com.boreal.allen.R
 import com.boreal.allen.theme.Bold
 import com.boreal.allen.theme.GrayLetterSeeAll
+import com.boreal.allen.theme.Medium
 import com.boreal.allen.theme.SemiBold
 
 
@@ -60,6 +60,27 @@ fun MediumText(
     color: Color = Color.Black,
     align: TextAlign? = null,
     size: TextUnit = 20.sp
+) {
+    Text(
+        modifier = modifier,
+        text = text ?: stringResource(id = labelId ?: R.string.empty_string),
+        fontSize = size,
+        letterSpacing = 0.sp,
+        color = color,
+        fontWeight = Medium,
+        textAlign = align,
+        fontFamily = MaterialTheme.typography.caption.fontFamily
+    )
+}
+
+@Composable
+fun SemiBoldText(
+    text: String? = null,
+    labelId: Int? = null,
+    modifier: Modifier = Modifier,
+    color: Color = Color.Black,
+    align: TextAlign? = null,
+    size: TextUnit = 18.sp
 ) {
     Text(
         modifier = modifier,

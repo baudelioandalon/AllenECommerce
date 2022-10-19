@@ -18,7 +18,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Black
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
@@ -28,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
+import androidx.constraintlayout.compose.layoutId
 import com.boreal.allen.R
 import com.boreal.allen.theme.*
 
@@ -48,6 +48,76 @@ fun PreviewBottons() {
             modifier = Modifier.fillMaxWidth()
         )
         LittleAddButton()
+        FavoriteButton()
+        ShareButton()
+        RightRoundedButton()
+    }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun FavoriteButton(modifier: Modifier = Modifier,clicked: (() -> Unit)? = null) {
+    Card(
+        modifier = modifier
+            .layoutId("favorite_selector")
+            .size(35.dp),
+        elevation = 0.dp,
+        shape = CircleShape, onClick = { clicked?.invoke() }) {
+        Image(
+            modifier = Modifier.fillMaxSize(),
+            painter = painterResource(id = R.drawable.ic_favorite_unselected),
+            contentDescription = ""
+        )
+    }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun ShareButton(modifier: Modifier = Modifier,clicked: (() -> Unit)? = null) {
+    Card(
+        modifier = modifier
+            .layoutId("share_selector")
+            .size(35.dp),
+        elevation = 0.dp,
+        shape = CircleShape, onClick = { clicked?.invoke() }) {
+        Image(
+            modifier = Modifier.fillMaxSize(),
+            painter = painterResource(id = R.drawable.ic_share_icon),
+            contentDescription = ""
+        )
+    }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun RightRoundedButton(modifier: Modifier = Modifier, clicked: (() -> Unit)? = null) {
+    Card(
+        modifier = modifier
+            .layoutId("rounded_selector")
+            .size(35.dp),
+        elevation = 0.dp,
+        shape = CircleShape, onClick = { clicked?.invoke() }) {
+        Image(
+            modifier = Modifier.fillMaxSize(),
+            painter = painterResource(id = R.drawable.ic_rounded_arrow_right),
+            contentDescription = ""
+        )
+    }
+}
+
+@Composable
+fun RightRoundedButton(modifier: Modifier = Modifier) {
+    Card(
+        modifier = modifier
+            .layoutId("rounded_selector")
+            .size(35.dp),
+        elevation = 0.dp,
+        shape = CircleShape) {
+        Image(
+            modifier = Modifier.fillMaxSize(),
+            painter = painterResource(id = R.drawable.ic_rounded_arrow_right),
+            contentDescription = ""
+        )
     }
 }
 

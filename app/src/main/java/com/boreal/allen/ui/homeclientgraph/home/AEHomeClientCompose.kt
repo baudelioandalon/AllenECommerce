@@ -263,7 +263,6 @@ fun CategoryListContainer() {
                     bottom = 35.dp
                 )
         ) {
-
             items(10) { index ->
                 CategorySelectorItem(
                     index % 2 != 0,

@@ -9,6 +9,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -82,4 +83,13 @@ fun buildConstraintSeparatorSet(): ConstraintSet {
             width = Dimension.fillToConstraints
         }
     }
+}
+
+@Composable
+fun SeparatorGray(modifier: Modifier = Modifier) {
+    Divider(
+        modifier = modifier,
+        color = GrayBorderLight,
+        thickness = 1.dp
+    )
 }

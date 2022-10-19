@@ -120,18 +120,18 @@ fun ToolbarTitle(
     modifier: Modifier = Modifier,
     titleText: String? = null,
     @IdRes labelId: Int? = null,
-    menuClicked: (() -> Unit)? = null,
+    backClicked: (() -> Unit)? = null,
     cartClicked: (() -> Unit)? = null,
     showEndImage: Boolean = true
 ) {
-    Row(modifier = modifier) {
-        Card(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(80.dp)
-                .layoutId("imageMenu"),
-            elevation = 5.dp
-        ) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(80.dp)
+            .layoutId("imageMenu"),
+        elevation = 5.dp
+    ) {
+        Row(modifier = modifier) {
             ConstraintLayout(
                 modifier = Modifier
                     .fillMaxSize(),
@@ -164,14 +164,14 @@ fun ToolbarTitle(
                         .height(35.dp)
                         .layoutId("imageBack"),
                     elevation = 0.dp,
-                    shape = CircleShape, onClick = { menuClicked?.invoke() }) {
+                    shape = CircleShape, onClick = { backClicked?.invoke() }) {
                     Image(
                         modifier = Modifier.wrapContentSize(),
                         painter = painterResource(id = R.drawable.ic_back_arrow),
                         contentDescription = ""
                     )
                 }
-                MediumText(
+                SemiBoldText(
                     modifier = Modifier
                         .layoutId("title"),
                     text = titleText ?: stringResource(id = labelId ?: R.string.empty_string),
@@ -193,6 +193,7 @@ fun ToolbarTitle(
                     }
                 }
             }
+
         }
     }
 }
@@ -234,7 +235,7 @@ fun TopTitle(
         ) {
             backClicked?.invoke()
         }
-        MediumText(
+        SemiBoldText(
             modifier = Modifier
                 .layoutId("title"),
             text = titleText ?: stringResource(id = labelId ?: R.string.empty_string),

@@ -2,12 +2,15 @@ package com.boreal.allen.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -34,7 +37,11 @@ fun TestItems() {
             .fillMaxSize()
             .background(White)
     ) {
+        SellerItemsItem()
+        SellerItem()
+        CategoryItem()
         CategorySelectorItem()
+        BrandingItem()
     }
 }
 
@@ -119,104 +126,17 @@ fun BrandingItem() {
     }
 }
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun HomeItem() {
-    ConstraintLayout(
-        modifier = Modifier
-            .padding(start = 30.dp, end = 4.dp)
-            .height(240.dp)
-            .width(178.dp), constraintSet = ConstraintSet {
-            val favSelector = createRefFor("favorite_selector")
-            val item = createRefFor("item")
-            constrain(favSelector) {
-                top.linkTo(parent.top, 10.dp)
-                start.linkTo(parent.start, 14.dp)
-                width = Dimension.wrapContent
-                height = Dimension.wrapContent
-            }
-            constrain(item) {
-                start.linkTo(parent.start)
-                top.linkTo(parent.top)
-                end.linkTo(parent.end)
-                width = Dimension.fillToConstraints
-                height = Dimension.wrapContent
-            }
-        }
-    ) {
-        Card(
-            modifier = Modifier
-                .layoutId("item"), onClick = {},
-            elevation = 6.dp,
-            shape = RoundedCornerShape(corner = CornerSize(10.dp)),
-            backgroundColor = White
-        ) {
-            Column(
-                modifier = Modifier
-                    .padding(horizontal = 10.dp)
-                    .fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
-                Image(
-                    modifier = Modifier
-                        .padding(top = 10.dp)
-                        .fillMaxWidth()
-                        .height(130.dp),
-                    painter = painterResource(id = R.drawable.tools_icon),
-                    contentDescription = "item"
-                )
-                NameProductText(
-                    modifier = Modifier
-                        .padding(start = 14.dp)
-                        .fillMaxWidth(), text = "Sensor Hc-sr04", align = TextAlign.Start
-                )
-                CategoryProductText(
-                    modifier = Modifier
-                        .padding(start = 14.dp)
-                        .fillMaxWidth(),
-                    text = "Electronica",
-                    color = GrayLetterCategoryProduct,
-                    align = TextAlign.Start
-                )
-
-                Row(
-                    modifier = Modifier
-                        .padding(start = 14.dp)
-                        .fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.Bottom
-                ) {
-                    BoldText(
-                        modifier = Modifier
-                            .padding(bottom = 5.dp)
-                            .wrapContentSize(),
-                        text = "$54"
-                    )
-                    LittleAddButton()
-                }
-            }
-        }
-        Card(
-            modifier = Modifier
-                .layoutId("favorite_selector")
-                .width(30.dp)
-                .height(30.dp),
-            elevation = 0.dp,
-            shape = CircleShape, onClick = { }) {
-            Image(
-                modifier = Modifier.fillMaxSize(),
-                painter = painterResource(id = R.drawable.ic_favorite_unselected),
-                contentDescription = ""
-            )
-        }
-
-    }
+    ProductItem()
 }
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun CategorySelectorItem(maxBackground: Boolean = false, color: Color = CategoryBackgroundSelectorOne) {
+fun CategorySelectorItem(
+    maxBackground: Boolean = false,
+    color: Color = CategoryBackgroundSelectorOne
+) {
     ConstraintLayout(
         modifier = Modifier
             .padding(start = 30.dp, end = 4.dp)
@@ -287,6 +207,161 @@ fun CategorySelectorItem(maxBackground: Boolean = false, color: Color = Category
                 )
             }
         }
-
     }
+}
+
+@Composable
+fun SellerItem() {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 45.dp)
+            .background(White),
+        verticalAlignment = Alignment.Bottom,
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(top = 20.dp, start = 30.dp, end = 30.dp)
+        ) {
+            BoldText("Vendedor", size = 18.sp)
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 35.dp, top = 22.dp)
+                    .wrapContentHeight()
+                    .clickable { },
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Card(
+                    modifier = Modifier
+                        .size(53.dp),
+                    backgroundColor = GrayBackgroundDrawerDismiss,
+                    elevation = 0.dp,
+                    shape = RoundedCornerShape(10.dp)
+                ) {
+
+                }
+                Column(
+                    modifier = Modifier
+                        .padding(start = 19.dp)
+                        .weight(1f)
+                        .fillMaxHeight()
+                ) {
+                    BoldText(text = "Ferreteria La Hormiga", size = 15.sp)
+                    MediumText(
+                        text = "Para Casa y Hogar",
+                        color = GrayLetterSeeAll,
+                        size = 15.sp
+                    )
+                }
+                RightRoundedButton()
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun ProductItem() {
+    Card(
+        modifier = Modifier
+            .padding(start = 30.dp, end = 4.dp)
+            .height(240.dp)
+            .width(178.dp), onClick = {},
+        elevation = 6.dp,
+        shape = RoundedCornerShape(corner = CornerSize(10.dp)),
+        backgroundColor = White
+    ) {
+        Column(
+            modifier = Modifier
+                .padding(horizontal = 10.dp)
+                .fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Box {
+                FavoriteButton()
+                Image(
+                    modifier = Modifier
+                        .padding(top = 10.dp)
+                        .fillMaxWidth()
+                        .height(130.dp),
+                    painter = painterResource(id = R.drawable.tools_icon),
+                    contentDescription = "item"
+                )
+            }
+
+            NameProductText(
+                modifier = Modifier
+                    .padding(start = 14.dp)
+                    .fillMaxWidth(), text = "Sensor Hc-sr04", align = TextAlign.Start
+            )
+            CategoryProductText(
+                modifier = Modifier
+                    .padding(start = 14.dp)
+                    .fillMaxWidth(),
+                text = "Electronica",
+                color = GrayLetterCategoryProduct,
+                align = TextAlign.Start
+            )
+
+            Row(
+                modifier = Modifier
+                    .padding(start = 14.dp)
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.Bottom
+            ) {
+                BoldText(
+                    modifier = Modifier
+                        .padding(bottom = 5.dp)
+                        .wrapContentSize(),
+                    text = "$54"
+                )
+                LittleAddButton()
+            }
+        }
+    }
+}
+
+@Composable
+fun SellerItemsItem(modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .background(White),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceBetween
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 30.dp, end = 30.dp)
+                .clickable { },
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            BoldText(
+                size = 18.sp,
+                modifier = Modifier.padding(top = 20.dp),
+                align = TextAlign.Start, text = "Más productos del\nvendedor"
+            )
+            RightRoundedButton()
+        }
+        LazyRow(
+            modifier = Modifier
+                .padding(
+                    top = 30.dp,
+                    bottom = 35.dp
+                )
+        ) {
+            items(10) {
+                ProductItem()
+            }
+        }
+    }
+
 }
