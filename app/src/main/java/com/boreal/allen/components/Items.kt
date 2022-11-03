@@ -461,7 +461,10 @@ fun SellersItem() {
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun QuestionItem(text: String = "", answerList: List<String> = emptyList(), likesList: List<String> = emptyList()) {
+fun QuestionItem(
+    text: String = "", answerList: List<String> = emptyList(),
+    likesList: List<String> = emptyList()
+) {
     Row(
         modifier = Modifier
             .background(White)
@@ -511,6 +514,60 @@ fun QuestionItem(text: String = "", answerList: List<String> = emptyList(), like
 
     }
 }
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun RatingByUserItem(
+    text: String = "",
+    likesList: List<String> = emptyList()
+) {
+    Row(
+        modifier = Modifier
+            .background(White)
+            .padding(start = 30.dp, end = 30.dp, bottom = 25.dp)
+            .fillMaxSize(),
+        verticalAlignment = Alignment.Top,
+        horizontalArrangement = Arrangement.Start
+    ) {
+        Card(
+            modifier = Modifier
+                .padding(bottom = 9.dp)
+                .size(41.dp), onClick = {},
+            elevation = 0.dp,
+            shape = CircleShape,
+            backgroundColor = GrayCategoryBackground
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.tools_icon),
+                    contentDescription = "item"
+                )
+            }
+        }
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Column {
+                SemiBoldText(
+                    modifier = Modifier.padding(start = 28.dp, bottom = 20.dp),
+                    text = text,
+                    size = 17.sp
+                )
+                StarRatingSelector(
+                    modifier = Modifier.padding(start = 28.dp)
+                )
+            }
+            FavoriteCounterButton(amount = likesList.size)
+        }
+    }
+}
+
 
 @OptIn(ExperimentalMaterialApi::class)
 @Preview

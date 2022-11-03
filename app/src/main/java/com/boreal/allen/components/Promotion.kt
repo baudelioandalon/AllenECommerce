@@ -1,6 +1,8 @@
 package com.boreal.allen.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
@@ -10,13 +12,14 @@ import androidx.compose.material.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color.Companion.Green
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.boreal.allen.R
 import com.boreal.allen.theme.GreenStrong
+import com.boreal.allen.theme.GreenTransparent
 
 @Composable
 fun FreeShipping(modifier: Modifier) {
@@ -52,9 +55,42 @@ fun Discount(modifier: Modifier = Modifier, discount: Int = 15) {
         modifier = modifier
             .padding(top = 5.dp, bottom = 5.dp)
             .wrapContentSize()
-            .background(color = GreenStrong, shape = RoundedCornerShape(corner = CornerSize(15.dp))),
+            .background(
+                color = GreenStrong,
+                shape = RoundedCornerShape(corner = CornerSize(15.dp))
+            ),
         text = "   $discount%   ",
         size = 12.sp,
         color = White
     )
 }
+
+@Composable
+fun Selector(
+    modifier: Modifier = Modifier,
+    text: String = "",
+    backgroundColor: Color = GreenTransparent,
+    textColor: Color = GreenStrong,
+    onClicked: () -> Unit = {}
+) {
+    Row(
+        modifier = modifier
+            .background(
+                color = backgroundColor,
+                shape = RoundedCornerShape(10.dp)
+            )
+            .wrapContentSize()
+            .clickable { onClicked() },
+        verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center
+    ) {
+        SemiBoldText(
+            modifier = Modifier
+                .padding(start = 17.dp, end = 17.dp, top = 5.dp, bottom = 5.dp)
+                .wrapContentSize(),
+            text = text,
+            size = 13.sp,
+            color = textColor
+        )
+    }
+}
+

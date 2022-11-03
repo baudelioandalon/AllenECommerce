@@ -15,16 +15,9 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Color.Companion.Black
 import androidx.compose.ui.graphics.Color.Companion.White
-import androidx.compose.ui.graphics.Paint
-import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
-import androidx.compose.ui.graphics.scale
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -37,6 +30,8 @@ import com.boreal.allen.components.*
 import com.boreal.allen.extensions.drawColoredShadow
 import com.boreal.allen.theme.*
 import com.boreal.allen.ui.logingraph.welcome.StarStatus
+import com.boreal.allen.ui.productgraph.comment.COMMENT_GRAPH
+import com.boreal.allen.ui.productgraph.ratinggraph.RATING_PRODUCT_GRAPH
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -237,7 +232,9 @@ fun ViewProductCompose(navController: NavController) {
                 SelectorDetail(
                     text = "Detalles del producto",
                     iconRes = R.drawable.ic_detail_icon
-                )
+                ) {
+
+                }
                 SeparatorGray(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -245,9 +242,11 @@ fun ViewProductCompose(navController: NavController) {
                         .padding(start = 30.dp, end = 30.dp)
                 )
                 SelectorDetail(
-                    text = "Comentarios",
+                    text = "Calificaciones",
                     iconRes = R.drawable.ic_comment_icon
-                )
+                ) {
+                    navController.navigate(RATING_PRODUCT_GRAPH)
+                }
                 SeparatorGray(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -261,7 +260,9 @@ fun ViewProductCompose(navController: NavController) {
                         .padding(bottom = 17.dp),
                     text = "Preguntas",
                     iconRes = R.drawable.ic_questions_icon
-                )
+                ) {
+                    navController.navigate(COMMENT_GRAPH)
+                }
             }
             item {
                 SellerItem()

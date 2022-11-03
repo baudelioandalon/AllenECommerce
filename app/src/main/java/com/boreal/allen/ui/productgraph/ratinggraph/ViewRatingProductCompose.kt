@@ -1,4 +1,4 @@
-package com.boreal.allen.ui.productgraph.comment
+package com.boreal.allen.ui.productgraph.ratinggraph
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -24,14 +24,12 @@ import com.boreal.allen.R
 import com.boreal.allen.components.*
 import com.boreal.allen.domain.model.QuestionModel
 import com.boreal.allen.extensions.drawColoredShadow
-import com.boreal.allen.theme.BlueTransparent
-import com.boreal.allen.theme.GrayBackgroundMain
-import com.boreal.allen.theme.GrayLetterShipping
+import com.boreal.allen.theme.*
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @Preview
 @Composable
-fun ViewCommentCompose(navController: NavHostController) {
+fun ViewRatingProductCompose(navController: NavHostController) {
     val systemUiController = rememberSystemUiController()
     if (isSystemInDarkTheme()) {
         systemUiController.setSystemBarsColor(
@@ -49,25 +47,25 @@ fun ViewCommentCompose(navController: NavHostController) {
         .background(GrayBackgroundMain),
         constraintSet = ConstraintSet {
             val toolbarTitle = createRefFor("toolbarTitle")
-            val search = createRefFor("search")
+            val container = createRefFor("container")
             val bottomQuestion = createRefFor("bottomQuestion")
             val content = createRefFor("content")
             val guideLine = createGuidelineFromTop(0.09f)
 
-            val guideLineSearch = createGuidelineFromTop(0.24f)
+            val guideLineSearch = createGuidelineFromTop(0.20f)
 
             constrain(toolbarTitle) {
                 top.linkTo(parent.top)
                 width = Dimension.matchParent
                 height = Dimension.fillToConstraints
             }
-            constrain(search) {
+            constrain(container) {
                 top.linkTo(guideLine)
                 start.linkTo(parent.start)
                 end.linkTo(parent.end)
                 bottom.linkTo(guideLineSearch)
                 width = Dimension.matchParent
-                height = Dimension.wrapContent
+                height = Dimension.fillToConstraints
             }
             constrain(content) {
                 top.linkTo(guideLineSearch, 0.dp)
@@ -81,15 +79,33 @@ fun ViewCommentCompose(navController: NavHostController) {
                 height = Dimension.fillToConstraints
             }
         }) {
-        SearcherWithButton(
+        Row(
             modifier = Modifier
                 .background(White)
-                .padding(top = 30.dp, end = 30.dp, start = 30.dp, bottom = 45.dp)
+                .padding(
+                    top = 30.dp, end = 30.dp,
+                    start = 30.dp
+                )
                 .fillMaxSize()
-                .layoutId("search"),
-            value = "",
-            placeHolder = "Buscar pregunta..."
-        )
+                .layoutId("container"),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Selector(
+                backgroundColor = GrayBrandingBackground,
+                text = "Todos",
+                textColor = PrimaryColor
+            )
+            Selector(
+                backgroundColor = GreenTransparent,
+                text = "Positivas",
+                textColor = GreenStrong
+            )
+            Selector(
+                backgroundColor = GrayBrandingBackground,
+                text = "Negativas",
+                textColor = PrimaryColor
+            )
+        }
         LazyColumn(
             modifier = Modifier
                 .fillMaxWidth()
@@ -123,16 +139,15 @@ fun ViewCommentCompose(navController: NavHostController) {
                     )
                 )
             ) { index, item ->
-                QuestionItem(
+                RatingByUserItem(
                     text = item.question,
-                    likesList = item.likesList,
-                    answerList = item.answerList
+                    likesList = item.likesList
                 )
             }
         }
         ToolbarTitle(
             modifier = Modifier.layoutId("toolbarTitle"),
-            titleText = "Preguntas", backClicked = {
+            titleText = "Calificaciones", backClicked = {
                 navController.navigateUp()
             },
             iconIdRes = R.drawable.ic_questions_icon
@@ -161,7 +176,7 @@ fun ViewCommentCompose(navController: NavHostController) {
                     horizontalAlignment = Alignment.Start
                 ) {
                     RegularText(
-                        text = "Preguntar",
+                        text = "Calificar",
                         color = GrayLetterShipping,
                         size = 18.sp
                     )
@@ -169,7 +184,7 @@ fun ViewCommentCompose(navController: NavHostController) {
                         modifier = Modifier.padding(bottom = 30.dp, top = 18.dp),
                         value = "",
                         onValueChange = {},
-                        placeHolder = "Escribe una pregunta al vendedor",
+                        placeHolder = "Califica el producto",
                     )
                     ShadowButton(
                         modifier = Modifier
@@ -179,7 +194,7 @@ fun ViewCommentCompose(navController: NavHostController) {
                                 color = BlueTransparent, alpha = 1f, borderRadius = 10.dp,
                                 offsetY = 6.dp, offsetX = 5.dp, blurRadius = 10.dp
                             ),
-                        text = "Hacer pregunta"
+                        text = "Enviar calificación"
                     )
                 }
             }

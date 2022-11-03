@@ -84,7 +84,8 @@ fun SelectorCounter(
 @Composable
 fun SelectorDetail(
     modifier: Modifier = Modifier, text: String = "",
-    @DrawableRes iconRes: Int
+    @DrawableRes iconRes: Int,
+    onClicked: () -> Unit = {}
 ) {
     Row(
         modifier = modifier
@@ -92,7 +93,7 @@ fun SelectorDetail(
             .height(40.dp)
             .background(Color.White)
             .padding(horizontal = 30.dp)
-            .clickable { },
+            .clickable { onClicked() },
         verticalAlignment = Alignment.CenterVertically
     ) {
         Image(

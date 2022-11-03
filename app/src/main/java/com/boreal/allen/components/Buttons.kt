@@ -5,6 +5,7 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.CornerSize
@@ -24,6 +25,7 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -210,6 +212,7 @@ fun ShadowButton(
     modifier: Modifier = Modifier,
     text: String? = "Agregar al carrito",
     @StringRes labelId: Int? = null,
+    size: TextUnit = 20.sp,
     onClick: (() -> Unit)? = null
 ) {
     BlueButton(
@@ -218,9 +221,64 @@ fun ShadowButton(
                 color = BlueTransparent, alpha = 1f, borderRadius = 10.dp,
                 offsetY = 6.dp, offsetX = 5.dp, blurRadius = 10.dp
             ),
+        size = size,
         text = text ?: stringResource(id = labelId ?: R.string.empty_string),
         borderRadius = 10.dp
     )
+}
+
+@Composable
+fun StarRatingSelector(modifier: Modifier = Modifier) {
+    Row(
+        modifier = modifier
+            .wrapContentWidth(),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Icon(
+            modifier = Modifier
+                .clickable { }
+                .size(30.dp),
+            painter = painterResource(id = R.drawable.ic_star_icon),
+            contentDescription = "star one",
+            tint = StarColor
+        )
+        Icon(
+            modifier = Modifier
+                .padding(horizontal = 2.dp)
+                .clickable { }
+                .size(30.dp),
+            painter = painterResource(id = R.drawable.ic_star_icon),
+            contentDescription = "star two",
+            tint = StarColor
+        )
+        Icon(
+            modifier = Modifier
+                .padding(horizontal = 2.dp)
+                .clickable { }
+                .size(30.dp),
+            painter = painterResource(id = R.drawable.ic_star_icon),
+            contentDescription = "star three",
+            tint = StarColor
+        )
+        Icon(
+            modifier = Modifier
+                .padding(horizontal = 2.dp)
+                .clickable { }
+                .size(30.dp),
+            painter = painterResource(id = R.drawable.ic_star_icon),
+            contentDescription = "star four",
+            tint = StarColor
+        )
+        Icon(
+            modifier = Modifier
+                .padding(start = 2.dp)
+                .clickable { }
+                .size(30.dp),
+            painter = painterResource(id = R.drawable.ic_star_icon),
+            contentDescription = "star five",
+            tint = StarColor
+        )
+    }
 }
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -250,6 +308,7 @@ fun BlueButton(
     text: String? = null,
     @StringRes labelId: Int? = null,
     borderRadius: Dp = 5.dp,
+    size: TextUnit = 15.sp,
     onClick: (() -> Unit)? = null
 ) {
     Button(
@@ -266,7 +325,7 @@ fun BlueButton(
     ) {
         Text(
             text = text ?: stringResource(id = labelId ?: R.string.empty_string),
-            fontSize = 15.sp,
+            fontSize = size,
             color = White,
             fontWeight = SemiBold,
             letterSpacing = 0.sp,
