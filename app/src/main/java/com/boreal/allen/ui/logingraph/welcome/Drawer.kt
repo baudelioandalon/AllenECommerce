@@ -163,7 +163,7 @@ fun DrawerHeader(closeClicked: (() -> Unit)? = null) {
                     color = GrayLetterDrawer,
                     size = 15.sp
                 )
-                BoldText("Luna")
+                BoldText(text = "Luna")
                 StarStatus()
             }
         }
@@ -178,7 +178,7 @@ fun StarStatus(modifier: Modifier = Modifier,text: String = "(12 Compras)", star
             .fillMaxSize(), verticalAlignment = CenterVertically
     ) {
         Icon(
-            painter = painterResource(id = R.drawable.ic_start_icon),
+            painter = painterResource(id = R.drawable.ic_star_icon),
             contentDescription = "star User",
             tint = StarColor
         )

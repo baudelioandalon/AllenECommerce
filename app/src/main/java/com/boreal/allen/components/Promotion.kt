@@ -4,11 +4,13 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color.Companion.Green
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -42,4 +44,17 @@ fun FreeShipping(modifier: Modifier) {
             tint = White
         )
     }
+}
+
+@Composable
+fun Discount(modifier: Modifier = Modifier, discount: Int = 15) {
+    BoldText(
+        modifier = modifier
+            .padding(top = 5.dp, bottom = 5.dp)
+            .wrapContentSize()
+            .background(color = GreenStrong, shape = RoundedCornerShape(corner = CornerSize(15.dp))),
+        text = "   $discount%   ",
+        size = 12.sp,
+        color = White
+    )
 }

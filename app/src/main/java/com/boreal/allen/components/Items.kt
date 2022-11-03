@@ -27,6 +27,7 @@ import androidx.constraintlayout.compose.Dimension
 import androidx.constraintlayout.compose.layoutId
 import com.boreal.allen.R
 import com.boreal.allen.theme.*
+import com.google.accompanist.flowlayout.FlowColumn
 
 @Preview
 @Composable
@@ -42,6 +43,7 @@ fun TestItems() {
         CategoryItem()
         CategorySelectorItem()
         BrandingItem()
+//        QuestionItem()
     }
 }
 
@@ -220,7 +222,7 @@ fun SellerItem() {
                 .fillMaxSize()
                 .padding(top = 20.dp, start = 30.dp, end = 30.dp)
         ) {
-            BoldText("Vendedor", size = 18.sp)
+            BoldText(text = "Vendedor", size = 18.sp)
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -454,5 +456,102 @@ fun SellersItem() {
                 BrandingItem()
             }
         }
+    }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun QuestionItem(text: String = "", answerList: List<String> = emptyList(), likesList: List<String> = emptyList()) {
+    Row(
+        modifier = Modifier
+            .background(White)
+            .padding(start = 30.dp, end = 30.dp)
+            .fillMaxSize(),
+        verticalAlignment = Alignment.Top,
+        horizontalArrangement = Arrangement.Start
+    ) {
+        Card(
+            modifier = Modifier
+                .padding(bottom = 9.dp)
+                .size(41.dp), onClick = {},
+            elevation = 0.dp,
+            shape = CircleShape,
+            backgroundColor = GrayCategoryBackground
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.tools_icon),
+                    contentDescription = "item"
+                )
+            }
+        }
+        Column(modifier = Modifier.fillMaxWidth()) {
+            Row(
+                modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                SemiBoldText(
+                    modifier = Modifier.padding(start = 28.dp, bottom = 30.dp),
+                    text = text,
+                    size = 17.sp
+                )
+                FavoriteCounterButton(amount = likesList.size)
+            }
+            FlowColumn {
+                answerList.forEach {
+                    AnswerItem(text = it)
+                }
+            }
+        }
+
+
+    }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Preview
+@Composable
+fun AnswerItem(text: String = "") {
+    Row(
+        modifier = Modifier
+            .padding(start = 30.dp, end = 4.dp, bottom = 35.dp)
+            .sizeIn(maxWidth = 200.dp)
+            .background(White),
+        verticalAlignment = Alignment.Top,
+        horizontalArrangement = Arrangement.Start
+    ) {
+        Card(
+            modifier = Modifier
+                .padding(bottom = 9.dp)
+                .size(30.dp), onClick = {},
+            elevation = 0.dp,
+            shape = CircleShape,
+            backgroundColor = GrayCategoryBackground
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                Image(
+                    modifier = Modifier.fillMaxSize(),
+                    painter = painterResource(id = R.drawable.tools_icon),
+                    contentDescription = "item"
+                )
+            }
+        }
+
+        SemiBoldText(
+            modifier = Modifier
+                .padding(start = 28.dp),
+            text = text,
+            align = TextAlign.Justify,
+            size = 17.sp, color = PrimaryColor
+        )
     }
 }

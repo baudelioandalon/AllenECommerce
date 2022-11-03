@@ -122,6 +122,32 @@
         <entry key="../../../../../layout/compose-model-1666151014440.xml" value="0.33" />
         <entry key="../../../../../layout/compose-model-1666151429734.xml" value="1.0" />
         <entry key="../../../../../layout/compose-model-1666151431359.xml" value="0.4797979797979798" />
+        <entry key="../../../../../layout/compose-model-1666413572222.xml" value="0.1" />
+        <entry key="../../../../../layout/compose-model-1666417385986.xml" value="0.1" />
+        <entry key="../../../../../layout/compose-model-1667412087292.xml" value="0.27735690235690236" />
+        <entry key="../../../../../layout/compose-model-1667412105711.xml" value="0.27735690235690236" />
+        <entry key="../../../../../layout/compose-model-1667417108396.xml" value="0.4797979797979798" />
+        <entry key="../../../../../layout/compose-model-1667417213648.xml" value="0.75" />
+        <entry key="../../../../../layout/compose-model-1667417213653.xml" value="0.37840531561461793" />
+        <entry key="../../../../../layout/compose-model-1667419406713.xml" value="0.4797979797979798" />
+        <entry key="../../../../../layout/compose-model-1667423758440.xml" value="1.0" />
+        <entry key="../../../../../layout/compose-model-1667429123666.xml" value="0.4797979797979798" />
+        <entry key="../../../../../layout/compose-model-1667429360016.xml" value="0.4797979797979798" />
+        <entry key="../../../../../layout/compose-model-1667429605902.xml" value="0.4797979797979798" />
+        <entry key="../../../../../layout/compose-model-1667430416946.xml" value="0.4797979797979798" />
+        <entry key="../../../../../layout/compose-model-1667430606680.xml" value="2.0" />
+        <entry key="../../../../../layout/compose-model-1667430644398.xml" value="0.4797979797979798" />
+        <entry key="../../../../../layout/compose-model-1667430805579.xml" value="0.5" />
+        <entry key="../../../../../layout/compose-model-1667431032295.xml" value="0.67" />
+        <entry key="../../../../../layout/compose-model-1667432009525.xml" value="0.67" />
+        <entry key="../../../../../layout/compose-model-1667432062444.xml" value="1.0" />
+        <entry key="../../../../../layout/compose-model-1667432064854.xml" value="0.67" />
+        <entry key="../../../../../layout/compose-model-1667432665134.xml" value="0.3829358414511253" />
+        <entry key="../../../../../layout/compose-model-1667433720743.xml" value="0.42792792792792794" />
+        <entry key="../../../../../layout/compose-model-1667436098154.xml" value="0.4797979797979798" />
+        <entry key="../../../../../layout/compose-model-1667438634705.xml" value="0.67" />
+        <entry key="../../../../../layout/compose-model-1667439059700.xml" value="0.5" />
+        <entry key="../../../../../layout/compose-model-1667441256436.xml" value="1.0" />
         <entry key="../../../../../layout/custom_preview.xml" value="0.20443645083932854" />
         <entry key="../../../../layout/compose-model-1665475577284.xml" value="0.48063973063973064" />
         <entry key="../../../../layout/compose-model-1665476376553.xml" value="2.0" />
@@ -130,8 +156,10 @@
         <entry key="../AllenECommerce/app/src/main/res/drawable/ic_favorite_unselected.xml" value="0.5165" />
         <entry key="../AllenECommerce/app/src/main/res/drawable/ic_less_icon.xml" value="0.338" />
         <entry key="../AllenECommerce/app/src/main/res/drawable/ic_more_icon.xml" value="0.338" />
+        <entry key="../AllenECommerce/app/src/main/res/drawable/ic_start_icon.xml" value="0.3985" />
         <entry key="../AllenECommerce/library/ui-system/src/main/res/drawable/allen_blue_logo.xml" value="0.257" />
         <entry key="../AllenECommerce/library/ui-system/src/main/res/drawable/ic_allen_blue.xml" value="0.524" />
+        <entry key="app/src/main/res/drawable/ic_favorite_unselected.xml" value="0.4295" />
       </map>
     </option>
   </component>

@@ -103,8 +103,9 @@ dependencies {
     implementation(Dependency.composeLifecycleViewModel)
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.17.0")
     implementation("androidx.constraintlayout:constraintlayout-compose:1.0.1")
-    implementation("androidx.navigation:navigation-compose:2.5.2")
+    implementation("androidx.navigation:navigation-compose:2.5.3")
     implementation("com.google.accompanist:accompanist-pager:0.13.0")
     implementation("com.google.accompanist:accompanist-pager-indicators:0.13.0")
     implementation("io.coil-kt:coil-compose:2.2.2")
+    implementation("com.google.accompanist:accompanist-flowlayout:0.23.1")
 }

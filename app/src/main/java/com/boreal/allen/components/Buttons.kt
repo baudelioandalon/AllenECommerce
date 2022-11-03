@@ -23,12 +23,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.layoutId
 import com.boreal.allen.R
+import com.boreal.allen.extensions.drawColoredShadow
 import com.boreal.allen.theme.*
 
 @Preview(showBackground = true)
@@ -41,6 +43,7 @@ fun PreviewBottons() {
     ) {
         BackButton()
         BlueButton(labelId = R.string.welcome_button_enter)
+        ShadowButton(labelId = R.string.welcome_button_enter)
         CornerButton(labelId = R.string.welcome_button_enter)
         CornerImgButton(
             imgId = R.drawable.ic_google_logo,
@@ -49,6 +52,7 @@ fun PreviewBottons() {
         )
         LittleAddButton()
         FavoriteButton()
+        FavoriteCounterButton()
         ShareButton()
         RightRoundedButton()
     }
@@ -56,7 +60,7 @@ fun PreviewBottons() {
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun FavoriteButton(modifier: Modifier = Modifier,clicked: (() -> Unit)? = null) {
+fun FavoriteButton(modifier: Modifier = Modifier, clicked: (() -> Unit)? = null) {
     Card(
         modifier = modifier
             .layoutId("favorite_selector")
@@ -73,7 +77,46 @@ fun FavoriteButton(modifier: Modifier = Modifier,clicked: (() -> Unit)? = null) 
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun ShareButton(modifier: Modifier = Modifier,clicked: (() -> Unit)? = null) {
+fun FavoriteCounterButton(
+    modifier: Modifier = Modifier,
+    amount: Int = 0, clicked: (() -> Unit)? = null
+) {
+    Card(
+        modifier = modifier
+            .layoutId("favorite_selector")
+            .height(35.dp)
+            .wrapContentWidth(),
+        elevation = 0.dp,
+        shape = RoundedCornerShape(10.dp),
+        backgroundColor = FavoriteUnselectedColor,
+        onClick = { clicked?.invoke() }) {
+        Row(
+            modifier = Modifier.wrapContentWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Image(
+                modifier = Modifier.size(35.dp),
+                painter = painterResource(id = R.drawable.ic_favorite_unselected),
+                contentDescription = ""
+            )
+            BoldText(
+                modifier = Modifier
+                    .padding(end = 13.dp)
+                    .wrapContentWidth(),
+                text = "$amount",
+                color = FavoriteSelectedColor,
+                size = 12.sp,
+                align = TextAlign.Start
+            )
+        }
+
+    }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun ShareButton(modifier: Modifier = Modifier, clicked: (() -> Unit)? = null) {
     Card(
         modifier = modifier
             .layoutId("share_selector")
@@ -112,7 +155,8 @@ fun RightRoundedButton(modifier: Modifier = Modifier) {
             .layoutId("rounded_selector")
             .size(35.dp),
         elevation = 0.dp,
-        shape = CircleShape) {
+        shape = CircleShape
+    ) {
         Image(
             modifier = Modifier.fillMaxSize(),
             painter = painterResource(id = R.drawable.ic_rounded_arrow_right),
@@ -160,10 +204,32 @@ fun LittleAddButton(onClick: (() -> Unit)? = null) {
     }
 }
 
+@Preview
+@Composable
+fun ShadowButton(
+    modifier: Modifier = Modifier,
+    text: String? = "Agregar al carrito",
+    @StringRes labelId: Int? = null,
+    onClick: (() -> Unit)? = null
+) {
+    BlueButton(
+        modifier = modifier
+            .drawColoredShadow(
+                color = BlueTransparent, alpha = 1f, borderRadius = 10.dp,
+                offsetY = 6.dp, offsetX = 5.dp, blurRadius = 10.dp
+            ),
+        text = text ?: stringResource(id = labelId ?: R.string.empty_string),
+        borderRadius = 10.dp
+    )
+}
+
 @OptIn(ExperimentalMaterialApi::class)
 @Preview(showBackground = true)
 @Composable
-fun BackButton(modifier: Modifier = Modifier, onClick: (() -> Unit)? = null) {
+fun BackButton(
+    modifier: Modifier = Modifier,
+    onClick: (() -> Unit)? = null
+) {
     Card(
         modifier = modifier
             .width(35.dp)
@@ -180,8 +246,10 @@ fun BackButton(modifier: Modifier = Modifier, onClick: (() -> Unit)? = null) {
 
 @Composable
 fun BlueButton(
-    @StringRes labelId: Int,
     modifier: Modifier = Modifier,
+    text: String? = null,
+    @StringRes labelId: Int? = null,
+    borderRadius: Dp = 5.dp,
     onClick: (() -> Unit)? = null
 ) {
     Button(
@@ -193,11 +261,11 @@ fun BlueButton(
             pressedElevation = 5.dp,
             disabledElevation = 0.dp
         ),
-        shape = RoundedCornerShape(corner = CornerSize(5.dp)),
+        shape = RoundedCornerShape(corner = CornerSize(borderRadius)),
         onClick = { onClick?.invoke() }
     ) {
         Text(
-            text = stringResource(id = labelId),
+            text = text ?: stringResource(id = labelId ?: R.string.empty_string),
             fontSize = 15.sp,
             color = White,
             fontWeight = SemiBold,

@@ -15,10 +15,16 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Black
 import androidx.compose.ui.graphics.Color.Companion.White
+import androidx.compose.ui.graphics.Paint
+import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
+import androidx.compose.ui.graphics.scale
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -28,6 +34,7 @@ import androidx.constraintlayout.compose.layoutId
 import androidx.navigation.NavController
 import com.boreal.allen.R
 import com.boreal.allen.components.*
+import com.boreal.allen.extensions.drawColoredShadow
 import com.boreal.allen.theme.*
 import com.boreal.allen.ui.logingraph.welcome.StarStatus
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
@@ -52,6 +59,7 @@ fun ViewProductCompose(navController: NavController) {
         .background(GrayBackgroundMain),
         constraintSet = ConstraintSet {
             val toolbarTitle = createRefFor("toolbarTitle")
+            val bottomPrice = createRefFor("bottomPrice")
             val content = createRefFor("content")
             val guideLine = createGuidelineFromTop(0.09f)
             constrain(toolbarTitle) {
@@ -61,6 +69,11 @@ fun ViewProductCompose(navController: NavController) {
             }
             constrain(content) {
                 top.linkTo(guideLine)
+                bottom.linkTo(parent.bottom)
+                width = Dimension.matchParent
+                height = Dimension.fillToConstraints
+            }
+            constrain(bottomPrice) {
                 bottom.linkTo(parent.bottom)
                 width = Dimension.matchParent
                 height = Dimension.fillToConstraints
@@ -137,7 +150,7 @@ fun ViewProductCompose(navController: NavController) {
                         .padding(top = 21.dp, end = 30.dp, start = 30.dp)
                         .fillMaxWidth()
                 ) {
-                    BoldText("Miniesmeriladora Angular")
+                    BoldText(text = "Miniesmeriladora Angular")
                 }
                 StarStatus(
                     modifier = Modifier
@@ -269,5 +282,56 @@ fun ViewProductCompose(navController: NavController) {
                 navController.navigateUp()
             }
         )
+
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .layoutId("bottomPrice"),
+            elevation = 9.dp
+        ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 10.dp)
+                    .background(White),
+                verticalAlignment = Alignment.Bottom,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Column(
+                    modifier = Modifier.padding(
+                        start = 30.dp,
+                        bottom = 18.dp
+                    ),
+                    verticalArrangement = Arrangement.SpaceBetween,
+                    horizontalAlignment = Alignment.Start
+                ) {
+                    Discount()
+                    Row(verticalAlignment = Alignment.Bottom) {
+                        BoldText(
+                            text = "$435.00"
+                        )
+                        SmallText(
+                            modifier = Modifier.padding(
+                                start = 10.dp,
+                            ), text = "$490.00"
+                        )
+                    }
+                }
+
+                ShadowButton(
+                    modifier = Modifier
+                        .padding(bottom = 18.dp, end = 30.dp)
+                        .width(117.dp)
+                        .height(52.dp)
+                        .drawColoredShadow(
+                            color = BlueTransparent, alpha = 1f, borderRadius = 10.dp,
+                            offsetY = 6.dp, offsetX = 5.dp, blurRadius = 10.dp
+                        ),
+                    text = "Agregar al carrito"
+                )
+
+            }
+        }
+
     }
 }

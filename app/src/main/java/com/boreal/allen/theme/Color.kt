@@ -24,10 +24,13 @@ val GrayLetterCategoryProduct = Color(0xFFDBDBDB)
 val GrayLetterArrow = Color(0xFFC2C3C1)
 val GreenStrong = Color(0xFF51BC9D)
 val GreenTransparent = Color(0x379FFAA9)
+val BlueTransparent = Color(0x54C7E1F7)
 val GrayBackgroundDrawerDismiss = Color(0xFFF1F5F8)
 val CategoryBackgroundSelectorOne = Color(0xFFE6EDDB)
 val CategoryBackgroundSelectorTwo = Color(0xFFDAE1F4)
 val CategoryBackgroundSelectorThree = Color(0xFFF2DFE6)
+val FavoriteUnselectedColor = Color(0xFFFAF6FF)
+val FavoriteSelectedColor = Color(0xFFB691FF)
 
 val categorySelectorColors = listOf(
     CategoryBackgroundSelectorOne,

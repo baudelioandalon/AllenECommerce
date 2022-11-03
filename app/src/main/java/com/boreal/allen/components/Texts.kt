@@ -35,9 +35,9 @@ fun TestPreviewTexts() {
 
 @Composable
 fun LargeText(
+    modifier: Modifier = Modifier,
     text: String? = null,
     labelId: Int? = null,
-    modifier: Modifier = Modifier,
     color: Color = Color.Black,
     align: TextAlign? = null
 ) {
@@ -54,9 +54,9 @@ fun LargeText(
 
 @Composable
 fun MediumText(
+    modifier: Modifier = Modifier,
     text: String? = null,
     labelId: Int? = null,
-    modifier: Modifier = Modifier,
     color: Color = Color.Black,
     align: TextAlign? = null,
     size: TextUnit = 20.sp
@@ -75,9 +75,9 @@ fun MediumText(
 
 @Composable
 fun SemiBoldText(
+    modifier: Modifier = Modifier,
     text: String? = null,
     labelId: Int? = null,
-    modifier: Modifier = Modifier,
     color: Color = Color.Black,
     align: TextAlign? = null,
     size: TextUnit = 18.sp
@@ -96,9 +96,9 @@ fun SemiBoldText(
 
 @Composable
 fun MediumTextBold(
+    modifier: Modifier = Modifier,
     text: String? = null,
     labelId: Int? = null,
-    modifier: Modifier = Modifier,
     color: Color = Color.Black,
     align: TextAlign? = null
 ) {
@@ -116,9 +116,9 @@ fun MediumTextBold(
 
 @Composable
 fun BoldText(
+    modifier: Modifier = Modifier,
     text: String? = null,
     labelId: Int? = null,
-    modifier: Modifier = Modifier,
     size: TextUnit = 25.sp,
     color: Color = Color.Black,
     align: TextAlign? = null
@@ -137,16 +137,17 @@ fun BoldText(
 
 @Composable
 fun RegularText(
+    modifier: Modifier = Modifier,
     text: String? = null,
     labelId: Int? = null,
-    modifier: Modifier = Modifier,
+    size: TextUnit = 15.sp,
     color: Color = Color.Black,
     align: TextAlign? = null
 ) {
     Text(
         modifier = modifier,
         text = text ?: stringResource(id = labelId ?: R.string.empty_string),
-        fontSize = 15.sp,
+        fontSize = size,
         color = color,
         fontWeight = SemiBold,
         textAlign = align
@@ -154,10 +155,30 @@ fun RegularText(
 }
 
 @Composable
-fun SeeAll(
+fun SmallText(
+    modifier: Modifier = Modifier,
     text: String? = null,
     labelId: Int? = null,
+    color: Color = GrayLetterSeeAll,
+    align: TextAlign? = null
+) {
+    Text(
+        modifier = modifier,
+        text = text ?: stringResource(id = labelId ?: R.string.empty_string),
+        fontSize = 12.sp,
+        color = color,
+        letterSpacing = 0.sp,
+        fontWeight = Bold,
+        textAlign = align,
+        fontFamily = MaterialTheme.typography.caption.fontFamily
+    )
+}
+
+@Composable
+fun SeeAll(
     modifier: Modifier = Modifier,
+    text: String? = null,
+    labelId: Int? = null,
     color: Color = GrayLetterSeeAll,
     align: TextAlign? = null
 ) {
