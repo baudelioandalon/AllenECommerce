@@ -8,14 +8,14 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.White
+import androidx.compose.ui.graphics.Color.Companion.Yellow
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -609,6 +609,130 @@ fun AnswerItem(text: String = "") {
             text = text,
             align = TextAlign.Justify,
             size = 17.sp, color = PrimaryColor
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ShoppingCartStoreItem() {
+
+    Column(modifier = Modifier.fillMaxWidth()) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceAround
+        ) {
+            RadioButton(
+                selected = false,
+                onClick = { },
+                colors = RadioButtonDefaults.colors(
+                    unselectedColor = GrayLetterHint,
+                    selectedColor = PrimaryColor
+                )
+            )
+            Card(
+                modifier = Modifier
+                    .size(30.dp),
+                backgroundColor = GrayBackgroundDrawerDismiss,
+                elevation = 0.dp,
+                shape = RoundedCornerShape(10.dp)
+            ) {
+
+            }
+            BoldText(
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(start = 6.dp),
+                text = "Ferreteria La Hormiga",
+                size = 15.sp
+            )
+            SemiBoldText(
+                modifier = Modifier.padding(end = 23.dp),
+                text = "2 articulos",
+                color = GrayMedium,
+                size = 13.sp
+            )
+            Icon(
+                modifier = Modifier
+                    .rotate(270f)
+                    .width(14.55.dp)
+                    .height(8.6.dp),
+                painter = painterResource(id = R.drawable.ic_right_arrow_simbol),
+                contentDescription = "arrow"
+            )
+
+        }
+        Divider(
+            thickness = 1.5.dp,
+            color = GrayBorderLight
+        )
+        FlowColumn {
+            listOf("Camiseta", "Camiseta").forEach {
+
+            }
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ShoppingCartItem() {
+    Column {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceAround
+        ) {
+
+            Column {
+                Card(
+                    modifier = Modifier
+                        .size(81.dp),
+                    backgroundColor = GrayBackgroundDrawerDismiss,
+                    elevation = 0.dp,
+                    shape = RoundedCornerShape(10.dp)
+                ) {
+
+                }
+
+            }
+            Column(
+                modifier = Modifier.height(81.dp).wrapContentWidth(),
+                verticalArrangement = Arrangement.SpaceAround
+            ) {
+                SemiBoldText(
+                    text = "Camiseta",
+                    size = 17.sp
+                )
+                SemiBoldText(modifier = Modifier.height(30.dp),
+                    text = "Ropa",
+                    color = GrayLetterCategoryProduct,
+                    size = 10.sp
+                )
+                Row (modifier =  Modifier.wrapContentHeight(),
+                verticalAlignment = Alignment.Bottom){
+                    BoldText(
+                        modifier = Modifier
+                            .wrapContentWidth()
+                            .padding(end = 24.dp),
+                        text = "$54",
+                        color = OrangeTransparent,
+                        size = 12.sp
+                    )
+                    BoldText(
+                        modifier = Modifier
+                            .wrapContentWidth(),
+                        text = "$46",
+                        size = 15.sp
+                    )
+                }
+            }
+        }
+        BoldText(
+            text = "Remover",
+            size = 12.sp,
+            color = OrangeStrong
         )
     }
 }
