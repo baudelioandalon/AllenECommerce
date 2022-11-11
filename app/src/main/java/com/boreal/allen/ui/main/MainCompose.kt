@@ -5,6 +5,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.boreal.allen.domain.LOGIN_GRAPH
 import com.boreal.allen.domain.ROOT_GRAPH
+import com.boreal.allen.domain.SHOPPING_CART_GRAPH
 import com.boreal.allen.ui.homeclientgraph.homeClientGraph
 import com.boreal.allen.ui.logingraph.loginGraph
 import com.boreal.allen.ui.productgraph.question.questionGraph
@@ -17,7 +18,7 @@ fun MainCompose(closeApp: () -> Unit) {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = LOGIN_GRAPH,
+        startDestination = SHOPPING_CART_GRAPH,
         route = ROOT_GRAPH
     ) {
         loginGraph(navController, closeApp)

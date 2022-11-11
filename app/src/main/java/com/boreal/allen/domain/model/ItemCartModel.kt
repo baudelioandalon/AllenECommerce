@@ -17,4 +17,10 @@ data class ProductShoppingCart(
     val fastOrder: Boolean,
     val minimalFastOrder: Int,
     val price: Double
-)
+) {
+    fun getProductWithDiscount() = if (discountPercentage > 0) {
+        price - (price * (discountPercentage / 100))
+    } else {
+        price
+    }
+}

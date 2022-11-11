@@ -24,13 +24,14 @@ import com.boreal.allen.R
 import com.boreal.allen.components.*
 import com.boreal.allen.domain.model.ItemCartModel
 import com.boreal.allen.domain.model.ProductShoppingCart
+import com.boreal.allen.extensions.DottedShape
 import com.boreal.allen.extensions.drawColoredShadow
 import com.boreal.allen.theme.*
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @Preview(showBackground = true)
 @Composable
-fun ViewRatingProductCompose() {
+fun ViewShoppingCartCompose() {
     val systemUiController = rememberSystemUiController()
     if (isSystemInDarkTheme()) {
         systemUiController.setSystemBarsColor(
@@ -48,32 +49,33 @@ fun ViewRatingProductCompose() {
         .background(GrayBackgroundMain),
         constraintSet = ConstraintSet {
             val toolbarTitle = createRefFor("toolbarTitle")
-            val container = createRefFor("container")
+            val listContent = createRefFor("listContent")
             val bottomQuestion = createRefFor("bottomQuestion")
             val content = createRefFor("content")
             val guideLine = createGuidelineFromTop(0.09f)
 
             val guideLineSearch = createGuidelineFromTop(0.095f)
 
-            constrain(toolbarTitle) {
-                top.linkTo(parent.top)
-                width = Dimension.matchParent
-                height = Dimension.fillToConstraints
-            }
-            constrain(container) {
-                top.linkTo(guideLine)
-                start.linkTo(parent.start)
-                end.linkTo(parent.end)
-                bottom.linkTo(guideLineSearch)
-                width = Dimension.matchParent
-                height = Dimension.fillToConstraints
-            }
             constrain(content) {
                 top.linkTo(guideLineSearch, 0.dp)
                 bottom.linkTo(bottomQuestion.top, margin = 0.dp)
                 width = Dimension.matchParent
                 height = Dimension.fillToConstraints
             }
+            constrain(toolbarTitle) {
+                top.linkTo(parent.top)
+                width = Dimension.matchParent
+                height = Dimension.fillToConstraints
+            }
+            constrain(listContent) {
+                top.linkTo(guideLine)
+                start.linkTo(parent.start)
+                end.linkTo(parent.end)
+                bottom.linkTo(bottomQuestion.top)
+                width = Dimension.matchParent
+                height = Dimension.fillToConstraints
+            }
+
             constrain(bottomQuestion) {
                 bottom.linkTo(parent.bottom)
                 width = Dimension.matchParent
@@ -83,10 +85,9 @@ fun ViewRatingProductCompose() {
 
         LazyColumn(
             modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight()
+                .fillMaxSize()
                 .background(GrayBackgroundMain)
-                .layoutId("content")
+                .layoutId("listContent")
         ) {
 
             itemsIndexed(
@@ -98,7 +99,18 @@ fun ViewRatingProductCompose() {
                         listItems = listOf(
                             ProductShoppingCart(
                                 skuProduct = "d2d232",
-                                nameProduct = "Camiseta",
+                                nameProduct = "1KG Clavo 1/2 pulgada",
+                                imgProduct = "ccdcdomd",
+                                categoryItem = "Ropa",
+                                quantity = 1,
+                                discountPercentage = 0.0,
+                                fastOrder = true,
+                                minimalFastOrder = 2,
+                                price = 46.0
+                            ),
+                            ProductShoppingCart(
+                                skuProduct = "d2d232",
+                                nameProduct = "Martillo",
                                 imgProduct = "ccdcdomd",
                                 categoryItem = "Ropa",
                                 quantity = 1,
@@ -108,10 +120,28 @@ fun ViewRatingProductCompose() {
                                 price = 46.0
                             )
                         )
+                    ),
+                    ItemCartModel(
+                        nameStore = "Nike Store",
+                        idStore = "idmidjikjdokjdo",
+                        imgStore = "didimd",
+                        listItems = listOf(
+                            ProductShoppingCart(
+                                skuProduct = "d2d232",
+                                nameProduct = "Balon Basketball num 6edcwedwedwedcedwcef",
+                                imgProduct = "ccdcdomd",
+                                categoryItem = "Deportes",
+                                quantity = 2,
+                                discountPercentage = 10.0,
+                                fastOrder = true,
+                                minimalFastOrder = 2,
+                                price = 50.0
+                            )
+                        )
                     )
                 )
             ) { index, item ->
-
+                ShoppingCartStoreItem(item)
             }
         }
         ToolbarTitle(
@@ -126,7 +156,7 @@ fun ViewRatingProductCompose() {
             modifier = Modifier
                 .fillMaxWidth()
                 .layoutId("bottomQuestion"),
-            elevation = 9.dp
+            elevation = 15.dp
         ) {
             Row(
                 modifier = Modifier
@@ -144,6 +174,30 @@ fun ViewRatingProductCompose() {
                     verticalArrangement = Arrangement.SpaceBetween,
                     horizontalAlignment = Alignment.Start
                 ) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 15.dp, bottom = 15.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        MediumText(
+                            text = "Descuento de tienda",
+                            color = GrayLetterSeeAll,
+                            size = 13.sp
+                        )
+                        SemiBoldText(
+                            text = "8%",
+                            color = GrayLetterShipping,
+                            size = 15.sp
+                        )
+                    }
+
+                    Box(
+                        Modifier
+                            .height(1.dp)
+                            .fillMaxWidth()
+                            .background(Color.Gray, shape = DottedShape(step = 20.dp))
+                    )
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceEvenly,

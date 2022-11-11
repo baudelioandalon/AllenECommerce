@@ -2,14 +2,17 @@ package com.boreal.allen.extensions
 
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Rect
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.*
 import androidx.compose.ui.graphics.Color.Companion.Black
-import androidx.compose.ui.graphics.Paint
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
-import androidx.compose.ui.graphics.scale
-import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import kotlin.math.roundToInt
 
 fun Modifier.drawColoredShadow(
     color: Color = Black,
@@ -63,4 +66,28 @@ fun Modifier.drawColoredShadow(
     }
 } else {
     this
+}
+
+data class DottedShape(
+    val step: Dp,
+) : Shape {
+    override fun createOutline(
+        size: Size,
+        layoutDirection: LayoutDirection,
+        density: Density
+    ) = Outline.Generic(Path().apply {
+        val stepPx = with(density) { step.toPx() }
+        val stepsCount = (size.width / stepPx).roundToInt()
+        val actualStep = size.width / stepsCount
+        val dotSize = Size(width = actualStep / 2, height = size.height)
+        for (i in 0 until stepsCount) {
+            addRect(
+                Rect(
+                    offset = Offset(x = i * actualStep, y = 0f),
+                    size = dotSize
+                )
+            )
+        }
+        close()
+    })
 }

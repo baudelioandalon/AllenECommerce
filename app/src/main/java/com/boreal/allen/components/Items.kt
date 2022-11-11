@@ -12,12 +12,11 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.White
-import androidx.compose.ui.graphics.Color.Companion.Yellow
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -26,8 +25,11 @@ import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import androidx.constraintlayout.compose.layoutId
 import com.boreal.allen.R
+import com.boreal.allen.domain.model.ItemCartModel
+import com.boreal.allen.domain.model.ProductShoppingCart
 import com.boreal.allen.theme.*
 import com.google.accompanist.flowlayout.FlowColumn
+import com.google.accompanist.flowlayout.FlowRow
 
 @Preview
 @Composable
@@ -615,77 +617,108 @@ fun AnswerItem(text: String = "") {
 
 @Preview(showBackground = true)
 @Composable
-fun ShoppingCartStoreItem() {
+fun ShoppingCartStoreItem(item: ItemCartModel = ItemCartModel("Test", "3e23dc2", "dd", listOf())) {
 
-    Column(modifier = Modifier.fillMaxWidth()) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceAround
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 30.dp),
+        elevation = 5.dp
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(White)
         ) {
-            RadioButton(
-                selected = false,
-                onClick = { },
-                colors = RadioButtonDefaults.colors(
-                    unselectedColor = GrayLetterHint,
-                    selectedColor = PrimaryColor
-                )
-            )
-            Card(
-                modifier = Modifier
-                    .size(30.dp),
-                backgroundColor = GrayBackgroundDrawerDismiss,
-                elevation = 0.dp,
-                shape = RoundedCornerShape(10.dp)
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceAround
             ) {
+                RadioButton(
+                    selected = false,
+                    onClick = { },
+                    colors = RadioButtonDefaults.colors(
+                        unselectedColor = GrayLetterHint,
+                        selectedColor = PrimaryColor
+                    )
+                )
+                Card(
+                    modifier = Modifier
+                        .size(30.dp),
+                    backgroundColor = GrayBackgroundDrawerDismiss,
+                    elevation = 0.dp,
+                    shape = RoundedCornerShape(10.dp)
+                ) {
+
+                }
+                BoldText(
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(start = 6.dp),
+                    text = item.nameStore,
+                    size = 15.sp
+                )
+                SemiBoldText(
+                    modifier = Modifier.padding(end = 23.dp),
+                    text = "${item.listItems.size} articulos",
+                    color = GrayMedium,
+                    size = 13.sp
+                )
+                Icon(
+                    modifier = Modifier
+                        .padding(end = 30.dp),
+                    painter = painterResource(id = R.drawable.ic_arrow_down),
+                    contentDescription = "arrow"
+                )
 
             }
-            BoldText(
+            Divider(
+                thickness = 1.5.dp,
+                color = GrayBorderLight
+            )
+            FlowRow(
                 modifier = Modifier
-                    .weight(1f)
-                    .padding(start = 6.dp),
-                text = "Ferreteria La Hormiga",
-                size = 15.sp
-            )
-            SemiBoldText(
-                modifier = Modifier.padding(end = 23.dp),
-                text = "2 articulos",
-                color = GrayMedium,
-                size = 13.sp
-            )
-            Icon(
-                modifier = Modifier
-                    .rotate(270f)
-                    .width(14.55.dp)
-                    .height(8.6.dp),
-                painter = painterResource(id = R.drawable.ic_right_arrow_simbol),
-                contentDescription = "arrow"
-            )
-
-        }
-        Divider(
-            thickness = 1.5.dp,
-            color = GrayBorderLight
-        )
-        FlowColumn {
-            listOf("Camiseta", "Camiseta").forEach {
-
+                    .fillMaxWidth(),
+            ) {
+                item.listItems.forEach {
+                    ShoppingCartItem(it)
+                }
             }
         }
     }
+
 }
 
 @Preview(showBackground = true)
 @Composable
-fun ShoppingCartItem() {
-    Column {
+fun ShoppingCartItem(
+    productShoppingCart: ProductShoppingCart = ProductShoppingCart(
+        skuProduct = "d2d232",
+        nameProduct = "Balon Basketball num 6edcwedwedwedcedwcef",
+        imgProduct = "ccdcdomd",
+        categoryItem = "Deportes",
+        quantity = 2,
+        discountPercentage = 10.0,
+        fastOrder = true,
+        minimalFastOrder = 2,
+        price = 588880.0
+    )
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 30.dp, end = 30.dp, top = 14.dp, bottom = 10.dp)
+    ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceAround
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
 
-            Column {
+            Column(
+                modifier = Modifier.wrapContentWidth()
+            ) {
                 Card(
                     modifier = Modifier
                         .size(81.dp),
@@ -698,41 +731,93 @@ fun ShoppingCartItem() {
 
             }
             Column(
-                modifier = Modifier.height(81.dp).wrapContentWidth(),
+                modifier = Modifier
+                    .height(81.dp)
+                    .padding(start = 27.dp)
+                    .weight(0.3f),
                 verticalArrangement = Arrangement.SpaceAround
             ) {
                 SemiBoldText(
-                    text = "Camiseta",
-                    size = 17.sp
+                    text = productShoppingCart.nameProduct,
+                    size = 13.sp,
+                    maxLines = 3,
+                    textOverflow = TextOverflow.Ellipsis
                 )
-                SemiBoldText(modifier = Modifier.height(30.dp),
-                    text = "Ropa",
+                SemiBoldText(
+                    modifier = Modifier.wrapContentHeight(),
+                    text = productShoppingCart.categoryItem,
                     color = GrayLetterCategoryProduct,
                     size = 10.sp
                 )
-                Row (modifier =  Modifier.wrapContentHeight(),
-                verticalAlignment = Alignment.Bottom){
+                Row(
+                    modifier = Modifier.weight(1f),
+                    verticalAlignment = Alignment.Bottom,
+                    horizontalArrangement = Arrangement.End
+                ) {
+                    if (productShoppingCart.discountPercentage > 0) {
+                        PriceBeforeDiscount(
+                            modifier = Modifier.weight(0.3f),
+                            price = productShoppingCart.price
+                        )
+                    }
                     BoldText(
                         modifier = Modifier
-                            .wrapContentWidth()
-                            .padding(end = 24.dp),
-                        text = "$54",
-                        color = OrangeTransparent,
-                        size = 12.sp
-                    )
-                    BoldText(
-                        modifier = Modifier
-                            .wrapContentWidth(),
-                        text = "$46",
-                        size = 15.sp
+                            .fillMaxWidth()
+                            .weight(1f),
+                        text = "$${productShoppingCart.getProductWithDiscount().toInt()}",
+                        size = 15.sp, align = TextAlign.End
                     )
                 }
             }
+            Column(
+                modifier = Modifier
+                    .height(81.dp)
+                    .weight(0.3f),
+                verticalArrangement = Arrangement.SpaceBetween,
+                horizontalAlignment = Alignment.End
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .wrapContentHeight(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    if (productShoppingCart.discountPercentage > 0) {
+                        Discount(
+                            modifier = Modifier.padding(start = 10.dp),
+                            discount = productShoppingCart.discountPercentage.toInt()
+                        )
+                    } else {
+                        Spacer(modifier = Modifier.padding(start = 10.dp))
+                    }
+                    if (productShoppingCart.fastOrder) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_thunder_icon),
+                            contentDescription = "free shipping",
+                            tint = StarColor
+                        )
+                    }
+                }
+                SelectorCounter(
+                    quantity = productShoppingCart.quantity
+                )
+            }
         }
-        BoldText(
-            text = "Remover",
-            size = 12.sp,
-            color = OrangeStrong
-        )
+        Row(modifier = Modifier.padding(top = 12.dp)) {
+            BoldText(
+                text = "Remover",
+                size = 12.sp,
+                color = OrangeStrong
+            ) {
+
+            }
+            BoldText(
+                modifier = Modifier.padding(start = 38.dp),
+                text = "Guardar para después",
+                size = 12.sp,
+                color = OrangeStrong
+            )
+        }
     }
 }

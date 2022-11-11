@@ -38,6 +38,7 @@ fun TestSelectors() {
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun SelectorCounter(
+    quantity: Int = 1,
     lessClicked: (() -> Unit)? = null,
     moreClicked: (() -> Unit)? = null
 ) {
@@ -62,7 +63,7 @@ fun SelectorCounter(
         }
         SemiBoldText(
             modifier = Modifier.padding(horizontal = 22.dp),
-            text = "1", size = 25.sp
+            text = "$quantity", size = 25.sp
         )
         Surface(
             modifier = Modifier

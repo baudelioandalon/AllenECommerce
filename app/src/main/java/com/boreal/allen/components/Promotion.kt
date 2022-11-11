@@ -1,25 +1,27 @@
 package com.boreal.allen.components
 
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.boreal.allen.R
 import com.boreal.allen.theme.GreenStrong
 import com.boreal.allen.theme.GreenTransparent
+import com.boreal.allen.theme.OrangeMedium
+import com.boreal.allen.theme.OrangeTransparent
 
 @Composable
 fun FreeShipping(modifier: Modifier) {
@@ -65,6 +67,36 @@ fun Discount(modifier: Modifier = Modifier, discount: Int = 15) {
     )
 }
 
+@Preview
+@Composable
+fun PriceBeforeDiscount(modifier: Modifier = Modifier,price: Double = 50.0) {
+
+    Box {
+        BoldText(
+            modifier = modifier
+                .wrapContentWidth()
+                .align(Alignment.Center),
+            text = "$${price.toInt()}",
+            color = OrangeTransparent,
+            size = 15.sp
+        )
+        Canvas(modifier = Modifier
+            .fillMaxWidth(0.3f)
+            .align(Alignment.Center)) {
+            var yCord = 0f
+            drawLine(
+                OrangeMedium,
+                Offset(0f, yCord),
+                Offset(size.width, yCord),
+                strokeWidth = 3f
+            )
+            yCord += 1.8f * 15.toDp().toPx()
+        }
+
+
+    }
+}
+
 @Composable
 fun Selector(
     modifier: Modifier = Modifier,
@@ -81,7 +113,8 @@ fun Selector(
             )
             .wrapContentSize()
             .clickable { onClicked() },
-        verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center
     ) {
         SemiBoldText(
             modifier = Modifier
