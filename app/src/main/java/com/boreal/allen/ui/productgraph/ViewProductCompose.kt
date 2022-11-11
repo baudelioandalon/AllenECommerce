@@ -1,4 +1,4 @@
-package com.boreal.allen.ui.productgraph.viewproduct
+package com.boreal.allen.ui.productgraph
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -30,7 +30,7 @@ import com.boreal.allen.components.*
 import com.boreal.allen.extensions.drawColoredShadow
 import com.boreal.allen.theme.*
 import com.boreal.allen.ui.logingraph.welcome.StarStatus
-import com.boreal.allen.ui.productgraph.comment.COMMENT_GRAPH
+import com.boreal.allen.ui.productgraph.question.QUESTION_GRAPH
 import com.boreal.allen.ui.productgraph.ratinggraph.RATING_PRODUCT_GRAPH
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
@@ -261,7 +261,7 @@ fun ViewProductCompose(navController: NavController) {
                     text = "Preguntas",
                     iconRes = R.drawable.ic_questions_icon
                 ) {
-                    navController.navigate(COMMENT_GRAPH)
+                    navController.navigate(QUESTION_GRAPH)
                 }
             }
             item {
@@ -328,7 +328,8 @@ fun ViewProductCompose(navController: NavController) {
                             color = BlueTransparent, alpha = 1f, borderRadius = 10.dp,
                             offsetY = 6.dp, offsetX = 5.dp, blurRadius = 10.dp
                         ),
-                    text = "Agregar al carrito"
+                    text = "Agregar al carrito",
+                    size = 15.sp
                 )
 
             }

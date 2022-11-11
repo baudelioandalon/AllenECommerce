@@ -9,8 +9,8 @@ import com.boreal.allen.domain.ProductScreen
 const val RATING_PRODUCT_GRAPH = "RATING_PRODUCT_GRAPH"
 
 fun NavGraphBuilder.ratingProductGraph(navController: NavHostController, closeApp: () -> Unit) {
-    navigation(startDestination = ProductScreen.ViewProductScreen.route, route = RATING_PRODUCT_GRAPH) {
-        composable(route = ProductScreen.ViewProductScreen.route) {
+    navigation(startDestination = ProductScreen.ViewRatingScreen.route, route = RATING_PRODUCT_GRAPH) {
+        composable(route = ProductScreen.ViewRatingScreen.route) {
             ViewRatingProductCompose(navController)
         }
     }

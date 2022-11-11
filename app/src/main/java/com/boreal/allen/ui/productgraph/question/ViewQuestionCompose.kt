@@ -1,4 +1,4 @@
-package com.boreal.allen.ui.productgraph.comment
+package com.boreal.allen.ui.productgraph.question
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -31,7 +31,7 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @Preview
 @Composable
-fun ViewCommentCompose(navController: NavHostController) {
+fun ViewQuestionCompose(navController: NavHostController) {
     val systemUiController = rememberSystemUiController()
     if (isSystemInDarkTheme()) {
         systemUiController.setSystemBarsColor(

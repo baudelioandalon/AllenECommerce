@@ -1,11 +1,10 @@
-package com.boreal.allen.ui.productgraph.viewproduct
+package com.boreal.allen.ui.productgraph
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import com.boreal.allen.domain.ProductScreen
-import com.boreal.allen.ui.productgraph.viewproduct.ViewProductCompose
 
 const val PRODUCT_GRAPH = "PRODUCT_GRAPH"
 

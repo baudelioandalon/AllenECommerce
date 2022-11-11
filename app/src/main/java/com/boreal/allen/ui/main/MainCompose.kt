@@ -7,10 +7,10 @@ import com.boreal.allen.domain.LOGIN_GRAPH
 import com.boreal.allen.domain.ROOT_GRAPH
 import com.boreal.allen.ui.homeclientgraph.homeClientGraph
 import com.boreal.allen.ui.logingraph.loginGraph
-import com.boreal.allen.ui.productgraph.comment.commentGraph
-import com.boreal.allen.ui.productgraph.ratinggraph.RATING_PRODUCT_GRAPH
+import com.boreal.allen.ui.productgraph.question.questionGraph
 import com.boreal.allen.ui.productgraph.ratinggraph.ratingProductGraph
-import com.boreal.allen.ui.productgraph.viewproduct.productGraph
+import com.boreal.allen.ui.productgraph.productGraph
+import com.boreal.allen.ui.shoppingcart.shoppingCartGraph
 
 @Composable
 fun MainCompose(closeApp: () -> Unit) {
@@ -23,7 +23,8 @@ fun MainCompose(closeApp: () -> Unit) {
         loginGraph(navController, closeApp)
         homeClientGraph(navController, closeApp)
         productGraph(navController, closeApp)
-        commentGraph(navController, closeApp)
+        questionGraph(navController, closeApp)
         ratingProductGraph(navController, closeApp)
+        shoppingCartGraph(navController, closeApp)
     }
 }
