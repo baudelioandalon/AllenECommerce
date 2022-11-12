@@ -5,18 +5,15 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -24,17 +21,18 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import androidx.constraintlayout.compose.layoutId
+import androidx.navigation.NavHostController
 import com.boreal.allen.R
-import com.boreal.allen.components.*
-import com.boreal.allen.extensions.DottedShape
-import com.boreal.allen.extensions.drawColoredShadow
-import com.boreal.allen.theme.*
+import com.boreal.allen.components.AddressSelector
+import com.boreal.allen.components.MediumText
+import com.boreal.allen.components.NewAddressSelector
+import com.boreal.allen.components.ToolbarTitle
+import com.boreal.allen.theme.GrayBackgroundMain
+import com.boreal.allen.theme.GrayStrong
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
-@OptIn(ExperimentalMaterialApi::class)
-@Preview(showBackground = true)
 @Composable
-fun ViewAddressClientCompose() {
+fun ViewAddressClientCompose(navController: NavHostController) {
     val systemUiController = rememberSystemUiController()
     if (isSystemInDarkTheme()) {
         systemUiController.setSystemBarsColor(
@@ -124,17 +122,18 @@ fun ViewAddressClientCompose() {
                                 .fillMaxWidth()
                                 .padding(bottom = 30.dp),
                         ) {
-
                             AddressSelector(
                                 textTop = "Casa",
                                 iconRes = R.drawable.ic_house,
                                 selected = true
                             )
-
                             AddressSelector(
                                 modifier = Modifier.padding(top = 20.dp),
                                 textTop = "Trabajo",
                                 iconRes = R.drawable.ic_briefcase
+                            )
+                            NewAddressSelector(
+                                modifier = Modifier.padding(top = 20.dp)
                             )
                         }
                     }
@@ -144,7 +143,7 @@ fun ViewAddressClientCompose() {
         ToolbarTitle(
             modifier = Modifier.layoutId("toolbarTitle"),
             titleText = "Mis direcciónes", backClicked = {
-
+                navController.navigateUp()
             }, showEndImage = false
         )
 

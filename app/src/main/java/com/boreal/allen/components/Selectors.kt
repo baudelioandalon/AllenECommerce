@@ -1,10 +1,7 @@
 package com.boreal.allen.components
 
 import androidx.annotation.DrawableRes
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -14,8 +11,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.graphics.Color.Companion.White
+import androidx.compose.ui.graphics.PathEffect
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -50,7 +49,7 @@ fun SelectorCounter(
         Surface(
             modifier = Modifier
                 .size(35.dp),
-            color = Color.White,
+            color = White,
             border = BorderStroke(
                 width = 1.dp,
                 color = GreenStrong
@@ -80,7 +79,7 @@ fun SelectorCounter(
                 modifier = Modifier.padding(12.dp),
                 painter = painterResource(id = R.drawable.ic_more_icon),
                 contentDescription = "more_icon",
-                tint = Color.White
+                tint = White
             )
         }
     }
@@ -142,6 +141,82 @@ fun AddressSelector(
         elevation = 0.dp,
         shape = RoundedCornerShape(10.dp),
         border = BorderStroke(1.dp, if (selected) PrimaryColor else GrayBorderThin),
+        backgroundColor = White,
+        onClick = {
+            onClicked?.invoke()
+        }
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Start,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                modifier = Modifier.padding(end = 13.dp, start = 16.dp),
+                painter = painterResource(id = iconRes),
+                contentDescription = "hide shipping options",
+                tint = if (selected) PrimaryColor else GraySinceTo
+            )
+            Column {
+                MediumText(
+                    text = textTop,
+                    color = GraySinceTo,
+                    size = 15.sp
+                )
+                MediumText(
+                    modifier = Modifier
+                        .width(180.dp)
+                        .wrapContentHeight(),
+                    text = textBottom,
+                    align = TextAlign.Center,
+                    color = GrayMedium,
+                    size = 15.sp,
+                    textOverflow = TextOverflow.Ellipsis,
+                    maxLines = 1
+                )
+            }
+            Spacer(modifier = Modifier.weight(1f))
+            Image(
+                modifier = Modifier
+                    .wrapContentSize()
+                    .padding(end = 15.dp),
+                painter = painterResource(id = R.drawable.ic_selector_right),
+                contentDescription = "right selector"
+            )
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Preview
+@Composable
+fun NewAddressSelector(
+    modifier: Modifier = Modifier,
+    onClicked: (() -> Unit)? = null
+) {
+
+    val stroke = Stroke(
+        width = 10f,
+        pathEffect = PathEffect.dashPathEffect(floatArrayOf(35f, 35f), 0f)
+    )
+
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(55.dp), contentAlignment = Alignment.Center
+    ) {
+        Canvas(modifier = Modifier.fillMaxSize()) {
+            drawRoundRect(
+                color = GrayBorderThin, style = stroke,
+                cornerRadius = CornerRadius(10.dp.toPx())
+            )
+        }
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(55.dp),
+            elevation = 0.dp,
+            shape = RoundedCornerShape(10.dp),
             backgroundColor = White,
             onClick = {
                 onClicked?.invoke()
@@ -154,28 +229,16 @@ fun AddressSelector(
             ) {
                 Icon(
                     modifier = Modifier.padding(end = 13.dp, start = 16.dp),
-                    painter = painterResource(id = iconRes),
+                    painter = painterResource(id = R.drawable.ic_more_icon),
                     contentDescription = "hide shipping options",
-                    tint = if (selected) PrimaryColor else GraySinceTo
+                    tint = GraySinceTo
                 )
-                Column {
-                    MediumText(
-                        text = textTop,
-                        color = GraySinceTo,
-                        size = 15.sp
-                    )
-                    MediumText(
-                        modifier = Modifier
-                            .width(180.dp)
-                            .wrapContentHeight(),
-                        text = textBottom,
-                        align = TextAlign.Center,
-                        color = GrayMedium,
-                        size = 15.sp,
-                        textOverflow = TextOverflow.Ellipsis,
-                        maxLines = 1
-                    )
-                }
+                MediumText(
+                    text = "Nueva dirección",
+                    color = GraySinceTo,
+                    size = 15.sp
+                )
+
                 Spacer(modifier = Modifier.weight(1f))
                 Image(
                     modifier = Modifier
@@ -186,6 +249,7 @@ fun AddressSelector(
                 )
             }
         }
+    }
 }
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -337,7 +401,7 @@ fun SelectorDetail(
         modifier = modifier
             .fillMaxWidth()
             .height(40.dp)
-            .background(Color.White)
+            .background(White)
             .padding(horizontal = 30.dp)
             .clickable { onClicked() },
         verticalAlignment = Alignment.CenterVertically

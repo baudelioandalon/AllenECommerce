@@ -6,8 +6,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import com.boreal.allen.domain.ADDRESS_CLIENT_GRAPH
 import com.boreal.allen.domain.ClientScreen
-import com.boreal.allen.domain.SHOPPING_CART_GRAPH
-import com.boreal.allen.domain.ShoppingCartScreen
 
 fun NavGraphBuilder.clientAddressGraph(navController: NavHostController, closeApp: () -> Unit) {
     navigation(
@@ -15,7 +13,7 @@ fun NavGraphBuilder.clientAddressGraph(navController: NavHostController, closeAp
         route = ADDRESS_CLIENT_GRAPH
     ) {
         composable(route = ClientScreen.AddressClientScreen.route) {
-            ViewAddressClientCompose()
+            ViewAddressClientCompose(navController)
         }
     }
 }

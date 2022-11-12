@@ -20,8 +20,10 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import androidx.constraintlayout.compose.layoutId
+import androidx.navigation.NavHostController
 import com.boreal.allen.R
 import com.boreal.allen.components.*
+import com.boreal.allen.domain.SHOPPING_DETAIL_GRAPH
 import com.boreal.allen.domain.model.ItemCartModel
 import com.boreal.allen.domain.model.ProductShoppingCart
 import com.boreal.allen.extensions.DottedShape
@@ -29,9 +31,8 @@ import com.boreal.allen.extensions.drawColoredShadow
 import com.boreal.allen.theme.*
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
-@Preview(showBackground = true)
 @Composable
-fun ViewShoppingCartCompose() {
+fun ViewShoppingCartCompose(navController: NavHostController) {
     val systemUiController = rememberSystemUiController()
     if (isSystemInDarkTheme()) {
         systemUiController.setSystemBarsColor(
@@ -147,7 +148,7 @@ fun ViewShoppingCartCompose() {
         ToolbarTitle(
             modifier = Modifier.layoutId("toolbarTitle"),
             titleText = "Mi carrito", backClicked = {
-
+                navController.navigateUp()
             },
             iconIdRes = R.drawable.ic_coupon
         )
@@ -236,7 +237,9 @@ fun ViewShoppingCartCompose() {
                                 offsetY = 6.dp, offsetX = 5.dp, blurRadius = 10.dp
                             ),
                         text = "Continuar"
-                    )
+                    ){
+                        navController.navigate(SHOPPING_DETAIL_GRAPH)
+                    }
                 }
             }
         }

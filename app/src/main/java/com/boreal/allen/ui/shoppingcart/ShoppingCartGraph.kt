@@ -13,7 +13,7 @@ fun NavGraphBuilder.shoppingCartGraph(navController: NavHostController, closeApp
         route = SHOPPING_CART_GRAPH
     ) {
         composable(route = ShoppingCartScreen.ViewShoppingCartScreen.route) {
-            ViewShoppingCartCompose()
+            ViewShoppingCartCompose(navController)
         }
     }
 }

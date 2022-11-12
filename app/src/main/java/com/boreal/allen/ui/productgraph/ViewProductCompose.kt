@@ -27,6 +27,7 @@ import androidx.constraintlayout.compose.layoutId
 import androidx.navigation.NavController
 import com.boreal.allen.R
 import com.boreal.allen.components.*
+import com.boreal.allen.domain.SHOPPING_CART_GRAPH
 import com.boreal.allen.extensions.drawColoredShadow
 import com.boreal.allen.theme.*
 import com.boreal.allen.ui.logingraph.welcome.StarStatus
@@ -281,6 +282,8 @@ fun ViewProductCompose(navController: NavController) {
             modifier = Modifier.layoutId("toolbarTitle"),
             titleText = "Articulo", backClicked = {
                 navController.navigateUp()
+            }, cartClicked = {
+                navController.navigate(SHOPPING_CART_GRAPH)
             }
         )
 
