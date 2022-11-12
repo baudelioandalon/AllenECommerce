@@ -2,31 +2,26 @@ package com.boreal.allen.ui.shoppingcart.resume
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.White
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import androidx.constraintlayout.compose.layoutId
 import com.boreal.allen.R
-import com.boreal.allen.components.*
+import com.boreal.allen.components.ShoppingCartStoreItem
+import com.boreal.allen.components.ToolbarTitle
 import com.boreal.allen.domain.model.ItemCartModel
 import com.boreal.allen.domain.model.ProductShoppingCart
-import com.boreal.allen.extensions.DottedShape
-import com.boreal.allen.extensions.drawColoredShadow
-import com.boreal.allen.theme.*
+import com.boreal.allen.theme.GrayBackgroundMain
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @Preview(showBackground = true)
@@ -141,104 +136,21 @@ fun ViewResumeCartCompose() {
                     )
                 )
             ) { index, item ->
-                ShoppingCartStoreItem(item)
+                ShoppingCartStoreItem(
+                    item = item,
+                    counter = false,
+                    deleteOptions = false,
+                    selector = false
+                )
             }
         }
         ToolbarTitle(
             modifier = Modifier.layoutId("toolbarTitle"),
-            titleText = "Mi carrito", backClicked = {
+            titleText = "Resumen de compra", backClicked = {
 
-            },
+            }, showEndImage = false,
             iconIdRes = R.drawable.ic_coupon
         )
 
-        Card(
-            modifier = Modifier
-                .fillMaxWidth()
-                .layoutId("bottomQuestion"),
-            elevation = 15.dp
-        ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 10.dp)
-                    .background(White),
-                verticalAlignment = Alignment.Bottom,
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Column(
-                    modifier = Modifier.padding(
-                        start = 30.dp, end = 30.dp,
-                        bottom = 18.dp
-                    ),
-                    verticalArrangement = Arrangement.SpaceBetween,
-                    horizontalAlignment = Alignment.Start
-                ) {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(top = 15.dp, bottom = 15.dp),
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        MediumText(
-                            text = "Descuento de tienda",
-                            color = GrayLetterSeeAll,
-                            size = 13.sp
-                        )
-                        SemiBoldText(
-                            text = "8%",
-                            color = GrayLetterShipping,
-                            size = 15.sp
-                        )
-                    }
-
-                    Box(
-                        Modifier
-                            .height(1.dp)
-                            .fillMaxWidth()
-                            .background(Color.Gray, shape = DottedShape(step = 20.dp))
-                    )
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceEvenly,
-                        verticalAlignment = Alignment.Bottom
-                    ) {
-                        RegularText(
-                            modifier = Modifier.weight(1f),
-                            text = "Pagar",
-                            color = GrayLetterShipping,
-                            size = 18.sp
-                        )
-                        BoldText(
-                            modifier = Modifier
-                                .wrapContentWidth()
-                                .padding(bottom = 5.dp),
-                            text = "$100",
-                            color = OrangeTransparent,
-                            size = 12.sp
-                        )
-                        BoldText(
-                            modifier = Modifier
-                                .wrapContentWidth()
-                                .padding(start = 21.dp),
-                            text = "$92",
-                            color = GreenStrong,
-                            size = 30.sp,
-                            align = TextAlign.End
-                        )
-                    }
-                    ShadowButton(
-                        modifier = Modifier
-                            .padding(bottom = 18.dp, top = 24.dp)
-                            .fillMaxWidth()
-                            .drawColoredShadow(
-                                color = BlueTransparent, alpha = 1f, borderRadius = 10.dp,
-                                offsetY = 6.dp, offsetX = 5.dp, blurRadius = 10.dp
-                            ),
-                        text = "Continuar"
-                    )
-                }
-            }
-        }
     }
 }

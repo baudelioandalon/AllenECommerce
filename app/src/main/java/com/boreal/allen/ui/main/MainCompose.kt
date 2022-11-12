@@ -19,7 +19,7 @@ fun MainCompose(closeApp: () -> Unit) {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = LOGIN_GRAPH,
+        startDestination = SHOPPING_RESUME_GRAPH,
         route = ROOT_GRAPH
     ) {
         loginGraph(navController, closeApp)

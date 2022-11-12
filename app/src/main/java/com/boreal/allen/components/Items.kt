@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Red
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
@@ -617,7 +618,14 @@ fun AnswerItem(text: String = "") {
 
 @Preview(showBackground = true)
 @Composable
-fun ShoppingCartStoreItem(item: ItemCartModel = ItemCartModel("Test", "3e23dc2", "dd", listOf())) {
+fun ShoppingCartStoreItem(
+    item: ItemCartModel = ItemCartModel(
+        "Test",
+        "3e23dc2", "dd", listOf()
+    ), counter: Boolean = true,
+    deleteOptions: Boolean = true,
+    selector: Boolean = true
+) {
 
     Card(
         modifier = Modifier
@@ -631,20 +639,27 @@ fun ShoppingCartStoreItem(item: ItemCartModel = ItemCartModel("Test", "3e23dc2",
                 .background(White)
         ) {
             Row(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 12.dp, bottom = 14.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceAround
             ) {
-                RadioButton(
-                    selected = false,
-                    onClick = { },
-                    colors = RadioButtonDefaults.colors(
-                        unselectedColor = GrayLetterHint,
-                        selectedColor = PrimaryColor
+                if (selector) {
+                    RadioButton(
+                        selected = false,
+                        onClick = { },
+                        colors = RadioButtonDefaults.colors(
+                            unselectedColor = GrayLetterHint,
+                            selectedColor = PrimaryColor
+                        )
                     )
-                )
+                }
+
                 Card(
-                    modifier = Modifier
+                    modifier = if (selector) Modifier
+                        .size(30.dp) else Modifier
+                        .padding(start = 30.dp)
                         .size(30.dp),
                     backgroundColor = GrayBackgroundDrawerDismiss,
                     elevation = 0.dp,
@@ -682,7 +697,11 @@ fun ShoppingCartStoreItem(item: ItemCartModel = ItemCartModel("Test", "3e23dc2",
                     .fillMaxWidth(),
             ) {
                 item.listItems.forEach {
-                    ShoppingCartItem(it)
+                    ShoppingCartItem(
+                        productShoppingCart = it,
+                        counter = counter,
+                        deleteOptions = deleteOptions
+                    )
                 }
             }
         }
@@ -703,7 +722,9 @@ fun ShoppingCartItem(
         fastOrder = true,
         minimalFastOrder = 2,
         price = 588880.0
-    )
+    ),
+    counter: Boolean = true,
+    deleteOptions: Boolean = true
 ) {
     Column(
         modifier = Modifier
@@ -799,25 +820,43 @@ fun ShoppingCartItem(
                         )
                     }
                 }
-                SelectorCounter(
-                    quantity = productShoppingCart.quantity
-                )
+                if (counter) {
+                    SelectorCounter(
+                        quantity = productShoppingCart.quantity
+                    )
+                } else {
+                    Row(
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.Bottom
+                    ) {
+                        SemiBoldText(
+                            modifier = Modifier.padding(end = 34.dp, bottom = 5.dp),
+                            text = "Cantidad", size = 15.sp
+                        )
+                        SemiBoldText(
+                            text = "${productShoppingCart.quantity}",
+                            size = 25.sp
+                        )
+                    }
+                }
             }
         }
-        Row(modifier = Modifier.padding(top = 12.dp)) {
-            BoldText(
-                text = "Remover",
-                size = 12.sp,
-                color = OrangeStrong
-            ) {
+        if (deleteOptions) {
+            Row(modifier = Modifier.padding(top = 12.dp)) {
+                BoldText(
+                    text = "Remover",
+                    size = 12.sp,
+                    color = OrangeStrong
+                ) {
 
+                }
+                BoldText(
+                    modifier = Modifier.padding(start = 38.dp),
+                    text = "Guardar para después",
+                    size = 12.sp,
+                    color = OrangeStrong
+                )
             }
-            BoldText(
-                modifier = Modifier.padding(start = 38.dp),
-                text = "Guardar para después",
-                size = 12.sp,
-                color = OrangeStrong
-            )
         }
     }
 }

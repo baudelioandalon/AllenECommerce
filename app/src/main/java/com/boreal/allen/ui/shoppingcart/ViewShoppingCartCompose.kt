@@ -13,7 +13,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -237,7 +236,7 @@ fun ViewShoppingCartCompose(navController: NavHostController) {
                                 offsetY = 6.dp, offsetX = 5.dp, blurRadius = 10.dp
                             ),
                         text = "Continuar"
-                    ){
+                    ) {
                         navController.navigate(SHOPPING_DETAIL_GRAPH)
                     }
                 }

@@ -14,7 +14,7 @@ fun NavGraphBuilder.resumeCartGraph(navController: NavHostController, closeApp: 
         startDestination = ShoppingCartScreen.ViewResumeCartScreen.route,
         route = SHOPPING_RESUME_GRAPH
     ) {
-        composable(route = ShoppingCartScreen.ViewDetailCartScreen.route) {
+        composable(route = ShoppingCartScreen.ViewResumeCartScreen.route) {
             ViewResumeCartCompose()
         }
     }
