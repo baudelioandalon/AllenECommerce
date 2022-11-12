@@ -69,9 +69,13 @@ fun Discount(modifier: Modifier = Modifier, discount: Int = 15) {
 
 @Preview
 @Composable
-fun PriceBeforeDiscount(modifier: Modifier = Modifier,price: Double = 50.0) {
+fun PriceBeforeDiscount(
+    modifier: Modifier = Modifier,
+    firstModifier: Modifier = Modifier,
+    price: Double = 50.0
+) {
 
-    Box {
+    Box(modifier = firstModifier) {
         BoldText(
             modifier = modifier
                 .wrapContentWidth()
@@ -80,9 +84,11 @@ fun PriceBeforeDiscount(modifier: Modifier = Modifier,price: Double = 50.0) {
             color = OrangeTransparent,
             size = 15.sp
         )
-        Canvas(modifier = Modifier
-            .fillMaxWidth(0.3f)
-            .align(Alignment.Center)) {
+        Canvas(
+            modifier = Modifier
+                .fillMaxWidth(0.3f)
+                .align(Alignment.Center)
+        ) {
             var yCord = 0f
             drawLine(
                 OrangeMedium,

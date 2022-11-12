@@ -292,13 +292,10 @@ fun ViewResumeCartCompose(navController: NavHostController? = null) {
                             color = GrayLetterShipping,
                             size = 18.sp
                         )
-                        BoldText(
-                            modifier = Modifier
-                                .wrapContentWidth()
-                                .padding(bottom = 5.dp),
-                            text = "$100",
-                            color = OrangeTransparent,
-                            size = 12.sp
+                        PriceBeforeDiscount(
+                            modifier = Modifier.width(50.dp),
+                            firstModifier = Modifier.weight(0.5f),
+                            price = 100.0
                         )
                         BoldText(
                             modifier = Modifier
@@ -327,9 +324,11 @@ fun ViewResumeCartCompose(navController: NavHostController? = null) {
         }
         ToolbarTitle(
             modifier = Modifier.layoutId("toolbarTitle"),
-            titleText = "Resumen de compra", backClicked = {
+            titleText = "Resumen de compra",
+            backClicked = {
                 navController?.navigateUp()
-            }, showEndImage = false,
+            },
+            showEndImage = false,
             iconIdRes = R.drawable.ic_coupon,
         )
 
