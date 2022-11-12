@@ -61,7 +61,9 @@ fun MediumText(
     labelId: Int? = null,
     color: Color = Color.Black,
     align: TextAlign? = null,
-    size: TextUnit = 20.sp
+    size: TextUnit = 20.sp,
+    textOverflow: TextOverflow = TextOverflow.Clip,
+    maxLines : Int = Int.MAX_VALUE
 ) {
     Text(
         modifier = modifier,
@@ -71,6 +73,8 @@ fun MediumText(
         color = color,
         fontWeight = Medium,
         textAlign = align,
+        overflow = textOverflow,
+        maxLines =  maxLines,
         fontFamily = MaterialTheme.typography.caption.fontFamily
     )
 }

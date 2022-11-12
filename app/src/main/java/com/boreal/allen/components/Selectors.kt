@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -128,8 +129,10 @@ fun ShippingSelector(
 @Composable
 fun AddressSelector(
     modifier: Modifier = Modifier,
-    text: String = "Desde",
+    textTop: String = "Recibe",
+    textBottom: String = "Calle #22, Colonia Test, Ciudad, Estado 000ddd00",
     iconRes: Int = R.drawable.ic_location,
+    selected: Boolean = false,
     onClicked: (() -> Unit)? = null
 ) {
     Card(
@@ -138,46 +141,51 @@ fun AddressSelector(
             .height(60.dp),
         elevation = 0.dp,
         shape = RoundedCornerShape(10.dp),
-        border = BorderStroke(1.dp, GrayBorderThin),
-        backgroundColor = White,
-        onClick = {
-            onClicked?.invoke()
-        }
-    ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.Start,
-            verticalAlignment = Alignment.CenterVertically
+        border = BorderStroke(1.dp, if (selected) PrimaryColor else GrayBorderThin),
+            backgroundColor = White,
+            onClick = {
+                onClicked?.invoke()
+            }
         ) {
-            Icon(
-                modifier = Modifier.padding(end = 13.dp, start = 16.dp),
-                painter = painterResource(id = iconRes),
-                contentDescription = "hide shipping options",
-                tint = GraySinceTo
-            )
-            Column {
-                MediumText(
-                    text = "Recibe",
-                    color = GraySinceTo,
-                    size = 15.sp
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Start,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(
+                    modifier = Modifier.padding(end = 13.dp, start = 16.dp),
+                    painter = painterResource(id = iconRes),
+                    contentDescription = "hide shipping options",
+                    tint = if (selected) PrimaryColor else GraySinceTo
                 )
-                MediumText(
-                    text = text,
-                    align = TextAlign.Center,
-                    color = GrayMedium,
-                    size = 15.sp
+                Column {
+                    MediumText(
+                        text = textTop,
+                        color = GraySinceTo,
+                        size = 15.sp
+                    )
+                    MediumText(
+                        modifier = Modifier
+                            .width(180.dp)
+                            .wrapContentHeight(),
+                        text = textBottom,
+                        align = TextAlign.Center,
+                        color = GrayMedium,
+                        size = 15.sp,
+                        textOverflow = TextOverflow.Ellipsis,
+                        maxLines = 1
+                    )
+                }
+                Spacer(modifier = Modifier.weight(1f))
+                Image(
+                    modifier = Modifier
+                        .wrapContentSize()
+                        .padding(end = 15.dp),
+                    painter = painterResource(id = R.drawable.ic_selector_right),
+                    contentDescription = "right selector"
                 )
             }
-            Spacer(modifier = Modifier.weight(1f))
-            Image(
-                modifier = Modifier
-                    .wrapContentSize()
-                    .padding(end = 15.dp),
-                painter = painterResource(id = R.drawable.ic_selector_right),
-                contentDescription = "right selector"
-            )
         }
-    }
 }
 
 @OptIn(ExperimentalMaterialApi::class)

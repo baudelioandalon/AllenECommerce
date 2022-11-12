@@ -187,7 +187,7 @@ fun ViewDetailCartCompose() {
                             )
                             AddressSelector(
                                 modifier = Modifier.padding(top = 20.dp),
-                                text = "Para",
+                                textTop = "Para",
                                 iconRes = R.drawable.ic_goal
                             )
                             UserSelector(

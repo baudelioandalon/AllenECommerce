@@ -3,10 +3,8 @@ package com.boreal.allen.ui.main
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import com.boreal.allen.domain.LOGIN_GRAPH
-import com.boreal.allen.domain.ROOT_GRAPH
-import com.boreal.allen.domain.SHOPPING_CART_GRAPH
-import com.boreal.allen.domain.SHOPPING_DETAIL_GRAPH
+import com.boreal.allen.domain.*
+import com.boreal.allen.ui.addressclient.clientAddressGraph
 import com.boreal.allen.ui.homeclientgraph.homeClientGraph
 import com.boreal.allen.ui.logingraph.loginGraph
 import com.boreal.allen.ui.productgraph.question.questionGraph
@@ -21,7 +19,7 @@ fun MainCompose(closeApp: () -> Unit) {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = SHOPPING_DETAIL_GRAPH,
+        startDestination = ADDRESS_CLIENT_GRAPH,
         route = ROOT_GRAPH
     ) {
         loginGraph(navController, closeApp)
@@ -32,5 +30,6 @@ fun MainCompose(closeApp: () -> Unit) {
         shoppingCartGraph(navController, closeApp)
         detailCartGraph(navController, closeApp)
         resumeCartGraph(navController, closeApp)
+        clientAddressGraph(navController, closeApp)
     }
 }
