@@ -427,10 +427,10 @@ fun CategorySeller() {
 }
 
 @Composable
-fun SellersItem() {
+fun SellersItem(modifier: Modifier = Modifier) {
     Column(
-        modifier = Modifier
-            .padding(top = 30.dp, bottom = 30.dp)
+        modifier = modifier
+            .padding(top = 30.dp, bottom = 100.dp)
             .fillMaxWidth()
             .background(White)
     ) {

@@ -27,6 +27,7 @@ import androidx.navigation.NavHostController
 import com.boreal.allen.R
 import com.boreal.allen.components.*
 import com.boreal.allen.domain.PRODUCT_GRAPH
+import com.boreal.allen.domain.SHOPPING_CART_GRAPH
 import com.boreal.allen.domain.model.PromotionItem
 import com.boreal.allen.theme.GrayBackgroundMain
 import com.boreal.allen.theme.GrayInactiveIndicator
@@ -149,6 +150,8 @@ fun AEHomeClientComposable(navController: NavHostController, closeApp: () -> Uni
                             scope.launch {
                                 scaffoldState.drawerState.open()
                             }
+                        }, cartClicked = {
+                            navController.navigate(SHOPPING_CART_GRAPH)
                         })
                     }
                     Column(
