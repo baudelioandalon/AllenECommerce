@@ -24,6 +24,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import androidx.constraintlayout.compose.layoutId
+import androidx.navigation.NavHostController
 import com.boreal.allen.R
 import com.boreal.allen.components.*
 import com.boreal.allen.domain.model.ItemCartModel
@@ -36,7 +37,7 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 @OptIn(ExperimentalMaterialApi::class)
 @Preview(showBackground = true)
 @Composable
-fun ViewResumeCartCompose() {
+fun ViewResumeCartCompose(navController: NavHostController? = null) {
     val systemUiController = rememberSystemUiController()
     if (isSystemInDarkTheme()) {
         systemUiController.setSystemBarsColor(
@@ -243,7 +244,8 @@ fun ViewResumeCartCompose() {
                     item = item,
                     counter = false,
                     deleteOptions = false,
-                    selector = false
+                    selector = false,
+                    hideMargin = true
                 )
             }
             item {
@@ -326,9 +328,9 @@ fun ViewResumeCartCompose() {
         ToolbarTitle(
             modifier = Modifier.layoutId("toolbarTitle"),
             titleText = "Resumen de compra", backClicked = {
-
+                navController?.navigateUp()
             }, showEndImage = false,
-            iconIdRes = R.drawable.ic_coupon
+            iconIdRes = R.drawable.ic_coupon,
         )
 
     }

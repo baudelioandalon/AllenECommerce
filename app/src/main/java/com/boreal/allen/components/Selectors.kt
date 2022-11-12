@@ -209,8 +209,11 @@ fun ResumeSelector(
             horizontalArrangement = Arrangement.Start,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Column {
+            Column(
+                verticalArrangement = Arrangement.SpaceBetween
+            ) {
                 MediumText(
+                    modifier = Modifier.padding(top = 5.dp),
                     text = textTop,
                     color = GraySinceTo,
                     size = 15.sp

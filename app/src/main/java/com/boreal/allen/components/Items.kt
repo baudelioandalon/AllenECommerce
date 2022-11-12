@@ -630,14 +630,14 @@ fun ShoppingCartStoreItem(
     ), counter: Boolean = true,
     deleteOptions: Boolean = true,
     selector: Boolean = true,
-    margin: Boolean = false
+    hideMargin: Boolean = false
 ) {
 
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .padding(bottom = if (margin) 30.dp else 0.dp),
-        elevation = if (margin) 5.dp else 0.dp
+            .padding(bottom = if (hideMargin) 0.dp else 30.dp),
+        elevation = if (hideMargin) 0.dp else 5.dp
     ) {
 
         val showItems = remember { mutableStateOf(true) }
@@ -646,7 +646,7 @@ fun ShoppingCartStoreItem(
                 .fillMaxWidth()
                 .background(White)
         ) {
-            if (!margin) {
+            if (hideMargin) {
                 Divider(
                     thickness = 1.5.dp,
                     color = GrayBorderLight
@@ -655,7 +655,7 @@ fun ShoppingCartStoreItem(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 12.dp, bottom = 14.dp),
+                    .padding(top = 12.dp, bottom = 14.dp, end = if (deleteOptions) 30.dp else 0.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceAround
             ) {
@@ -681,10 +681,12 @@ fun ShoppingCartStoreItem(
                 }
                 BoldText(
                     modifier = Modifier
-                        .weight(1f)
-                        .padding(start = 6.dp),
+                        .weight(0.5f)
+                        .padding(start = 6.dp, end = 10.dp),
                     text = item.nameStore,
-                    size = 15.sp
+                    size = 15.sp,
+                    textOverflow = TextOverflow.Ellipsis,
+                    maxLines = 2
                 )
                 SemiBoldText(
                     modifier = Modifier.padding(end = 23.dp),
@@ -695,8 +697,7 @@ fun ShoppingCartStoreItem(
                 Card(
                     modifier = Modifier
                         .width(35.dp)
-                        .height(35.dp)
-                        .padding(end = if (deleteOptions) 30.dp else 0.dp),
+                        .height(35.dp),
                     elevation = 0.dp,
                     shape = CircleShape, onClick = { showItems.value = !showItems.value }) {
                     Image(

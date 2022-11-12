@@ -25,6 +25,7 @@ import androidx.navigation.NavHostController
 import com.boreal.allen.R
 import com.boreal.allen.components.*
 import com.boreal.allen.domain.ADDRESS_CLIENT_GRAPH
+import com.boreal.allen.domain.SHOPPING_RESUME_GRAPH
 import com.boreal.allen.extensions.DottedShape
 import com.boreal.allen.extensions.drawColoredShadow
 import com.boreal.allen.theme.*
@@ -332,7 +333,7 @@ fun ViewDetailCartCompose(navController: NavHostController? = null) {
                             ),
                         text = "Continuar"
                     ){
-
+                        navController?.navigate(SHOPPING_RESUME_GRAPH)
                     }
                 }
             }
