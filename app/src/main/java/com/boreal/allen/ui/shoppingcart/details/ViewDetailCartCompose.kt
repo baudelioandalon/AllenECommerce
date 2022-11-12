@@ -5,8 +5,11 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -28,6 +31,7 @@ import com.boreal.allen.extensions.drawColoredShadow
 import com.boreal.allen.theme.*
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
+@OptIn(ExperimentalMaterialApi::class)
 @Preview(showBackground = true)
 @Composable
 fun ViewDetailCartCompose() {
@@ -173,23 +177,67 @@ fun ViewDetailCartCompose() {
                             )
                         }
 
-                        Row(
+                        Column(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(bottom = 30.dp),
-                            horizontalArrangement = Arrangement.SpaceBetween,
                         ) {
-                            ShippingSelector(
-                                modifier = Modifier
-                                    .padding(end = 25.dp)
-                                    .weight(1f), shipping = true
+                            AddressSelector(
+                                iconRes = R.drawable.ic_location
                             )
-
+                            AddressSelector(
+                                modifier = Modifier.padding(top = 20.dp),
+                                text = "Para",
+                                iconRes = R.drawable.ic_goal
+                            )
+                            UserSelector(
+                                modifier = Modifier.padding(top = 20.dp)
+                            )
                         }
-
                     }
                 }
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 30.dp),
+                    elevation = 5.dp
+                ) {
+                    Column(
+                        modifier = Modifier
+                            .background(White)
+                            .padding(horizontal = 30.dp)
+                            .wrapContentHeight()
+                            .fillMaxWidth()
+                    ) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(top = 20.dp, bottom = 30.dp),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            MediumText(
+                                text = "Forma de pago",
+                                size = 15.sp
+                            )
+                            Icon(
+                                painter = painterResource(id = R.drawable.ic_arrow_down),
+                                contentDescription = "hide address",
+                                tint = GrayStrong
+                            )
+                        }
 
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(bottom = 30.dp),
+                        ) {
+
+                            SelectorSpinner()
+
+                        }
+                    }
+                }
             }
         }
         ToolbarTitle(

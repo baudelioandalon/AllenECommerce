@@ -7,11 +7,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.Icon
-import androidx.compose.material.Surface
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
@@ -128,7 +127,9 @@ fun ShippingSelector(
 @Preview
 @Composable
 fun AddressSelector(
-    modifier: Modifier = Modifier, shipping: Boolean = false,
+    modifier: Modifier = Modifier,
+    text: String = "Desde",
+    iconRes: Int = R.drawable.ic_location,
     onClicked: (() -> Unit)? = null
 ) {
     Card(
@@ -150,18 +151,18 @@ fun AddressSelector(
         ) {
             Icon(
                 modifier = Modifier.padding(end = 13.dp, start = 16.dp),
-                painter = painterResource(id = R.drawable.ic_location),
+                painter = painterResource(id = iconRes),
                 contentDescription = "hide shipping options",
-                tint = GrayMedium
+                tint = GraySinceTo
             )
             Column {
                 MediumText(
-                    text = "Para",
+                    text = "Recibe",
                     color = GraySinceTo,
                     size = 15.sp
                 )
                 MediumText(
-                    text = "Ferreteria La hormiga",
+                    text = text,
                     align = TextAlign.Center,
                     color = GrayMedium,
                     size = 15.sp
@@ -177,6 +178,145 @@ fun AddressSelector(
             )
         }
     }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Preview
+@Composable
+fun UserSelector(
+    modifier: Modifier = Modifier,
+    text: String = "Yo",
+    onClicked: (() -> Unit)? = null
+) {
+    Card(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(60.dp),
+        elevation = 0.dp,
+        shape = RoundedCornerShape(10.dp),
+        border = BorderStroke(1.dp, GrayBorderThin),
+        backgroundColor = White,
+        onClick = {
+            onClicked?.invoke()
+        }
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Start,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                modifier = Modifier.padding(end = 13.dp, start = 16.dp),
+                painter = painterResource(id = R.drawable.ic_user),
+                contentDescription = "hide shipping options",
+                tint = GraySinceTo
+            )
+            Column {
+                MediumText(
+                    text = "Quien recibe",
+                    color = GraySinceTo,
+                    size = 15.sp
+                )
+                MediumText(
+                    text = text,
+                    align = TextAlign.Center,
+                    color = GrayMedium,
+                    size = 15.sp
+                )
+            }
+            Spacer(modifier = Modifier.weight(1f))
+            Image(
+                modifier = Modifier
+                    .wrapContentSize()
+                    .padding(end = 15.dp),
+                painter = painterResource(id = R.drawable.ic_selector_right),
+                contentDescription = "right selector"
+            )
+        }
+    }
+}
+
+@Composable
+fun <T> Spinner(
+    modifier: Modifier = Modifier,
+    dropDownModifier: Modifier = Modifier,
+    items: List<T>,
+    selectedItem: T,
+    onItemSelected: (T) -> Unit,
+    selectedItemFactory: @Composable (Modifier, T) -> Unit,
+    dropdownItemFactory: @Composable (T, Int) -> Unit,
+) {
+    val expanded = remember { mutableStateOf(false) }
+
+    Box(modifier = modifier.fillMaxWidth()) {
+        selectedItemFactory(
+            Modifier
+                .clickable { expanded.value = true },
+            selectedItem
+        )
+
+        DropdownMenu(
+            expanded = expanded.value,
+            onDismissRequest = { expanded.value = false },
+            modifier = dropDownModifier.fillMaxWidth()
+        ) {
+            items.forEachIndexed { index, element ->
+                DropdownMenuItem(onClick = {
+                    onItemSelected(items[index])
+                    expanded.value = false
+                }) {
+                    dropdownItemFactory(element, index)
+                }
+            }
+        }
+    }
+}
+
+@Preview
+@Composable
+fun SelectorSpinner(
+    modifier: Modifier = Modifier,
+    list: List<String> = listOf("Seleccione una opcion", "Data 1", "Data 2")
+) {
+    Spinner(
+        modifier = modifier.wrapContentSize(),
+        dropDownModifier = Modifier.wrapContentSize(),
+        items = list,
+        selectedItem = "Seleccione una opcion",
+        onItemSelected = {},
+        selectedItemFactory = { modifierContainer, item ->
+            Card(
+                modifier = modifierContainer
+                    .fillMaxWidth()
+                    .height(60.dp),
+                elevation = 0.dp,
+                shape = RoundedCornerShape(10.dp),
+                backgroundColor = GraySelector
+            ) {
+                Row(
+                    modifier = modifierContainer
+                        .padding(start = 16.dp, end = 20.dp)
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    MediumText(
+                        text = item,
+                        size = 15.sp
+                    )
+
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_arrow_down),
+                        contentDescription = "drop down arrow"
+                    )
+                }
+            }
+
+        },
+        dropdownItemFactory = { item, _ ->
+            Text(text = item)
+        }
+    )
 }
 
 @Composable
