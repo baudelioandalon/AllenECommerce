@@ -141,7 +141,7 @@ fun ViewShoppingCartCompose(navController: NavHostController) {
                     )
                 )
             ) { index, item ->
-                ShoppingCartStoreItem(item)
+                ShoppingCartStoreItem(item = item)
             }
         }
         ToolbarTitle(

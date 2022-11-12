@@ -133,6 +133,8 @@ fun BoldText(
     size: TextUnit = 25.sp,
     color: Color = Color.Black,
     align: TextAlign? = null,
+    textOverflow: TextOverflow = TextOverflow.Clip,
+    maxLines : Int = Int.MAX_VALUE,
     onClicked: (() -> Unit)? = null
 ) {
     Text(
@@ -143,6 +145,8 @@ fun BoldText(
         letterSpacing = 0.sp,
         fontWeight = Bold,
         textAlign = align,
+        overflow = textOverflow,
+        maxLines = maxLines,
         fontFamily = MaterialTheme.typography.caption.fontFamily
     )
 }

@@ -31,8 +31,9 @@ import com.boreal.allen.theme.GrayBackgroundMain
 import com.boreal.allen.theme.GrayStrong
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
+@Preview
 @Composable
-fun ViewAddressClientCompose(navController: NavHostController) {
+fun ViewAddressClientCompose(navController: NavHostController? = null) {
     val systemUiController = rememberSystemUiController()
     if (isSystemInDarkTheme()) {
         systemUiController.setSystemBarsColor(
@@ -143,7 +144,7 @@ fun ViewAddressClientCompose(navController: NavHostController) {
         ToolbarTitle(
             modifier = Modifier.layoutId("toolbarTitle"),
             titleText = "Mis direcciónes", backClicked = {
-                navController.navigateUp()
+                navController?.navigateUp()
             }, showEndImage = false
         )
 

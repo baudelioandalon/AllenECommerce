@@ -187,6 +187,64 @@ fun AddressSelector(
     }
 }
 
+@Preview
+@Composable
+fun ResumeSelector(
+    modifier: Modifier = Modifier,
+    textTop: String = "Recibe",
+    textBottom: String = "Calle #22, Colonia Test, Ciudad, Estado 000ddd00",
+    lineBottom: Boolean = true,
+    onClicked: (() -> Unit)? = null
+) {
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(60.dp)
+            .background(White)
+            .clickable { onClicked?.invoke() },
+        verticalArrangement = Arrangement.SpaceBetween
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Start,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Column {
+                MediumText(
+                    text = textTop,
+                    color = GraySinceTo,
+                    size = 15.sp
+                )
+                BoldText(
+                    modifier = Modifier
+                        .wrapContentWidth()
+                        .wrapContentHeight(),
+                    text = textBottom,
+                    align = TextAlign.Center,
+                    color = GrayMedium,
+                    size = 18.sp,
+                    textOverflow = TextOverflow.Ellipsis,
+                    maxLines = 1
+                )
+            }
+            Spacer(modifier = Modifier.weight(1f))
+            Image(
+                modifier = Modifier
+                    .wrapContentSize()
+                    .rotate(90f),
+                painter = painterResource(id = R.drawable.ic_selector_right),
+                contentDescription = "right selector"
+            )
+        }
+        if (lineBottom) {
+            Divider(
+                color = GrayBorderLight,
+                thickness = 1.dp
+            )
+        }
+    }
+}
+
 @OptIn(ExperimentalMaterialApi::class)
 @Preview
 @Composable

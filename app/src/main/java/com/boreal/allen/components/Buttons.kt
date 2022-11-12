@@ -53,6 +53,8 @@ fun PreviewBottons() {
             modifier = Modifier.fillMaxWidth()
         )
         LittleAddButton()
+        LocationIcon()
+        GoalIcon()
         FavoriteButton()
         FavoriteCounterButton()
         ShareButton()
@@ -224,7 +226,7 @@ fun ShadowButton(
         size = size,
         text = text ?: stringResource(id = labelId ?: R.string.empty_string),
         borderRadius = 10.dp
-    ){
+    ) {
         onClick?.invoke()
     }
 }

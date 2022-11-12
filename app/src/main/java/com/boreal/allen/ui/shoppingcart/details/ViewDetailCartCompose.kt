@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -29,8 +30,9 @@ import com.boreal.allen.extensions.drawColoredShadow
 import com.boreal.allen.theme.*
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
+@Preview
 @Composable
-fun ViewDetailCartCompose(navController: NavHostController) {
+fun ViewDetailCartCompose(navController: NavHostController? = null) {
     val systemUiController = rememberSystemUiController()
     if (isSystemInDarkTheme()) {
         systemUiController.setSystemBarsColor(
@@ -186,7 +188,7 @@ fun ViewDetailCartCompose(navController: NavHostController) {
                                 textTop = "Para",
                                 iconRes = R.drawable.ic_goal
                             ){
-                                navController.navigate(ADDRESS_CLIENT_GRAPH)
+                                navController?.navigate(ADDRESS_CLIENT_GRAPH)
                             }
                             UserSelector(
                                 modifier = Modifier.padding(top = 20.dp)
@@ -241,7 +243,7 @@ fun ViewDetailCartCompose(navController: NavHostController) {
         ToolbarTitle(
             modifier = Modifier.layoutId("toolbarTitle"),
             titleText = "Detalles de compra", backClicked = {
-                navController.navigateUp()
+                navController?.navigateUp()
             }, showEndImage = false
         )
 

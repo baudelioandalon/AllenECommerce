@@ -10,10 +10,12 @@ import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Color.Companion.Red
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
@@ -616,28 +618,40 @@ fun AnswerItem(text: String = "") {
     }
 }
 
+@OptIn(ExperimentalMaterialApi::class)
 @Preview(showBackground = true)
 @Composable
 fun ShoppingCartStoreItem(
+    modifier: Modifier = Modifier,
     item: ItemCartModel = ItemCartModel(
         "Test",
-        "3e23dc2", "dd", listOf()
+        "3e23dc2",
+        "dd", listOf()
     ), counter: Boolean = true,
     deleteOptions: Boolean = true,
-    selector: Boolean = true
+    selector: Boolean = true,
+    margin: Boolean = false
 ) {
 
     Card(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
-            .padding(bottom = 30.dp),
-        elevation = 5.dp
+            .padding(bottom = if (margin) 30.dp else 0.dp),
+        elevation = if (margin) 5.dp else 0.dp
     ) {
+
+        val showItems = remember { mutableStateOf(true) }
         Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(White)
         ) {
+            if (!margin) {
+                Divider(
+                    thickness = 1.5.dp,
+                    color = GrayBorderLight
+                )
+            }
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -657,9 +671,7 @@ fun ShoppingCartStoreItem(
                 }
 
                 Card(
-                    modifier = if (selector) Modifier
-                        .size(30.dp) else Modifier
-                        .padding(start = 30.dp)
+                    modifier = Modifier
                         .size(30.dp),
                     backgroundColor = GrayBackgroundDrawerDismiss,
                     elevation = 0.dp,
@@ -680,30 +692,44 @@ fun ShoppingCartStoreItem(
                     color = GrayMedium,
                     size = 13.sp
                 )
-                Icon(
+                Card(
                     modifier = Modifier
-                        .padding(end = 30.dp),
-                    painter = painterResource(id = R.drawable.ic_arrow_down),
-                    contentDescription = "arrow"
-                )
-
-            }
-            Divider(
-                thickness = 1.5.dp,
-                color = GrayBorderLight
-            )
-            FlowRow(
-                modifier = Modifier
-                    .fillMaxWidth(),
-            ) {
-                item.listItems.forEach {
-                    ShoppingCartItem(
-                        productShoppingCart = it,
-                        counter = counter,
-                        deleteOptions = deleteOptions
+                        .width(35.dp)
+                        .height(35.dp)
+                        .padding(end = if (deleteOptions) 30.dp else 0.dp),
+                    elevation = 0.dp,
+                    shape = CircleShape, onClick = { showItems.value = !showItems.value }) {
+                    Image(
+                        modifier = Modifier
+                            .wrapContentSize()
+                            .rotate(if (showItems.value) 0f else 180f),
+                        painter = painterResource(id = R.drawable.ic_arrow_down),
+                        contentDescription = "arrow"
                     )
                 }
+
             }
+            if (showItems.value) {
+                Divider(
+                    thickness = 1.5.dp,
+                    color = GrayBorderLight
+                )
+            }
+            if (showItems.value) {
+                FlowRow(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                ) {
+                    item.listItems.forEach {
+                        ShoppingCartItem(
+                            productShoppingCart = it,
+                            counter = counter,
+                            deleteOptions = deleteOptions
+                        )
+                    }
+                }
+            }
+
         }
     }
 
@@ -727,9 +753,13 @@ fun ShoppingCartItem(
     deleteOptions: Boolean = true
 ) {
     Column(
-        modifier = Modifier
+        modifier = if (deleteOptions)
+            Modifier
+                .fillMaxWidth()
+                .padding(start = 30.dp, end = 30.dp, top = 14.dp, bottom = 10.dp)
+        else Modifier
             .fillMaxWidth()
-            .padding(start = 30.dp, end = 30.dp, top = 14.dp, bottom = 10.dp)
+            .padding(top = 14.dp, bottom = 10.dp)
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
