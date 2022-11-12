@@ -7,6 +7,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
 import androidx.compose.material.Surface
@@ -15,13 +16,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.boreal.allen.R
-import com.boreal.allen.theme.GrayLetterArrow
-import com.boreal.allen.theme.GreenStrong
+import com.boreal.allen.theme.*
 
 @Preview(showBackground = true)
 @Composable
@@ -32,6 +34,8 @@ fun TestSelectors() {
             text = "Detalles del producto",
             iconRes = R.drawable.ic_detail_icon
         )
+        ShippingSelector()
+        AddressSelector()
     }
 }
 
@@ -77,6 +81,99 @@ fun SelectorCounter(
                 painter = painterResource(id = R.drawable.ic_more_icon),
                 contentDescription = "more_icon",
                 tint = Color.White
+            )
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun ShippingSelector(
+    modifier: Modifier = Modifier, shipping: Boolean = false,
+    onClicked: (() -> Unit)? = null
+) {
+    Card(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(60.dp),
+        elevation = 0.dp,
+        shape = RoundedCornerShape(10.dp),
+        border = if (shipping) BorderStroke(1.dp, PrimaryColor) else null,
+        backgroundColor = if (shipping) White else GraySelector,
+        onClick = {
+            onClicked?.invoke()
+        }
+    ) {
+        Row(
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                modifier = Modifier.padding(end = 13.dp),
+                painter = painterResource(id = if (shipping) R.drawable.ic_house else R.drawable.ic_walking),
+                contentDescription = "hide shipping options",
+                tint = if (shipping) PrimaryColor else GrayMedium
+            )
+            MediumText(
+                text = if (shipping) "Enviar a \ndomicilio" else "Recolectar",
+                align = TextAlign.Center,
+                color = if (shipping) PrimaryColor else GrayMedium,
+                size = 15.sp
+            )
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Preview
+@Composable
+fun AddressSelector(
+    modifier: Modifier = Modifier, shipping: Boolean = false,
+    onClicked: (() -> Unit)? = null
+) {
+    Card(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(60.dp),
+        elevation = 0.dp,
+        shape = RoundedCornerShape(10.dp),
+        border = BorderStroke(1.dp, GrayBorderThin),
+        backgroundColor = White,
+        onClick = {
+            onClicked?.invoke()
+        }
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Start,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                modifier = Modifier.padding(end = 13.dp, start = 16.dp),
+                painter = painterResource(id = R.drawable.ic_location),
+                contentDescription = "hide shipping options",
+                tint = GrayMedium
+            )
+            Column {
+                MediumText(
+                    text = "Para",
+                    color = GraySinceTo,
+                    size = 15.sp
+                )
+                MediumText(
+                    text = "Ferreteria La hormiga",
+                    align = TextAlign.Center,
+                    color = GrayMedium,
+                    size = 15.sp
+                )
+            }
+            Spacer(modifier = Modifier.weight(1f))
+            Image(
+                modifier = Modifier
+                    .wrapContentSize()
+                    .padding(end = 15.dp),
+                painter = painterResource(id = R.drawable.ic_selector_right),
+                contentDescription = "right selector"
             )
         }
     }

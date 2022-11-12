@@ -7,7 +7,6 @@ import androidx.navigation.compose.navigation
 import com.boreal.allen.domain.SHOPPING_CART_GRAPH
 import com.boreal.allen.domain.ShoppingCartScreen
 
-
 fun NavGraphBuilder.shoppingCartGraph(navController: NavHostController, closeApp: () -> Unit) {
     navigation(
         startDestination = ShoppingCartScreen.ViewShoppingCartScreen.route,
