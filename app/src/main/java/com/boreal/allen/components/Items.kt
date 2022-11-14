@@ -21,6 +21,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -627,26 +628,28 @@ fun ShoppingCartStoreItem(
         "Test",
         "3e23dc2",
         "dd", listOf()
-    ), counter: Boolean = true,
+    ),
+    counter: Boolean = true,
     deleteOptions: Boolean = true,
     selector: Boolean = true,
-    hideMargin: Boolean = false
+    elevation: Dp = 0.dp,
+    hideTopLine: Boolean = false,
+    bottomSeparator: Boolean = false
 ) {
 
     Card(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(bottom = if (hideMargin) 0.dp else 30.dp),
-        elevation = if (hideMargin) 0.dp else 5.dp
+        modifier = Modifier
+            .fillMaxWidth(),
+        elevation = elevation
     ) {
 
         val showItems = remember { mutableStateOf(true) }
         Column(
-            modifier = Modifier
+            modifier = modifier
                 .fillMaxWidth()
                 .background(White)
         ) {
-            if (hideMargin) {
+            if (!hideTopLine) {
                 Divider(
                     thickness = 1.5.dp,
                     color = GrayBorderLight
@@ -757,10 +760,10 @@ fun ShoppingCartItem(
         modifier = if (deleteOptions)
             Modifier
                 .fillMaxWidth()
-                .padding(start = 30.dp, end = 30.dp, top = 14.dp, bottom = 10.dp)
+                .padding(start = 30.dp, end = 30.dp, top = 14.dp, bottom = 20.dp)
         else Modifier
             .fillMaxWidth()
-            .padding(top = 14.dp, bottom = 10.dp)
+            .padding(top = 14.dp, bottom = 20.dp)
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
