@@ -29,6 +29,7 @@ import com.boreal.allen.R
 import com.boreal.allen.components.*
 import com.boreal.allen.domain.PRODUCT_GRAPH
 import com.boreal.allen.domain.SHOPPING_CART_GRAPH
+import com.boreal.allen.domain.SHOPPING_CLIENT_GRAPH
 import com.boreal.allen.domain.model.PromotionItem
 import com.boreal.allen.theme.GrayBackgroundMain
 import com.boreal.allen.theme.GrayInactiveIndicator
@@ -116,6 +117,11 @@ fun AEHomeClientComposable(navController: NavHostController? = null, closeApp: (
                     println("Clicked on ${it.option.name}")
                     if (it.option == DrawerOptions.Exit) {
                         closeApp()
+                    } else if (it.option == DrawerOptions.Buys) {
+                        navController?.navigate(SHOPPING_CLIENT_GRAPH)
+                        scope.launch {
+                            scaffoldState.drawerState.close()
+                        }
                     }
                 }
             },
