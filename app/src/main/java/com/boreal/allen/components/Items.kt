@@ -14,8 +14,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Black
+import androidx.compose.ui.graphics.Color.Companion.Red
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
@@ -30,6 +33,7 @@ import androidx.constraintlayout.compose.Dimension
 import androidx.constraintlayout.compose.layoutId
 import com.boreal.allen.R
 import com.boreal.allen.domain.model.ItemCartModel
+import com.boreal.allen.domain.model.ItemShoppingModel
 import com.boreal.allen.domain.model.ProductShoppingCart
 import com.boreal.allen.theme.*
 import com.google.accompanist.flowlayout.FlowColumn
@@ -890,6 +894,304 @@ fun ShoppingCartItem(
                     size = 12.sp,
                     color = OrangeStrong
                 )
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Preview(showBackground = true)
+@Composable
+fun ShoppingCategoryHistoryItem(
+    modifier: Modifier = Modifier,
+    item: ItemShoppingModel = ItemShoppingModel(
+        nameStore = "Ferreteria La hormiga",
+        idStore = "d2d232",
+        imgStore = "dddd",
+        idSale = "dwed342",
+        price = 46.0,
+        status = "RECEIVED",
+        giftStatus = "AVAILABLE",
+        apologyStatus = "NONE",
+        canceledBy = "NONE",
+        numberProducts = 1
+    ),
+    counter: Boolean = true,
+    deleteOptions: Boolean = true,
+    selector: Boolean = true,
+    elevation: Dp = 0.dp,
+    hideTopLine: Boolean = false,
+    bottomSeparator: Boolean = false
+) {
+
+    Card(
+        modifier = Modifier
+            .fillMaxWidth(),
+        elevation = elevation
+    ) {
+
+        Column(
+            modifier = modifier
+                .fillMaxWidth()
+                .background(White)
+        ) {
+            if (!hideTopLine) {
+                Divider(
+                    thickness = 1.5.dp,
+                    color = GrayBorderLight
+                )
+            }
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 12.dp, bottom = 14.dp, end = if (deleteOptions) 30.dp else 0.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceAround
+            ) {
+                if (selector) {
+                    RadioButton(
+                        selected = false,
+                        onClick = { },
+                        colors = RadioButtonDefaults.colors(
+                            unselectedColor = GrayLetterHint,
+                            selectedColor = PrimaryColor
+                        )
+                    )
+                }
+
+                Card(
+                    modifier = Modifier
+                        .size(30.dp),
+                    backgroundColor = GrayBackgroundDrawerDismiss,
+                    elevation = 0.dp,
+                    shape = RoundedCornerShape(10.dp)
+                ) {
+
+                }
+                BoldText(
+                    modifier = Modifier
+                        .weight(0.5f)
+                        .padding(start = 6.dp, end = 10.dp),
+                    text = item.nameStore,
+                    size = 15.sp,
+                    textOverflow = TextOverflow.Ellipsis,
+                    maxLines = 2
+                )
+                SemiBoldText(
+                    modifier = Modifier.padding(end = 23.dp),
+                    text = "${item.numberProducts} articulos",
+                    color = GrayMedium,
+                    size = 13.sp
+                )
+
+            }
+            Divider(
+                thickness = 1.5.dp,
+                color = GrayBorderLight
+            )
+            ShoppingHistoryItem(
+                counter = counter,
+                deleteOptions = deleteOptions,
+                historyModel = item
+            )
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ShoppingHistoryItem(
+    historyModel: ItemShoppingModel = ItemShoppingModel(
+        nameStore = "Ferreteria La hormiga",
+        idStore = "d2d232",
+        imgStore = "dddd",
+        idSale = "dwed342",
+        price = 46.0,
+        status = "RECEIVED",
+        giftStatus = "AVAILABLE",
+        apologyStatus = "NONE",
+        canceledBy = "NONE",
+        numberProducts = 1
+    ),
+    counter: Boolean = true,
+    deleteOptions: Boolean = true
+) {
+    Column(
+        modifier = if (deleteOptions)
+            Modifier
+                .fillMaxWidth()
+                .padding(start = 30.dp, end = 30.dp, top = 14.dp, bottom = 20.dp)
+        else Modifier
+            .fillMaxWidth()
+            .padding(top = 14.dp, bottom = 20.dp)
+    ) {
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+
+            Column(
+                modifier = Modifier.wrapContentWidth()
+            ) {
+                Card(
+                    modifier = Modifier
+                        .size(81.dp),
+                    backgroundColor = GrayBackgroundDrawerDismiss,
+                    elevation = 0.dp,
+                    shape = RoundedCornerShape(10.dp)
+                ) {
+
+                }
+
+            }
+            Column(
+                modifier = Modifier
+                    .height(100.dp)
+                    .padding(start = 27.dp)
+                    .weight(0.3f),
+                verticalArrangement = Arrangement.SpaceAround
+            ) {
+                SemiBoldText(
+                    text = if (historyModel.status == "WAITING_CLIENT") "Esperando" else "Orden",
+                    size = 15.sp,
+                    maxLines = 2,
+                    textOverflow = TextOverflow.Ellipsis
+                )
+                SemiBoldText(
+                    text = when (historyModel.status) {
+                        "CANCELED" -> {
+                            "cancelada"
+                        }
+                        "RUNNING" -> {
+                            "en camino"
+                        }
+                        "WAITING_CLIENT" -> {
+                            "al cliente"
+                        }
+                        "WAITING_SELLER" -> {
+                            "en proceso"
+                        }
+                        else -> {
+                            "confirmada"
+                        }
+                    },
+                    size = 15.sp,
+                    maxLines = 2,
+                    color = when (historyModel.status) {
+                        "CANCELED" -> {
+                            Red
+                        }
+                        else -> {
+                            Black
+                        }
+                    },
+                    textOverflow = TextOverflow.Ellipsis
+                )
+                SemiBoldText(
+                    modifier = Modifier.wrapContentHeight(),
+                    text = "$${historyModel.price}",
+                    color = Black,
+                    size = 15.sp
+                )
+
+                SemiBoldText(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .wrapContentHeight(),
+                    text = "12/08/2023 a las 09:41 am",
+                    color = GrayLetterCategoryProduct,
+                    size = 12.sp,
+                    maxLines = 2,
+                    textOverflow = TextOverflow.Ellipsis,
+                    align = TextAlign.Start
+                )
+
+            }
+            Column(
+                modifier = Modifier
+                    .height(81.dp)
+                    .weight(0.3f),
+                verticalArrangement = if (historyModel.giftStatus != "NONE") Arrangement.Center else Arrangement.SpaceBetween,
+                horizontalAlignment = Alignment.End
+            ) {
+                if (historyModel.status == "RUNNING" || historyModel.status == "WAITING_SELLER" ||
+                    historyModel.status == "WAITING_CLIENT"
+                ) {
+                    Card(
+                        modifier = Modifier
+                            .size(81.dp),
+                        backgroundColor = GrayBackgroundDrawerDismiss,
+                        elevation = 0.dp,
+                        shape = RoundedCornerShape(10.dp)
+                    ) {
+
+                    }
+                } else {
+                    if (historyModel.canceledBy != "NONE") {
+                        GrayButton(
+                            text = when (historyModel.canceledBy) {
+                                "CLIENT" -> {
+                                    "Disculpas"
+                                }
+                                else -> {
+                                    "Calificar"
+                                }
+                            }
+                        )
+                    }
+
+                    when (historyModel.giftStatus) {
+                        "NONE" -> {
+
+                        }
+                        "TAKEN" -> {
+                            Row(
+                                modifier = Modifier.wrapContentWidth(),
+                                horizontalArrangement = Arrangement.End,
+                                verticalAlignment = Alignment.Bottom
+                            ) {
+                                SemiBoldText(
+                                    modifier = Modifier
+                                        .padding(end = 10.dp)
+                                        .alpha(0.39f),
+                                    text = "Recolectado",
+                                    color = GrayMedium,
+                                    size = 12.sp
+                                )
+                                Image(
+                                    modifier = Modifier
+                                        .size(25.dp)
+                                        .alpha(0.39f),
+                                    painter = painterResource(id = R.drawable.ic_gift),
+                                    contentDescription = "gift"
+                                )
+                            }
+                        }
+                        else -> {
+                            Row(
+                                modifier = Modifier.wrapContentWidth(),
+                                horizontalArrangement = Arrangement.End,
+                                verticalAlignment = Alignment.Bottom
+                            ) {
+                                SemiBoldText(
+                                    modifier = Modifier.padding(end = 10.dp),
+                                    text = "Recolectar regalo",
+                                    color = PrimaryColor,
+                                    size = 12.sp
+                                )
+                                Image(
+                                    modifier = Modifier.size(25.dp),
+                                    painter = painterResource(id = R.drawable.ic_gift),
+                                    contentDescription = "gift"
+                                )
+                            }
+                        }
+                    }
+                }
             }
         }
     }

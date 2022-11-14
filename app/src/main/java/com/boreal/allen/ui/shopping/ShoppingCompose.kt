@@ -23,10 +23,9 @@ import androidx.navigation.NavHostController
 import com.boreal.allen.R
 import com.boreal.allen.components.BoldText
 import com.boreal.allen.components.SemiBoldText
-import com.boreal.allen.components.ShoppingCartStoreItem
+import com.boreal.allen.components.ShoppingCategoryHistoryItem
 import com.boreal.allen.components.ToolbarTitle
-import com.boreal.allen.domain.model.ItemCartModel
-import com.boreal.allen.domain.model.ProductShoppingCart
+import com.boreal.allen.domain.model.ItemShoppingModel
 import com.boreal.allen.theme.GrayBackgroundMain
 import com.boreal.allen.theme.PrimaryColor
 import com.google.accompanist.flowlayout.FlowRow
@@ -129,59 +128,46 @@ fun ViewShoppingCompose(navController: NavHostController? = null) {
                             modifier = Modifier.fillMaxWidth()
                         ) {
                             val list = listOf(
-                                ItemCartModel(
-                                    nameStore = "Ferreteria La Hormiga",
-                                    idStore = "idmidjikjdokjdo",
-                                    imgStore = "didimd",
-                                    listItems = listOf(
-                                        ProductShoppingCart(
-                                            skuProduct = "d2d232",
-                                            nameProduct = "1KG Clavo 1/2 pulgada",
-                                            imgProduct = "ccdcdomd",
-                                            categoryItem = "Ropa",
-                                            quantity = 1,
-                                            discountPercentage = 0.0,
-                                            fastOrder = true,
-                                            minimalFastOrder = 2,
-                                            price = 46.0
-                                        ),
-                                        ProductShoppingCart(
-                                            skuProduct = "d2d232",
-                                            nameProduct = "Martillo",
-                                            imgProduct = "ccdcdomd",
-                                            categoryItem = "Ropa",
-                                            quantity = 1,
-                                            discountPercentage = 15.0,
-                                            fastOrder = true,
-                                            minimalFastOrder = 2,
-                                            price = 46.0
-                                        )
-                                    )
-                                ),
-                                ItemCartModel(
-                                    nameStore = "Nike Store",
-                                    idStore = "idmidjikjdokjdo",
-                                    imgStore = "didimd",
-                                    listItems = listOf(
-                                        ProductShoppingCart(
-                                            skuProduct = "d2d232",
-                                            nameProduct = "Balon Basketball num 6edcwedwedwedcedwcef",
-                                            imgProduct = "ccdcdomd",
-                                            categoryItem = "Deportes",
-                                            quantity = 2,
-                                            discountPercentage = 10.0,
-                                            fastOrder = true,
-                                            minimalFastOrder = 2,
-                                            price = 50.0
-                                        )
-                                    )
+                                ItemShoppingModel(
+                                    nameStore = "Ferreteria La hormiga",
+                                    idStore = "d2d232",
+                                    imgStore = "dddd",
+                                    idSale = "dwed342",
+                                    price = 46.0,
+                                    status = "RUNNING",
+                                    giftStatus = "TAKEN",
+                                    apologyStatus = "NONE",
+                                    canceledBy = "NONE",
+                                    numberProducts = 1
+                                ), ItemShoppingModel(
+                                    nameStore = "Ferreteria La hormiga",
+                                    idStore = "d2d232",
+                                    imgStore = "dddd",
+                                    idSale = "dwed342",
+                                    price = 46.0,
+                                    status = "WAITING_CLIENT",
+                                    giftStatus = "TAKEN",
+                                    apologyStatus = "NONE",
+                                    canceledBy = "NONE",
+                                    numberProducts = 1
+                                ), ItemShoppingModel(
+                                    nameStore = "Ferreteria La hormiga",
+                                    idStore = "d2d232",
+                                    imgStore = "dddd",
+                                    idSale = "dwed342",
+                                    price = 46.0,
+                                    status = "WAITING_SELLER",
+                                    giftStatus = "TAKEN",
+                                    apologyStatus = "NONE",
+                                    canceledBy = "NONE",
+                                    numberProducts = 1
                                 )
                             )
-
                             list.forEachIndexed { index, item ->
-                                ShoppingCartStoreItem(
+                                ShoppingCategoryHistoryItem(
                                     modifier = Modifier.padding(
-                                        horizontal = 30.dp
+                                        start = 30.dp,
+                                        end = 30.dp
                                     ),
                                     item = item,
                                     counter = false,
@@ -216,56 +202,45 @@ fun ViewShoppingCompose(navController: NavHostController? = null) {
                             modifier = Modifier.fillMaxWidth()
                         ) {
                             val list = listOf(
-                                ItemCartModel(
-                                    nameStore = "Ferreteria La Hormiga",
-                                    idStore = "idmidjikjdokjdo",
-                                    imgStore = "didimd",
-                                    listItems = listOf(
-                                        ProductShoppingCart(
-                                            skuProduct = "d2d232",
-                                            nameProduct = "1KG Clavo 1/2 pulgada",
-                                            imgProduct = "ccdcdomd",
-                                            categoryItem = "Ropa",
-                                            quantity = 1,
-                                            discountPercentage = 0.0,
-                                            fastOrder = true,
-                                            minimalFastOrder = 2,
-                                            price = 46.0
-                                        ),
-                                        ProductShoppingCart(
-                                            skuProduct = "d2d232",
-                                            nameProduct = "Martillo",
-                                            imgProduct = "ccdcdomd",
-                                            categoryItem = "Ropa",
-                                            quantity = 1,
-                                            discountPercentage = 15.0,
-                                            fastOrder = true,
-                                            minimalFastOrder = 2,
-                                            price = 46.0
-                                        )
-                                    )
+                                ItemShoppingModel(
+                                    nameStore = "Ferreteria La hormiga",
+                                    idStore = "d2d232",
+                                    imgStore = "dddd",
+                                    idSale = "dwed342",
+                                    price = 46.0,
+                                    status = "RECEIVED",
+                                    giftStatus = "TAKEN",
+                                    apologyStatus = "NONE",
+                                    canceledBy = "NONE",
+                                    numberProducts = 1
                                 ),
-                                ItemCartModel(
-                                    nameStore = "Nike Store",
-                                    idStore = "idmidjikjdokjdo",
-                                    imgStore = "didimd",
-                                    listItems = listOf(
-                                        ProductShoppingCart(
-                                            skuProduct = "d2d232",
-                                            nameProduct = "Balon Basketball num 6edcwedwedwedcedwcef",
-                                            imgProduct = "ccdcdomd",
-                                            categoryItem = "Deportes",
-                                            quantity = 2,
-                                            discountPercentage = 10.0,
-                                            fastOrder = true,
-                                            minimalFastOrder = 2,
-                                            price = 50.0
-                                        )
-                                    )
+                                ItemShoppingModel(
+                                    nameStore = "Ferreteria La hormiga",
+                                    idStore = "d2d232",
+                                    imgStore = "dddd",
+                                    idSale = "dwed342",
+                                    price = 1000.0,
+                                    status = "CANCELED",
+                                    giftStatus = "AVAILABLE",
+                                    apologyStatus = "NONE",
+                                    canceledBy = "SELLER",
+                                    numberProducts = 1
+                                ),
+                                ItemShoppingModel(
+                                    nameStore = "Ferreteria La hormiga",
+                                    idStore = "d2d232",
+                                    imgStore = "dddd",
+                                    idSale = "dwed342",
+                                    price = 56.0,
+                                    status = "CANCELED",
+                                    giftStatus = "NONE",
+                                    apologyStatus = "NONE",
+                                    canceledBy = "CLIENT",
+                                    numberProducts = 1
                                 )
                             )
                             list.forEachIndexed { index, item ->
-                                ShoppingCartStoreItem(
+                                ShoppingCategoryHistoryItem(
                                     modifier = Modifier.padding(
                                         start = 30.dp,
                                         end = 30.dp
@@ -277,7 +252,6 @@ fun ViewShoppingCompose(navController: NavHostController? = null) {
                                     hideTopLine = index != list.lastIndex
                                 )
                             }
-
                         }
                     }
                 }

@@ -244,8 +244,7 @@ fun ViewResumeCartCompose(navController: NavHostController? = null) {
                     item = item,
                     counter = false,
                     deleteOptions = false,
-                    selector = false,
-                    hideMargin = true
+                    selector = false
                 )
             }
             item {

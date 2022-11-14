@@ -59,6 +59,7 @@ fun PreviewBottons() {
         FavoriteCounterButton()
         ShareButton()
         RightRoundedButton()
+        GrayButton()
     }
 }
 
@@ -166,6 +167,30 @@ fun RightRoundedButton(modifier: Modifier = Modifier) {
             painter = painterResource(id = R.drawable.ic_rounded_arrow_right),
             contentDescription = ""
         )
+    }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun GrayButton(
+    modifier: Modifier = Modifier,
+    text: String? = "Calificar",
+    onClick: (() -> Unit)? = null
+) {
+    Card(
+        modifier = modifier
+            .wrapContentWidth(),
+        elevation = 0.dp,
+        shape = RoundedCornerShape(10.dp),
+        backgroundColor = GrayBackgroundDrawerDismiss,
+        onClick = { onClick?.invoke() }
+    ) {
+        Row(modifier = Modifier.padding(horizontal = 15.dp, vertical = 10.dp)) {
+            SemiBoldText(
+                text = text,
+                size = 13.sp
+            )
+        }
     }
 }
 
