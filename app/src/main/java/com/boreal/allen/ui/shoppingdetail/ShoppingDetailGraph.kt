@@ -6,7 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import com.boreal.allen.domain.*
 
-fun NavGraphBuilder.shoppingGraph(navController: NavHostController, closeApp: () -> Unit) {
+fun NavGraphBuilder.shoppingDetail(navController: NavHostController, closeApp: () -> Unit) {
     navigation(
         startDestination = ClientScreen.ShoppingDetailClientScreen.route,
         route = SHOPPING_DETAIL_CLIENT_GRAPH
