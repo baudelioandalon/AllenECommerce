@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -30,8 +31,9 @@ import com.boreal.allen.extensions.drawColoredShadow
 import com.boreal.allen.theme.*
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
+@Preview(showBackground = true)
 @Composable
-fun ViewShoppingCartCompose(navController: NavHostController) {
+fun ViewShoppingCartCompose(navController: NavHostController ? = null) {
     val systemUiController = rememberSystemUiController()
     if (isSystemInDarkTheme()) {
         systemUiController.setSystemBarsColor(
@@ -147,7 +149,7 @@ fun ViewShoppingCartCompose(navController: NavHostController) {
         ToolbarTitle(
             modifier = Modifier.layoutId("toolbarTitle"),
             titleText = "Mi carrito", backClicked = {
-                navController.navigateUp()
+                navController?.navigateUp()
             },
             iconIdRes = R.drawable.ic_coupon
         )
@@ -237,7 +239,7 @@ fun ViewShoppingCartCompose(navController: NavHostController) {
                             ),
                         text = "Continuar"
                     ) {
-                        navController.navigate(SHOPPING_DETAIL_GRAPH)
+                        navController?.navigate(SHOPPING_DETAIL_GRAPH)
                     }
                 }
             }
