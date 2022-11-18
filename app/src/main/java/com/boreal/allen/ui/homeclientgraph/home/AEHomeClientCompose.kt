@@ -27,9 +27,7 @@ import androidx.constraintlayout.compose.layoutId
 import androidx.navigation.NavHostController
 import com.boreal.allen.R
 import com.boreal.allen.components.*
-import com.boreal.allen.domain.PRODUCT_GRAPH
-import com.boreal.allen.domain.SHOPPING_CART_GRAPH
-import com.boreal.allen.domain.SHOPPING_CLIENT_GRAPH
+import com.boreal.allen.domain.*
 import com.boreal.allen.domain.model.PromotionItem
 import com.boreal.allen.theme.GrayBackgroundMain
 import com.boreal.allen.theme.GrayInactiveIndicator
@@ -119,6 +117,16 @@ fun AEHomeClientComposable(navController: NavHostController? = null, closeApp: (
                         closeApp()
                     } else if (it.option == DrawerOptions.Buys) {
                         navController?.navigate(SHOPPING_CLIENT_GRAPH)
+                        scope.launch {
+                            scaffoldState.drawerState.close()
+                        }
+                    }else if (it.option == DrawerOptions.Favorites) {
+                        navController?.navigate(FAVORITES_GRAPH)
+                        scope.launch {
+                            scaffoldState.drawerState.close()
+                        }
+                    }else if (it.option == DrawerOptions.Stores) {
+                        navController?.navigate(STORES_MAPS_GENERAL_GRAPH)
                         scope.launch {
                             scaffoldState.drawerState.close()
                         }

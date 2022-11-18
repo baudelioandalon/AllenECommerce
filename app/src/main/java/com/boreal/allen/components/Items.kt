@@ -11,7 +11,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -900,7 +899,143 @@ fun ShoppingCartItem(
     }
 }
 
-@OptIn(ExperimentalMaterialApi::class)
+@Preview(showBackground = true)
+@Composable
+fun FavoriteItem(
+    productShoppingCart: ProductShoppingCart = ProductShoppingCart(
+        skuProduct = "d2d232",
+        nameProduct = "Balon Basketball num 6edcwedwedwedcedwcef",
+        imgProduct = "ccdcdomd",
+        categoryItem = "Deportes",
+        quantity = 1,
+        discountPercentage = 10.0,
+        fastOrder = true,
+        minimalFastOrder = 2,
+        price = 588880.0
+    )
+) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth(),
+        elevation = 10.dp
+    ) {
+        Column(
+            modifier =
+            Modifier
+                .fillMaxWidth()
+                .background(White)
+                .padding(start = 30.dp, end = 30.dp, top = 14.dp, bottom = 20.dp)
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+
+                Column(
+                    modifier = Modifier.wrapContentWidth()
+                ) {
+                    Card(
+                        modifier = Modifier
+                            .size(81.dp),
+                        backgroundColor = GrayBackgroundDrawerDismiss,
+                        elevation = 0.dp,
+                        shape = RoundedCornerShape(10.dp)
+                    ) {
+
+                    }
+
+                }
+                Column(
+                    modifier = Modifier
+                        .height(81.dp)
+                        .padding(start = 27.dp)
+                        .weight(0.3f),
+                    verticalArrangement = Arrangement.SpaceAround
+                ) {
+                    SemiBoldText(
+                        text = productShoppingCart.nameProduct,
+                        size = 13.sp,
+                        maxLines = 3,
+                        textOverflow = TextOverflow.Ellipsis
+                    )
+                    SemiBoldText(
+                        modifier = Modifier.wrapContentHeight(),
+                        text = productShoppingCart.categoryItem,
+                        color = GrayLetterCategoryProduct,
+                        size = 10.sp
+                    )
+                    Row(
+                        modifier = Modifier.weight(1f),
+                        verticalAlignment = Alignment.Bottom,
+                        horizontalArrangement = Arrangement.End
+                    ) {
+                        if (productShoppingCart.discountPercentage > 0) {
+                            PriceBeforeDiscount(
+                                modifier = Modifier.weight(0.3f),
+                                price = productShoppingCart.price
+                            )
+                        }
+                        BoldText(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .weight(1f),
+                            text = "$${productShoppingCart.getProductWithDiscount().toInt()}",
+                            size = 15.sp, align = TextAlign.End
+                        )
+                    }
+                }
+                Column(
+                    modifier = Modifier
+                        .height(81.dp)
+                        .weight(0.3f),
+                    verticalArrangement = Arrangement.SpaceBetween,
+                    horizontalAlignment = Alignment.End
+                ) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .wrapContentHeight(),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        if (productShoppingCart.discountPercentage > 0) {
+                            Discount(
+                                modifier = Modifier.padding(start = 10.dp),
+                                discount = productShoppingCart.discountPercentage.toInt()
+                            )
+                        } else {
+                            Spacer(modifier = Modifier.padding(start = 10.dp))
+                        }
+                        if (productShoppingCart.fastOrder) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.ic_thunder_icon),
+                                contentDescription = "free shipping",
+                                tint = StarColor
+                            )
+                        }
+                    }
+                }
+            }
+            Row(modifier = Modifier.padding(top = 12.dp)) {
+                BoldText(
+                    text = "Remover",
+                    size = 12.sp,
+                    color = OrangeStrong
+                ) {
+
+                }
+                BoldText(
+                    modifier = Modifier.padding(start = 38.dp),
+                    text = "Guardar para después",
+                    size = 12.sp,
+                    color = OrangeStrong
+                )
+            }
+        }
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun ShoppingCategoryHistoryItem(
