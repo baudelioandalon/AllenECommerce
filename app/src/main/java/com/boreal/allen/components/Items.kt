@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Black
 import androidx.compose.ui.graphics.Color.Companion.Red
@@ -35,6 +36,7 @@ import com.boreal.allen.R
 import com.boreal.allen.domain.model.ItemCartModel
 import com.boreal.allen.domain.model.ItemShoppingModel
 import com.boreal.allen.domain.model.ProductShoppingCart
+import com.boreal.allen.extensions.mirror
 import com.boreal.allen.theme.*
 import com.google.accompanist.flowlayout.FlowColumn
 import com.google.accompanist.flowlayout.FlowRow
@@ -1034,6 +1036,252 @@ fun FavoriteItem(
             }
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun NotificationItem(
+    step: Int = 0,
+    default: Boolean = true,
+    shippingType: String = "SHIPPING",
+    shippingStatus: String = "OK"
+) {
+    Column(
+        modifier =
+        Modifier
+            .fillMaxWidth()
+            .background(White)
+            .padding(start = 30.dp, end = 30.dp, top = 14.dp, bottom = 20.dp)
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+
+            Column(
+                modifier = Modifier.wrapContentWidth()
+            ) {
+                Card(
+                    modifier = Modifier
+                        .size(81.dp),
+                    backgroundColor = GrayBackgroundDrawerDismiss,
+                    elevation = 0.dp,
+                    shape = RoundedCornerShape(10.dp)
+                ) {
+
+                }
+
+            }
+            if (default) {
+                Column(
+                    modifier = Modifier
+                        .wrapContentHeight()
+                        .padding(start = 22.dp)
+                        .fillMaxWidth()
+                        .background(White),
+                    verticalArrangement = Arrangement.Top
+                ) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        SemiBoldText(
+                            text = "Recibido el 1 de septiembre",
+                            size = 15.sp,
+                            maxLines = 3,
+                            textOverflow = TextOverflow.Ellipsis
+                        )
+                        Image(
+                            modifier = Modifier.mirror(),
+                            painter = painterResource(id = R.drawable.ic_on_way_traffic_circle),
+                            contentDescription = "on way"
+                        )
+                    }
+                    SemiBoldText(
+                        modifier = Modifier.wrapContentHeight(),
+                        text = "Camiseta",
+                        color = GrayLetterCategoryProduct,
+                        size = 10.sp
+                    )
+
+                    StepIndicatorNotification(
+                        modifier = Modifier.padding(top = 20.dp),
+                        step = step
+                    )
+                    BoldText(
+                        modifier = Modifier.padding(top = 10.dp),
+                        text = "Calificar",
+                        size = 12.sp,
+                        color = OrangeStrong
+                    ) {
+
+                    }
+                }
+            } else {
+                Column(
+                    modifier = Modifier
+                        .wrapContentHeight()
+                        .padding(start = 22.dp)
+                        .fillMaxWidth()
+                        .background(White),
+                    verticalArrangement = Arrangement.Top
+                ) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        SemiBoldText(
+                            text = if (shippingType == "SHIPPING" && shippingStatus == "OK") "Preparando pedido" else if (
+                                shippingType == "PICKUP" && shippingStatus == "OK"
+                            ) "Pedido listo" else if (shippingStatus == "CANCELLED_BY_SELLER") "Cancelado por el vendedor" else "Cancelado por el cliente",
+                            size = 15.sp,
+                            maxLines = 3,
+                            textOverflow = TextOverflow.Ellipsis
+                        )
+                    }
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 7.dp)
+                            .background(
+                                brush = Brush.horizontalGradient(
+                                    colors = if (shippingStatus == "OK") listOf(
+                                        PrimaryColor,
+                                        PrimaryEndColor
+                                    ) else listOf(
+                                        RedStartColor,
+                                        RedEndColor
+                                    )
+                                ),
+                                shape = RoundedCornerShape(10.dp)
+                            )
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(vertical = 9.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.Start
+                        ) {
+                            Icon(
+                                modifier = Modifier
+                                    .wrapContentHeight()
+                                    .padding(horizontal = 16.dp),
+                                painter = painterResource(id = if (shippingType == "PICKUP") R.drawable.ic_on_way_walking else R.drawable.ic_on_way_traffic),
+                                contentDescription = "on way",
+                                tint = White
+                            )
+                            Column(modifier = Modifier.wrapContentWidth()) {
+                                MediumText(
+                                    text = if (shippingType == "SHIPPING" && shippingStatus == "OK") "Preparando pedido" else if (
+                                        shippingType == "PICKUP" && shippingStatus == "OK"
+                                    ) "Pedido listo" else "Pedido cancelado",
+                                    color = White,
+                                    size = 15.sp
+                                )
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.SpaceBetween
+                                ) {
+                                    MediumText(
+                                        text = if (shippingType == "SHIPPING") "Enviar" else "Recolectar",
+                                        color = White,
+                                        size = 12.sp
+                                    )
+                                    MediumText(
+                                        modifier = Modifier.padding(end = 20.dp),
+                                        text = "Ene 8, 9:30 am",
+                                        color = White,
+                                        size = 12.sp
+                                    )
+                                }
+                            }
+                        }
+                    }
+                    BoldText(
+                        modifier = Modifier.padding(top = 10.dp),
+                        text = "Contactar",
+                        size = 12.sp,
+                        color = OrangeStrong
+                    ) {
+
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun StepIndicatorNotification(
+    modifier: Modifier = Modifier,
+    step: Int = 0,
+    messageOne: String = "19/11/23",
+    messageTwo: String = "20/11/23",
+    messageThree: String = "21/11/23"
+) {
+    Column(modifier = modifier.fillMaxWidth()) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            BoldText(
+                text = messageOne,
+                size = 12.sp
+            )
+            BoldText(
+                text = messageTwo,
+                size = 12.sp
+            )
+            BoldText(
+                text = messageThree,
+                size = 12.sp
+            )
+        }
+        Box(
+            modifier = Modifier.fillMaxWidth(),
+            contentAlignment = Alignment.Center
+        ) {
+            Row(modifier = Modifier.fillMaxWidth()) {
+                Divider(
+                    modifier = Modifier
+                        .padding(start = 5.dp)
+                        .weight(0.5f),
+                    color = if (step > 0) PrimaryColor else GrayBackgroundDrawerDismiss,
+                    thickness = 7.dp
+                )
+                Divider(
+                    modifier = Modifier
+                        .padding(end = 5.dp)
+                        .weight(0.5f),
+                    color = if (step > 3) PrimaryColor else GrayBackgroundDrawerDismiss,
+                    thickness = 7.dp
+                )
+            }
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_circle),
+                    contentDescription = "on way",
+                    tint = if (step >= 0) PrimaryColor else GrayBackgroundDrawerDismiss
+                )
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_circle),
+                    contentDescription = "on way",
+                    tint = if (step > 2) PrimaryColor else GrayBackgroundDrawerDismiss
+                )
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_circle),
+                    contentDescription = "on way",
+                    tint = if (step > 4) PrimaryColor else GrayBackgroundDrawerDismiss
+                )
+            }
+        }
+    }
+
 }
 
 @Preview(showBackground = true)

@@ -9,6 +9,7 @@ import com.boreal.allen.ui.addressclient.clientAddressGraph
 import com.boreal.allen.ui.favorites.favoritesGraph
 import com.boreal.allen.ui.homeclientgraph.homeClientGraph
 import com.boreal.allen.ui.logingraph.loginGraph
+import com.boreal.allen.ui.notificationclient.notificationClientGraph
 import com.boreal.allen.ui.productgraph.productGraph
 import com.boreal.allen.ui.productgraph.question.questionGraph
 import com.boreal.allen.ui.productgraph.ratinggraph.ratingProductGraph
@@ -37,8 +38,9 @@ fun MainCompose(closeApp: () -> Unit) {
         resumeCartGraph(navController, closeApp)
         clientAddressGraph(navController, closeApp)
         shoppingGraph(navController, closeApp)
-        favoritesGraph(navController, closeApp)
-        storesMapGeneralGraph(navController, closeApp)
         shoppingDetail(navController, closeApp)
+        favoritesGraph(navController, closeApp)
+        notificationClientGraph(navController, closeApp)
+        storesMapGeneralGraph(navController, closeApp)
     }
 }

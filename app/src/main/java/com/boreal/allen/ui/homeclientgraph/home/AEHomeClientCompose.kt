@@ -113,22 +113,36 @@ fun AEHomeClientComposable(navController: NavHostController? = null, closeApp: (
                     ),
                 ) {
                     println("Clicked on ${it.option.name}")
-                    if (it.option == DrawerOptions.Exit) {
-                        closeApp()
-                    } else if (it.option == DrawerOptions.Buys) {
-                        navController?.navigate(SHOPPING_CLIENT_GRAPH)
-                        scope.launch {
-                            scaffoldState.drawerState.close()
+                    when (it.option) {
+                        DrawerOptions.Exit -> {
+                            closeApp()
                         }
-                    }else if (it.option == DrawerOptions.Favorites) {
-                        navController?.navigate(FAVORITES_GRAPH)
-                        scope.launch {
-                            scaffoldState.drawerState.close()
+                        DrawerOptions.Buys -> {
+                            navController?.navigate(SHOPPING_CLIENT_GRAPH)
+                            scope.launch {
+                                scaffoldState.drawerState.close()
+                            }
                         }
-                    }else if (it.option == DrawerOptions.Stores) {
-                        navController?.navigate(STORES_MAPS_GENERAL_GRAPH)
-                        scope.launch {
-                            scaffoldState.drawerState.close()
+                        DrawerOptions.Favorites -> {
+                            navController?.navigate(FAVORITES_GRAPH)
+                            scope.launch {
+                                scaffoldState.drawerState.close()
+                            }
+                        }
+                        DrawerOptions.Stores -> {
+                            navController?.navigate(STORES_MAPS_GENERAL_GRAPH)
+                            scope.launch {
+                                scaffoldState.drawerState.close()
+                            }
+                        }
+                        DrawerOptions.Notifications -> {
+                            navController?.navigate(NOTIFICATION_CLIENT_GRAPH)
+                            scope.launch {
+                                scaffoldState.drawerState.close()
+                            }
+                        }
+                        else -> {
+
                         }
                     }
                 }

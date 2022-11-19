@@ -1,13 +1,16 @@
 package com.boreal.allen.extensions
 
+import androidx.compose.runtime.Stable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.*
 import androidx.compose.ui.graphics.Color.Companion.Black
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
+import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
@@ -66,6 +69,11 @@ fun Modifier.drawColoredShadow(
     }
 } else {
     this
+}
+
+@Stable
+fun Modifier.mirror(): Modifier {
+    return scale(scaleX = -1f, scaleY = 1f)
 }
 
 data class DottedShape(

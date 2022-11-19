@@ -3,6 +3,7 @@ package com.boreal.allen.theme
 import androidx.compose.ui.graphics.Color
 
 val PrimaryColor = Color(0xFF348FDD)
+val PrimaryEndColor = Color(0xFF95C1FB)
 val Purple200 = Color(0xFFBB86FC)
 val Purple500 = Color(0xFF6200EE)
 val Purple700 = Color(0xFF3700B3)
@@ -28,6 +29,8 @@ val GrayLetterDrawer = Color(0xFFB5B6BA)
 val GrayLetterCategoryProduct = Color(0xFFDBDBDB)
 val GrayLetterArrow = Color(0xFFC2C3C1)
 val GreenStrong = Color(0xFF51BC9D)
+val RedStartColor = Color(0xFFEA6965)
+val RedEndColor = Color(0xFFF5B3B3)
 val OrangeStrong = Color(0xFFD46743)
 val OrangeMedium = Color(0xFFF2714C)
 val OrangeTransparent = Color(0xFFEFC3B4)
