@@ -47,6 +47,10 @@ fun TestSearchs() {
             value = "",
             placeHolder = "Buscar"
         )
+        SearcherWithSettings(
+            value = "",
+            placeHolder = "Escribe el producto o marca..."
+        )
     }
 }
 
@@ -176,7 +180,7 @@ fun SearcherWithButton(
     settingsClicked: (() -> Unit)? = null,
     itemClicked: (() -> Unit)? = null
 ) {
-    Row (modifier = modifier, verticalAlignment = Alignment.CenterVertically){
+    Row(modifier = modifier, verticalAlignment = Alignment.CenterVertically) {
         val interactionSource = remember { MutableInteractionSource() }
         Column(modifier = Modifier.weight(1f)) {
             OutlinedTextField(
@@ -241,9 +245,89 @@ fun SearcherWithButton(
             )
 
         }
-        BoldText(modifier = Modifier.padding(start = 33.dp).clickable { itemClicked?.invoke() },
+        BoldText(
+            modifier = Modifier
+                .padding(start = 33.dp)
+                .clickable { itemClicked?.invoke() },
             text = "Buscar", size = 14.sp,
             color = PrimaryColor
         )
+    }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun SearcherWithSettings(
+    modifier: Modifier = Modifier,
+    placeHolder: String = "",
+    value: String,
+    keyboardOptions: KeyboardOptions = KeyboardOptions(
+        capitalization = KeyboardCapitalization.Words,
+        keyboardType = KeyboardType.Text
+    ),
+    keyboardActions: KeyboardActions = KeyboardActions { },
+    enabled: Boolean = true,
+    singleLine: Boolean = false,
+    colors: TextFieldColors = TextFieldDefaults.textFieldColors(
+        backgroundColor = GrayBackgroundSearch,
+        focusedIndicatorColor = Color.Transparent,
+        unfocusedIndicatorColor = Color.Transparent,
+        disabledIndicatorColor = Color.Transparent, textColor = GrayLetterHint,
+        disabledTextColor = GrayLetterHint,
+    ),
+    visualTransformation: VisualTransformation = VisualTransformation.None,
+    settingsClicked: (() -> Unit)? = null,
+    itemClicked: (() -> Unit)? = null
+) {
+    Row(modifier = modifier, verticalAlignment = Alignment.CenterVertically) {
+        val interactionSource = remember { MutableInteractionSource() }
+        Column(modifier = Modifier
+            .weight(1f)
+            .clickable { itemClicked?.invoke() }) {
+            OutlinedTextField(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(52.dp),
+                shape = RoundedCornerShape(corner = CornerSize(10.dp)),
+                textStyle = TextStyle(
+                    color = Black,
+                    fontWeight = SemiBold,
+                    fontSize = 15.sp
+                ),
+                interactionSource = interactionSource,
+                value = value,
+                onValueChange = {}, placeholder = {
+                    Text(
+                        text = placeHolder,
+                        color = GrayLetterHint,
+                        fontWeight = SemiBold,
+                        fontSize = 16.sp
+                    )
+                },
+                colors = colors,
+                isError = false,
+                keyboardOptions = keyboardOptions,
+                keyboardActions = keyboardActions,
+                enabled = enabled,
+                singleLine = singleLine,
+                visualTransformation = visualTransformation
+            )
+
+        }
+        Card(
+            modifier = Modifier
+                .padding(horizontal = 10.dp)
+                .width(35.dp)
+                .height(35.dp),
+            elevation = 0.dp,
+            shape = CircleShape,
+            onClick = { settingsClicked?.invoke() }) {
+            Icon(
+                modifier = Modifier.wrapContentSize(),
+                painter = painterResource(id = R.drawable.ic_settings_gray),
+                contentDescription = "settingsIcon",
+                tint = Black
+            )
+        }
     }
 }

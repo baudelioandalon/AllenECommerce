@@ -1,4 +1,4 @@
-package com.boreal.allen.ui.homeclientgraph.home
+package com.boreal.allen.ui.homeclientgraph
 
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.*
@@ -182,6 +182,8 @@ fun AEHomeClientComposable(navController: NavHostController? = null, closeApp: (
                             }
                         }, cartClicked = {
                             navController?.navigate(SHOPPING_CART_GRAPH)
+                        }, searchClicked = {
+                            navController?.navigate(SEARCH_CLIENT_GRAPH)
                         })
                     }
                     Column(

@@ -328,6 +328,17 @@
         <entry key="../../../../../layout/compose-model-1668819035992.xml" value="1.0" />
         <entry key="../../../../../layout/compose-model-1668819236423.xml" value="0.3244090002848191" />
         <entry key="../../../../../layout/compose-model-1668819336881.xml" value="0.5828220858895705" />
+        <entry key="../../../../../layout/compose-model-1668963896685.xml" value="0.1" />
+        <entry key="../../../../../layout/compose-model-1668963926858.xml" value="0.48063973063973064" />
+        <entry key="../../../../../layout/compose-model-1668963957399.xml" value="0.32497863856451153" />
+        <entry key="../../../../../layout/compose-model-1668964156990.xml" value="0.67" />
+        <entry key="../../../../../layout/compose-model-1668964525633.xml" value="0.48063973063973064" />
+        <entry key="../../../../../layout/compose-model-1668964583314.xml" value="1.0" />
+        <entry key="../../../../../layout/compose-model-1668964757465.xml" value="2.0" />
+        <entry key="../../../../../layout/compose-model-1668964804107.xml" value="0.67" />
+        <entry key="../../../../../layout/compose-model-1668965606330.xml" value="0.5" />
+        <entry key="../../../../../layout/compose-model-1668965693327.xml" value="0.75" />
+        <entry key="../../../../../layout/compose-model-1668965729528.xml" value="0.4797979797979798" />
         <entry key="../../../../../layout/custom_preview.xml" value="0.20443645083932854" />
         <entry key="../../../../layout/compose-model-1665475577284.xml" value="0.48063973063973064" />
         <entry key="../../../../layout/compose-model-1665476376553.xml" value="2.0" />
@@ -347,6 +358,7 @@
         <entry key="app/src/main/res/drawable/ic_bell_icon_badge.xml" value="0.404" />
         <entry key="app/src/main/res/drawable/ic_favorite_unselected.xml" value="0.4295" />
         <entry key="app/src/main/res/drawable/ic_on_way_traffic_circle.xml" value="0.418" />
+        <entry key="app/src/main/res/drawable/ic_search_icon.xml" value="0.4395" />
       </map>
     </option>
   </component>

@@ -31,7 +31,7 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @Preview
 @Composable
-fun ViewQuestionCompose(navController: NavHostController) {
+fun ViewQuestionCompose(navController: NavHostController? = null) {
     val systemUiController = rememberSystemUiController()
     if (isSystemInDarkTheme()) {
         systemUiController.setSystemBarsColor(
@@ -133,7 +133,7 @@ fun ViewQuestionCompose(navController: NavHostController) {
         ToolbarTitle(
             modifier = Modifier.layoutId("toolbarTitle"),
             titleText = "Preguntas", backClicked = {
-                navController.navigateUp()
+                navController?.navigateUp()
             },
             iconIdRes = R.drawable.ic_questions_icon
         )
