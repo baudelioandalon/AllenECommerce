@@ -5,24 +5,24 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.boreal.allen.domain.HOME_CLIENT_GRAPH
 import com.boreal.allen.domain.ROOT_GRAPH
-import com.boreal.allen.ui.addressclient.clientAddressGraph
-import com.boreal.allen.ui.favorites.favoritesGraph
-import com.boreal.allen.ui.homeclientgraph.homeClientGraph
-import com.boreal.allen.ui.logingraph.loginGraph
-import com.boreal.allen.ui.notificationclient.notificationClientGraph
-import com.boreal.allen.ui.productgraph.productGraph
-import com.boreal.allen.ui.productgraph.question.questionGraph
-import com.boreal.allen.ui.productgraph.ratinggraph.ratingProductGraph
-import com.boreal.allen.ui.result.general.resultClientGraph
-import com.boreal.allen.ui.result.seller.resultBySellerClientGraph
-import com.boreal.allen.ui.searchclient.searchClientGraph
-import com.boreal.allen.ui.shopping.shoppingGraph
-import com.boreal.allen.ui.shoppingcart.details.detailCartGraph
-import com.boreal.allen.ui.shoppingcart.resume.resumeCartGraph
-import com.boreal.allen.ui.shoppingcart.shoppingCartGraph
-import com.boreal.allen.ui.shoppingdetail.shoppingDetail
+import com.boreal.allen.ui.client.addressclient.clientAddressGraph
+import com.boreal.allen.ui.client.favorites.favoritesGraph
+import com.boreal.allen.ui.client.homeclientgraph.homeClientGraph
+import com.boreal.allen.ui.general.logingraph.loginGraph
+import com.boreal.allen.ui.client.notificationclient.notificationClientGraph
+import com.boreal.allen.ui.client.productgraph.productGraph
+import com.boreal.allen.ui.client.productgraph.question.questionGraph
+import com.boreal.allen.ui.client.productgraph.ratinggraph.ratingProductGraph
+import com.boreal.allen.ui.client.result.general.resultClientGraph
+import com.boreal.allen.ui.client.result.seller.resultBySellerClientGraph
+import com.boreal.allen.ui.client.searchclient.searchClientGraph
+import com.boreal.allen.ui.client.shopping.shoppingGraph
+import com.boreal.allen.ui.client.shoppingcart.details.detailCartGraph
+import com.boreal.allen.ui.client.shoppingcart.resume.resumeCartGraph
+import com.boreal.allen.ui.client.shoppingcart.shoppingCartGraph
+import com.boreal.allen.ui.client.shoppingdetail.shoppingDetail
 import com.boreal.allen.ui.status.statusGraph
-import com.boreal.allen.ui.storesmap.storesMapGeneralGraph
+import com.boreal.allen.ui.general.storesmap.storesMapGeneralGraph
 
 @Composable
 fun MainCompose(closeApp: () -> Unit) {
