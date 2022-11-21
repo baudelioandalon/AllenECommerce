@@ -10,28 +10,22 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Color.Companion.Green
 import androidx.compose.ui.graphics.Color.Companion.Red
+import androidx.compose.ui.graphics.Color.Companion.Transparent
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.graphics.Color.Companion.Yellow
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.constraintlayout.compose.ConstraintSet
-import androidx.constraintlayout.compose.Dimension
-import androidx.constraintlayout.compose.layoutId
+import androidx.constraintlayout.compose.*
 import androidx.navigation.NavHostController
 import com.boreal.allen.R
 import com.boreal.allen.components.*
 import com.boreal.allen.domain.model.ItemCartModel
 import com.boreal.allen.domain.model.ProductShoppingCart
 import com.boreal.allen.extensions.DottedShape
-import com.boreal.allen.theme.GrayBackgroundMain
-import com.boreal.allen.theme.GrayLetterSeeAll
-import com.boreal.allen.theme.GrayLetterShipping
-import com.boreal.allen.theme.GreenStrong
+import com.boreal.allen.theme.*
 import com.google.accompanist.flowlayout.FlowRow
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
@@ -99,54 +93,48 @@ fun ViewShoppingDetailCompose(navController: NavHostController? = null) {
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
+                        .wrapContentHeight()
                         .padding(bottom = 30.dp),
                     elevation = 5.dp
                 ) {
                     ConstraintLayout(modifier = Modifier
                         .fillMaxWidth()
-                        .fillParentMaxHeight(0.6f)
-                        .background(Green),
+                        .wrapContentHeight()
+                        .background(White),
                         constraintSet = ConstraintSet {
                             val map = createRefFor("map")
                             val shoppingStatus = createRefFor("shoppingStatus")
-                            val guideLineMiddle = createGuidelineFromTop(0.5f)
 
                             constrain(map) {
                                 top.linkTo(parent.top)
                                 start.linkTo(parent.start)
                                 end.linkTo(parent.end)
                                 width = Dimension.fillToConstraints
-                                height = Dimension.percent(0.6f)
+                                height = Dimension.value(300.dp)
                             }
                             constrain(shoppingStatus) {
-                                top.linkTo(guideLineMiddle)
-                                bottom.linkTo(parent.bottom)
+                                top.linkTo(map.bottom, (-40).dp)
                                 width = Dimension.matchParent
-                                height = Dimension.fillToConstraints
+                                height = Dimension.preferredWrapContent.atLeastWrapContent
                             }
                         }) {
 
                         Card(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .wrapContentHeight()
                                 .layoutId("map"),
-                            backgroundColor = Red,
+                            backgroundColor = GrayBackgroundDrawerDismiss,
                             elevation = 0.dp
                         ) {
-                            Row(
-                                modifier = Modifier
-                                    .height(300.dp)
-                                    .fillMaxWidth()
-                            ) {}
+
                         }
                         Card(
                             modifier = Modifier
                                 .padding(bottom = 30.dp, start = 30.dp, end = 30.dp)
                                 .fillMaxWidth()
-                                .height(300.dp)
+                                .wrapContentHeight()
                                 .layoutId("shoppingStatus"),
-                            backgroundColor = Yellow,
+                            backgroundColor = Transparent,
                             elevation = 0.dp,
                             shape = RoundedCornerShape(10.dp)
                         ) {
@@ -154,6 +142,14 @@ fun ViewShoppingDetailCompose(navController: NavHostController? = null) {
                                 StatusPackageItem(
                                     default = false
                                 )
+                                FlowRow(
+                                    modifier = Modifier.fillMaxWidth()
+                                ) {
+                                    val list = listOf(false,false,false,false,false,true)
+                                    list.forEach {
+                                        StatusPreviouPackageItem(lastItem = it)
+                                    }
+                                }
                             }
                         }
                     }

@@ -41,7 +41,6 @@ import com.boreal.allen.theme.*
 import com.google.accompanist.flowlayout.FlowColumn
 import com.google.accompanist.flowlayout.FlowRow
 
-@Preview
 @Composable
 fun TestItems() {
     Column(
@@ -768,7 +767,6 @@ fun AnswerItem(text: String = "") {
 }
 
 @OptIn(ExperimentalMaterialApi::class)
-@Preview(showBackground = true)
 @Composable
 fun ShoppingCartStoreItem(
     modifier: Modifier = Modifier,
@@ -887,7 +885,6 @@ fun ShoppingCartStoreItem(
 
 }
 
-@Preview(showBackground = true)
 @Composable
 fun ShoppingCartItem(
     productShoppingCart: ProductShoppingCart = ProductShoppingCart(
@@ -1043,7 +1040,6 @@ fun ShoppingCartItem(
     }
 }
 
-@Preview(showBackground = true)
 @Composable
 fun FavoriteItem(
     productShoppingCart: ProductShoppingCart = ProductShoppingCart(
@@ -1180,7 +1176,6 @@ fun FavoriteItem(
     }
 }
 
-@Preview(showBackground = true)
 @Composable
 fun NotificationItem(
     step: Int = 0,
@@ -1355,7 +1350,6 @@ fun NotificationItem(
     }
 }
 
-@Preview(showBackground = true)
 @Composable
 fun StatusPackageItem(
     step: Int = 0,
@@ -1468,6 +1462,85 @@ fun StatusPackageItem(
             }
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun StatusPreviouPackageItem(
+    step: Int = 0,
+    shippingType: String = "SHIPPING",
+    shippingStatus: String = "OK",
+    lastItem: Boolean = false
+) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(
+                color = White,
+                shape = RoundedCornerShape(10.dp)
+            )
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Start
+        ) {
+            Column(
+                verticalArrangement = Arrangement.SpaceBetween,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Divider(
+                    modifier = Modifier
+                        .height(20.dp)
+                        .width(2.dp),
+                    color = BlueStatusLineColor,
+                    thickness = 1.dp
+                )
+                Icon(
+                    modifier = Modifier
+                        .wrapContentHeight()
+                        .padding(horizontal = 16.dp, vertical = 5.dp),
+                    painter = painterResource(id = R.drawable.ic_dot),
+                    contentDescription = "on way",
+                    tint = PrimaryColor
+                )
+                if (!lastItem) {
+                    Divider(
+                        modifier = Modifier
+                            .height(20.dp)
+                            .width(2.dp),
+                        color = BlueStatusLineColor,
+                        thickness = 1.dp
+                    )
+                }
+            }
+            Column(modifier = Modifier.wrapContentWidth()) {
+                MediumText(
+                    text = if (shippingType == "SHIPPING" && shippingStatus == "OK") "Preparando pedido" else if (
+                        shippingType == "PICKUP" && shippingStatus == "OK"
+                    ) "Pedido listo" else "Pedido cancelado",
+                    color = Black,
+                    size = 15.sp
+                )
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    MediumText(
+                        text = if (shippingType == "SHIPPING") "Enviar" else "Recolectar",
+                        color = GraySinceTo,
+                        size = 12.sp
+                    )
+                    MediumText(
+                        modifier = Modifier.padding(end = 20.dp),
+                        text = "Ene 8, 9:30 am",
+                        color = GraySinceTo,
+                        size = 12.sp
+                    )
+                }
+            }
+        }
+    }
+
 }
 
 @Composable
@@ -1640,7 +1713,6 @@ fun ShoppingCategoryHistoryItem(
     }
 }
 
-@Preview(showBackground = true)
 @Composable
 fun ShoppingHistoryItem(
     historyModel: ItemShoppingModel = ItemShoppingModel(
