@@ -4,7 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
@@ -49,7 +48,6 @@ fun ViewShoppingDetailCompose(navController: NavHostController? = null) {
             color = White
         )
     }
-    val scrollState = rememberScrollState()
 
     ConstraintLayout(modifier = Modifier
         .fillMaxSize()
@@ -152,7 +150,11 @@ fun ViewShoppingDetailCompose(navController: NavHostController? = null) {
                             elevation = 0.dp,
                             shape = RoundedCornerShape(10.dp)
                         ) {
-
+                            Column {
+                                StatusPackageItem(
+                                    default = false
+                                )
+                            }
                         }
                     }
                 }

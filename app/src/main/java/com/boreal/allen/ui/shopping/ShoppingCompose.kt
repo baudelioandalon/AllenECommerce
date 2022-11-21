@@ -25,6 +25,7 @@ import com.boreal.allen.components.BoldText
 import com.boreal.allen.components.SemiBoldText
 import com.boreal.allen.components.ShoppingCategoryHistoryItem
 import com.boreal.allen.components.ToolbarTitle
+import com.boreal.allen.domain.SHOPPING_DETAIL_CLIENT_GRAPH
 import com.boreal.allen.domain.model.ItemShoppingModel
 import com.boreal.allen.theme.GrayBackgroundMain
 import com.boreal.allen.theme.PrimaryColor
@@ -250,7 +251,9 @@ fun ViewShoppingCompose(navController: NavHostController? = null) {
                                     deleteOptions = false,
                                     selector = false,
                                     hideTopLine = index != list.lastIndex
-                                )
+                                ) {
+                                    navController?.navigate(SHOPPING_DETAIL_CLIENT_GRAPH)
+                                }
                             }
                         }
                     }

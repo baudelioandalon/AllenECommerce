@@ -59,6 +59,7 @@ fun TestItems() {
         ProductResultItem()
         BrandingHorizontal()
         AnswerItem()
+        ShoppingCategoryHistoryItem()
     }
 }
 
@@ -1354,6 +1355,121 @@ fun NotificationItem(
     }
 }
 
+@Preview(showBackground = true)
+@Composable
+fun StatusPackageItem(
+    step: Int = 0,
+    default: Boolean = true,
+    shippingType: String = "SHIPPING",
+    shippingStatus: String = "OK"
+) {
+    if (default) {
+        Column(
+            modifier = Modifier
+                .wrapContentHeight()
+                .padding(start = 22.dp)
+                .fillMaxWidth()
+                .background(White),
+            verticalArrangement = Arrangement.Top
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                SemiBoldText(
+                    text = "Recibido el 1 de septiembre",
+                    size = 15.sp,
+                    maxLines = 3,
+                    textOverflow = TextOverflow.Ellipsis
+                )
+                Image(
+                    modifier = Modifier.mirror(),
+                    painter = painterResource(id = R.drawable.ic_on_way_traffic_circle),
+                    contentDescription = "on way"
+                )
+            }
+            SemiBoldText(
+                modifier = Modifier.wrapContentHeight(),
+                text = "Camiseta",
+                color = GrayLetterCategoryProduct,
+                size = 10.sp
+            )
+
+            StepIndicatorNotification(
+                modifier = Modifier.padding(top = 20.dp),
+                step = step
+            )
+            BoldText(
+                modifier = Modifier.padding(top = 10.dp),
+                text = "Calificar",
+                size = 12.sp,
+                color = OrangeStrong
+            ) {
+
+            }
+        }
+    } else {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 7.dp)
+                .background(
+                    brush = Brush.horizontalGradient(
+                        colors = if (shippingStatus == "OK") listOf(
+                            PrimaryColor,
+                            PrimaryEndColor
+                        ) else listOf(
+                            RedStartColor,
+                            RedEndColor
+                        )
+                    ),
+                    shape = RoundedCornerShape(10.dp)
+                )
+        ) {
+            Row(
+                modifier = Modifier.padding(vertical = 9.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Start
+            ) {
+                Icon(
+                    modifier = Modifier
+                        .wrapContentHeight()
+                        .padding(horizontal = 16.dp),
+                    painter = painterResource(id = if (shippingType == "PICKUP") R.drawable.ic_on_way_walking else R.drawable.ic_on_way_traffic),
+                    contentDescription = "on way",
+                    tint = White
+                )
+                Column(modifier = Modifier.wrapContentWidth()) {
+                    MediumText(
+                        text = if (shippingType == "SHIPPING" && shippingStatus == "OK") "Preparando pedido" else if (
+                            shippingType == "PICKUP" && shippingStatus == "OK"
+                        ) "Pedido listo" else "Pedido cancelado",
+                        color = White,
+                        size = 15.sp
+                    )
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        MediumText(
+                            text = if (shippingType == "SHIPPING") "Enviar" else "Recolectar",
+                            color = White,
+                            size = 12.sp
+                        )
+                        MediumText(
+                            modifier = Modifier.padding(end = 20.dp),
+                            text = "Ene 8, 9:30 am",
+                            color = White,
+                            size = 12.sp
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
 @Composable
 fun StepIndicatorNotification(
     modifier: Modifier = Modifier,
@@ -1425,7 +1541,6 @@ fun StepIndicatorNotification(
 
 }
 
-@Preview(showBackground = true)
 @Composable
 fun ShoppingCategoryHistoryItem(
     modifier: Modifier = Modifier,
@@ -1446,7 +1561,7 @@ fun ShoppingCategoryHistoryItem(
     selector: Boolean = true,
     elevation: Dp = 0.dp,
     hideTopLine: Boolean = false,
-    bottomSeparator: Boolean = false
+    onClicked: (() -> Unit)? = null
 ) {
 
     Card(
@@ -1518,7 +1633,9 @@ fun ShoppingCategoryHistoryItem(
                 counter = counter,
                 deleteOptions = deleteOptions,
                 historyModel = item
-            )
+            ) {
+                onClicked?.invoke()
+            }
         }
     }
 }
@@ -1539,7 +1656,8 @@ fun ShoppingHistoryItem(
         numberProducts = 1
     ),
     counter: Boolean = true,
-    deleteOptions: Boolean = true
+    deleteOptions: Boolean = true,
+    onClicked: (() -> Unit)? = null
 ) {
     Column(
         modifier = if (deleteOptions)
@@ -1553,8 +1671,8 @@ fun ShoppingHistoryItem(
 
         Row(
             modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight(),
+                .fillMaxSize()
+                .clickable { onClicked?.invoke() },
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
