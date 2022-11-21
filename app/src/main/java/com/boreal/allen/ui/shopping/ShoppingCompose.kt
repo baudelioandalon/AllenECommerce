@@ -175,7 +175,9 @@ fun ViewShoppingCompose(navController: NavHostController? = null) {
                                     deleteOptions = false,
                                     selector = false,
                                     hideTopLine = index != list.lastIndex
-                                )
+                                ){
+                                    navController?.navigate(SHOPPING_DETAIL_CLIENT_GRAPH)
+                                }
                             }
 
                         }
