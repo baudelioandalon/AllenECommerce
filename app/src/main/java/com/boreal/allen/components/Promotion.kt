@@ -52,6 +52,28 @@ fun FreeShipping(modifier: Modifier = Modifier) {
 }
 
 @Composable
+fun StatusStore(modifier: Modifier = Modifier) {
+    Row(
+        modifier = modifier
+            .background(
+                color = GreenStrong,
+                shape = RoundedCornerShape(20.dp)
+            )
+            .wrapContentSize(),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        BoldText(
+            modifier = Modifier
+                .padding(horizontal = 10.dp, vertical = 5.dp)
+                .wrapContentSize(),
+            text = "Abierto",
+            size = 10.sp,
+            color = White
+        )
+    }
+}
+
+@Composable
 fun Discount(modifier: Modifier = Modifier, discount: Int = 15) {
     BoldText(
         modifier = modifier

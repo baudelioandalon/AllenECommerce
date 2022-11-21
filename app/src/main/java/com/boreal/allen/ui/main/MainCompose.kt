@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.boreal.allen.domain.HOME_CLIENT_GRAPH
+import com.boreal.allen.domain.HOME_SELLER_GRAPH
 import com.boreal.allen.domain.ROOT_GRAPH
 import com.boreal.allen.ui.client.addressclient.clientAddressGraph
 import com.boreal.allen.ui.client.favorites.favoritesGraph
@@ -23,16 +24,24 @@ import com.boreal.allen.ui.client.shoppingcart.shoppingCartGraph
 import com.boreal.allen.ui.client.shoppingdetail.shoppingDetail
 import com.boreal.allen.ui.status.statusGraph
 import com.boreal.allen.ui.general.storesmap.storesMapGeneralGraph
+import com.boreal.allen.ui.seller.homesellergraph.homeSellerGraph
 
 @Composable
 fun MainCompose(closeApp: () -> Unit) {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = HOME_CLIENT_GRAPH,
+        startDestination = HOME_SELLER_GRAPH,
         route = ROOT_GRAPH
     ) {
+        //General
         loginGraph(navController, closeApp)
+        storesMapGeneralGraph(navController, closeApp)
+
+        //Seller
+        homeSellerGraph(navController,closeApp)
+
+        //Client
         homeClientGraph(navController, closeApp)
         searchClientGraph(navController, closeApp)
         resultClientGraph(navController, closeApp)
@@ -49,6 +58,5 @@ fun MainCompose(closeApp: () -> Unit) {
         shoppingDetail(navController, closeApp)
         favoritesGraph(navController, closeApp)
         notificationClientGraph(navController, closeApp)
-        storesMapGeneralGraph(navController, closeApp)
     }
 }

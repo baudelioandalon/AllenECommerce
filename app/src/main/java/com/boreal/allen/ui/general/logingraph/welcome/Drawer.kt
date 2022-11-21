@@ -36,9 +36,17 @@ data class MenuItem(
 )
 
 sealed class DrawerOptions(val name: String) {
+    //Client
     object Buys : DrawerOptions("BUYS")
     object Favorites : DrawerOptions("FAVORITES")
     object Stores : DrawerOptions("STORES")
+
+    //Seller
+    object MyProducts : DrawerOptions("MY_PRODUCTS")
+    object Sales : DrawerOptions("SALES")
+    object MyStores : DrawerOptions("MY_STORES")
+
+    //General
     object Notifications : DrawerOptions("NOTIFICATIONS")
     object Exit : DrawerOptions("EXIT")
     object CloseSession : DrawerOptions("CLOSE_SESSION")

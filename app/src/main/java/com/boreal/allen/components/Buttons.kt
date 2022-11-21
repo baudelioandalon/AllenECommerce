@@ -186,8 +186,10 @@ fun GrayButton(
     ) {
         Row(modifier = Modifier.padding(horizontal = 15.dp, vertical = 10.dp)) {
             SemiBoldText(
+                modifier = Modifier.fillMaxWidth(),
                 text = text,
-                size = 13.sp
+                size = 13.sp,
+                align = TextAlign.Center
             )
         }
     }

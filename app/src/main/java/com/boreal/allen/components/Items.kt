@@ -1911,3 +1911,43 @@ fun ShoppingHistoryItem(
         }
     }
 }
+
+//Seller
+@Composable
+fun ItemSold() {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Column(
+            modifier = Modifier.weight(3f),
+            verticalArrangement = Arrangement.SpaceBetween
+        ) {
+            SemiBoldText(
+                text = "Feb 21, 2022",
+                size = 15.sp
+            )
+            SemiBoldText(
+                text = "14:02",
+                size = 12.sp,
+                color = GraySinceTo
+            )
+        }
+        Column(
+            modifier = Modifier.weight(2f),
+            verticalArrangement = Arrangement.SpaceBetween,
+            horizontalAlignment = Alignment.End
+        ) {
+            SemiBoldText(
+                text = "$21.72",
+                size = 15.sp
+            )
+            SemiBoldText(
+                text = "3 articulos",
+                size = 12.sp,
+                color = GraySinceTo
+            )
+        }
+    }
+}
