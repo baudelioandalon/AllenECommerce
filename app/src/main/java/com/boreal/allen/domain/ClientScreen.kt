@@ -10,6 +10,7 @@ const val FAVORITES_GRAPH = "FAVORITES_GRAPH"
 const val NOTIFICATION_CLIENT_GRAPH = "NOTIFICATION_CLIENT_GRAPH"
 const val STORES_MAPS_GENERAL_GRAPH = "STORES_MAPS_GENERAL_GRAPH"
 const val SHOPPING_DETAIL_CLIENT_GRAPH = "SHOPPING_DETAIL_CLIENT_GRAPH"
+const val STATUS_GRAPH = "STATUS_GRAPH"
 
 sealed class ClientScreen(val route: String) {
     object HomeClientLoginScreen : ClientScreen("home_client_screen")
@@ -22,4 +23,5 @@ sealed class ClientScreen(val route: String) {
     object NotificationClientScreen : ClientScreen("notification_client_screen")
     object StoresMapGeneralScreen : ClientScreen("stores_maps_general_screen")
     object ShoppingDetailClientScreen : ClientScreen("shopping_detail_client_screen")
+    object StatusClientScreen : ClientScreen("status_screen")
 }
