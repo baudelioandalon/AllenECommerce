@@ -24,7 +24,7 @@ import com.boreal.allen.theme.OrangeMedium
 import com.boreal.allen.theme.OrangeTransparent
 
 @Composable
-fun FreeShipping(modifier: Modifier) {
+fun FreeShipping(modifier: Modifier = Modifier) {
     Row(
         modifier = modifier
             .background(

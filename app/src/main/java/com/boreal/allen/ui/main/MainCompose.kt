@@ -13,6 +13,8 @@ import com.boreal.allen.ui.notificationclient.notificationClientGraph
 import com.boreal.allen.ui.productgraph.productGraph
 import com.boreal.allen.ui.productgraph.question.questionGraph
 import com.boreal.allen.ui.productgraph.ratinggraph.ratingProductGraph
+import com.boreal.allen.ui.result.general.resultClientGraph
+import com.boreal.allen.ui.result.seller.resultBySellerClientGraph
 import com.boreal.allen.ui.searchclient.searchClientGraph
 import com.boreal.allen.ui.shopping.shoppingGraph
 import com.boreal.allen.ui.shoppingcart.details.detailCartGraph
@@ -32,6 +34,8 @@ fun MainCompose(closeApp: () -> Unit) {
         loginGraph(navController, closeApp)
         homeClientGraph(navController, closeApp)
         searchClientGraph(navController, closeApp)
+        resultClientGraph(navController, closeApp)
+        resultBySellerClientGraph(navController, closeApp)
         productGraph(navController, closeApp)
         questionGraph(navController, closeApp)
         ratingProductGraph(navController, closeApp)

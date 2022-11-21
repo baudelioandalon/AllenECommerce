@@ -219,26 +219,27 @@ fun TopContainer() {
 }
 
 @Composable
-fun BrandingContainer() {
+fun BrandingContainer(
+    modifier: Modifier = Modifier,
+    hideTitle: Boolean = false
+) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .padding(top = 30.dp)
             .background(White)
     ) {
-        MediumTextBold(modifier = Modifier.padding(start = 30.dp, top = 20.dp), text = "Marcas")
-        LazyRow(
-            modifier = Modifier
-                .padding(
-                    top = 30.dp,
-                    bottom = 35.dp
-                )
-        ) {
-            items(10) {
-                BrandingItem()
-            }
+        if (!hideTitle) {
+            MediumTextBold(modifier = Modifier.padding(start = 30.dp, top = 20.dp), text = "Marcas")
         }
+        BrandingHorizontal(
+            modifier = Modifier.padding(
+                top = 30.dp,
+                bottom = 35.dp
+            )
+        )
     }
 }
+
 
 @Preview
 @Composable

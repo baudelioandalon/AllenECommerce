@@ -56,6 +56,9 @@ fun TestItems() {
         CategorySelectorItem()
         BrandingItem()
 //        QuestionItem()
+        ProductResultItem()
+        BrandingHorizontal()
+        AnswerItem()
     }
 }
 
@@ -107,7 +110,7 @@ fun CategoryItem() {
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun BrandingItem() {
+fun BrandingItem(itemSize: Dp = 60.dp) {
     Column(
         modifier = Modifier
             .wrapContentSize()
@@ -117,7 +120,7 @@ fun BrandingItem() {
     ) {
         Card(
             modifier = Modifier
-                .size(60.dp), onClick = {},
+                .size(itemSize), onClick = {},
             elevation = 0.dp,
             shape = RoundedCornerShape(corner = CornerSize(10.dp)),
             backgroundColor = GrayBrandingBackground
@@ -220,7 +223,9 @@ fun CategorySelectorItem(
 }
 
 @Composable
-fun SellerItem() {
+fun SellerItem(
+    onClicked: (() -> Unit)? = null
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -240,7 +245,7 @@ fun SellerItem() {
                     .fillMaxWidth()
                     .padding(bottom = 35.dp, top = 22.dp)
                     .wrapContentHeight()
-                    .clickable { },
+                    .clickable { onClicked?.invoke() },
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
@@ -336,6 +341,102 @@ fun ProductItem(productClicked: (() -> Unit)? = null) {
     }
 }
 
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun ProductResultItem(
+    modifier: Modifier = Modifier,
+    productClicked: (() -> Unit)? = null
+) {
+    Card(
+        modifier = modifier
+            .wrapContentHeight()
+            .fillMaxWidth(),
+        onClick = { productClicked?.invoke() },
+        elevation = 0.dp,
+        shape = RoundedCornerShape(topStart = 10.dp, topEnd = 10.dp),
+        backgroundColor = White
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Top
+        ) {
+            Box(
+                modifier = Modifier
+                    .background(
+                        color = GrayBackgroundDrawerDismiss,
+                        shape = RoundedCornerShape(10.dp)
+                    )
+                    .height(200.dp)
+            ) {
+                FavoriteButton(modifier = Modifier.padding(start = 7.dp, top = 7.dp))
+                Image(
+                    modifier = Modifier
+                        .fillMaxSize(),
+                    painter = painterResource(id = R.drawable.tools_icon),
+                    contentDescription = "item"
+                )
+            }
+
+            Row {
+                SemiBoldText(
+                    modifier = Modifier
+                        .weight(1f),
+                    text = "Sensor Hc-sr04", align = TextAlign.Start,
+                    size = 13.sp
+                )
+                BoldText(
+                    modifier = Modifier
+                        .wrapContentSize(),
+                    text = "$54",
+                    size = 14.sp
+                )
+            }
+
+            CategoryProductText(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                text = "Electronica",
+                color = GrayLetterCategoryProduct,
+                align = TextAlign.Start
+            )
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 10.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.Top
+            ) {
+                Icon(
+                    modifier = Modifier
+                        .padding(top = 10.dp)
+                        .size(20.dp),
+                    painter = painterResource(id = R.drawable.ic_thunder_icon),
+                    contentDescription = "free shipping",
+                    tint = StarColor
+                )
+                MinimumAddButton(modifier = Modifier.padding(bottom = 10.dp))
+            }
+        }
+    }
+}
+
+@Composable
+fun BrandingHorizontal(
+    modifier: Modifier = Modifier,
+    itemSize: Dp = 60.dp
+) {
+    LazyRow(
+        modifier = modifier
+    ) {
+        items(10) {
+            BrandingItem(itemSize)
+        }
+    }
+}
+
 @Composable
 fun SellerItemsItem(modifier: Modifier = Modifier) {
     Column(
@@ -376,24 +477,62 @@ fun SellerItemsItem(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun CategorySeller() {
+fun ShowSellerItem(modifier: Modifier = Modifier) {
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+            .clickable { },
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Card(
+            modifier = Modifier
+                .size(53.dp),
+            backgroundColor = GrayBackgroundDrawerDismiss,
+            elevation = 0.dp,
+            shape = RoundedCornerShape(10.dp)
+        ) {
+
+        }
+        Column(
+            modifier = Modifier
+                .padding(start = 19.dp)
+                .fillMaxWidth()
+        ) {
+            MediumText(
+                text = "Para",
+                color = GrayLetterSeeAll,
+                size = 15.sp
+            )
+            BoldText(text = "Casa y Hogar", size = 15.sp)
+        }
+    }
+}
+
+@Composable
+fun CategorySeller(onClicked: (() -> Unit)? = null) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
+            .wrapContentHeight()
             .padding(top = 45.dp)
-            .background(White),
+            .background(White)
+            .clickable {
+                onClicked?.invoke()
+            },
         verticalAlignment = Alignment.Bottom,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Column(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(top = 20.dp, start = 30.dp, end = 30.dp)
+                .fillMaxWidth()
+//                .padding(top = 20.dp, start = 30.dp, end = 30.dp)
         ) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(bottom = 35.dp, top = 22.dp)
+//                    .padding(bottom = 35.dp, top = 22.dp)
                     .wrapContentHeight()
                     .clickable { },
                 verticalAlignment = Alignment.CenterVertically,
@@ -412,7 +551,6 @@ fun CategorySeller() {
                     modifier = Modifier
                         .padding(start = 19.dp)
                         .weight(1f)
-                        .fillMaxHeight()
                 ) {
                     MediumText(
                         text = "Para",
@@ -582,7 +720,6 @@ fun RatingByUserItem(
 
 
 @OptIn(ExperimentalMaterialApi::class)
-@Preview
 @Composable
 fun AnswerItem(text: String = "") {
     Row(

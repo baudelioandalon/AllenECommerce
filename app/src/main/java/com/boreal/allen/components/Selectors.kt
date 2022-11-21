@@ -35,6 +35,9 @@ fun TestSelectors() {
         )
         ShippingSelector()
         AddressSelector()
+        ResumeSelector()
+        SelectorSpinner()
+        SelectorStoreSpinner()
     }
 }
 
@@ -124,7 +127,6 @@ fun ShippingSelector(
 }
 
 @OptIn(ExperimentalMaterialApi::class)
-@Preview
 @Composable
 fun AddressSelector(
     modifier: Modifier = Modifier,
@@ -187,7 +189,6 @@ fun AddressSelector(
     }
 }
 
-@Preview
 @Composable
 fun ResumeSelector(
     modifier: Modifier = Modifier,
@@ -249,7 +250,6 @@ fun ResumeSelector(
 }
 
 @OptIn(ExperimentalMaterialApi::class)
-@Preview
 @Composable
 fun NewAddressSelector(
     modifier: Modifier = Modifier,
@@ -314,7 +314,6 @@ fun NewAddressSelector(
 }
 
 @OptIn(ExperimentalMaterialApi::class)
-@Preview
 @Composable
 fun UserSelector(
     modifier: Modifier = Modifier,
@@ -405,7 +404,6 @@ fun <T> Spinner(
     }
 }
 
-@Preview
 @Composable
 fun SelectorSpinner(
     modifier: Modifier = Modifier,
@@ -433,6 +431,57 @@ fun SelectorSpinner(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
+                    MediumText(
+                        text = item,
+                        size = 15.sp
+                    )
+
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_arrow_down),
+                        contentDescription = "drop down arrow"
+                    )
+                }
+            }
+
+        },
+        dropdownItemFactory = { item, _ ->
+            Text(text = item)
+        }
+    )
+}
+
+@Composable
+fun SelectorStoreSpinner(
+    modifier: Modifier = Modifier,
+    list: List<String> = listOf("Fluvial Vallarta", "Data 1", "Data 2")
+) {
+    Spinner(
+        modifier = modifier.wrapContentSize(),
+        dropDownModifier = Modifier.wrapContentSize(),
+        items = list,
+        selectedItem = list.first(),
+        onItemSelected = {},
+        selectedItemFactory = { modifierContainer, item ->
+            Card(
+                modifier = modifierContainer
+                    .fillMaxWidth()
+                    .height(60.dp),
+                elevation = 0.dp,
+                shape = RoundedCornerShape(30.dp),
+                backgroundColor = GrayBackgroundSearch
+            ) {
+                Row(
+                    modifier = modifierContainer
+                        .padding(start = 16.dp, end = 20.dp)
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_dot),
+                        contentDescription = "status store",
+                        tint = GreenStrong
+                    )
                     MediumText(
                         text = item,
                         size = 15.sp

@@ -35,6 +35,7 @@ fun TestToolbars() {
 
         }
         ToolbarTitle(titleText = "Articulo")
+        ToolbarSellerStore()
     }
 }
 
@@ -42,6 +43,8 @@ fun TestToolbars() {
 @Composable
 fun ToolbarSearchHome(
     modifier: Modifier = Modifier,
+    textPlaceHolder: String = "Buscar",
+    leftIcon: Int = R.drawable.ic_menu_icon,
     menuClicked: (() -> Unit)? = null,
     searchClicked: (() -> Unit)? = null,
     cartClicked: (() -> Unit)? = null
@@ -88,14 +91,15 @@ fun ToolbarSearchHome(
                     shape = CircleShape, onClick = { menuClicked?.invoke() }) {
                     Image(
                         modifier = Modifier.wrapContentSize(),
-                        painter = painterResource(id = R.drawable.ic_menu_icon),
+                        painter = painterResource(id = leftIcon),
                         contentDescription = ""
                     )
                 }
                 SearchOutlinedTextField(
                     modifier = Modifier.layoutId("search"),
                     value = "",
-                    placeHolder = "Buscar", itemClicked = { searchClicked?.invoke() }
+                    placeHolder = textPlaceHolder,
+                    itemClicked = { searchClicked?.invoke() }
                 )
                 Card(
                     modifier = Modifier
@@ -299,5 +303,85 @@ fun TopTitle(
             text = titleText ?: stringResource(id = labelId ?: R.string.empty_string),
             align = TextAlign.Center
         )
+    }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Preview
+@Composable
+fun ToolbarSellerStore(
+    modifier: Modifier = Modifier,
+    backClicked: (() -> Unit)? = null,
+    optionClicked: (() -> Unit)? = null,
+    iconIdRes: Int = R.drawable.ic_cart_icon
+) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(80.dp)
+            .layoutId("imageMenu"),
+        elevation = 5.dp
+    ) {
+        Row(modifier = modifier) {
+            ConstraintLayout(
+                modifier = Modifier
+                    .fillMaxSize(),
+                constraintSet = ConstraintSet {
+                    val imageBack = createRefFor("imageBack")
+                    val selector = createRefFor("selector")
+                    val imageCart = createRefFor("imageCart")
+                    constrain(imageBack) {
+                        start.linkTo(parent.start, margin = 28.dp)
+                        top.linkTo(parent.top)
+                        bottom.linkTo(parent.bottom)
+                    }
+                    constrain(selector) {
+                        start.linkTo(imageBack.end, 55.dp)
+                        top.linkTo(parent.top)
+                        end.linkTo(imageCart.start, 35.dp)
+                        bottom.linkTo(parent.bottom)
+                        width = Dimension.fillToConstraints
+                        height = Dimension.value(46.dp)
+                    }
+                    constrain(imageCart) {
+                        end.linkTo(parent.end, margin = 28.dp)
+                        top.linkTo(parent.top)
+                        bottom.linkTo(parent.bottom)
+                    }
+                }) {
+                Card(
+                    modifier = Modifier
+                        .width(35.dp)
+                        .height(35.dp)
+                        .layoutId("imageBack"),
+                    elevation = 0.dp,
+                    shape = CircleShape, onClick = { backClicked?.invoke() }) {
+                    Image(
+                        modifier = Modifier.wrapContentSize(),
+                        painter = painterResource(id = R.drawable.ic_back_arrow),
+                        contentDescription = ""
+                    )
+                }
+                SelectorStoreSpinner(
+                    modifier = Modifier
+                        .size(35.dp)
+                        .layoutId("selector")
+                )
+                Card(
+                    modifier = Modifier
+                        .width(35.dp)
+                        .height(35.dp)
+                        .layoutId("imageCart"),
+                    elevation = 0.dp,
+                    shape = CircleShape, onClick = { optionClicked?.invoke() }) {
+                    Image(
+                        modifier = Modifier.wrapContentSize(),
+                        painter = painterResource(id = R.drawable.ic_dots_options),
+                        contentDescription = ""
+                    )
+                }
+            }
+
+        }
     }
 }

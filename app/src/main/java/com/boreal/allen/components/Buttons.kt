@@ -14,8 +14,6 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Black
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -52,7 +50,8 @@ fun PreviewBottons() {
             labelId = R.string.google_name,
             modifier = Modifier.fillMaxWidth()
         )
-        LittleAddButton()
+        LittleAddButton(modifier = Modifier.padding(10.dp))
+        MinimumAddButton(modifier = Modifier.padding(10.dp))
         LocationIcon()
         GoalIcon()
         FavoriteButton()
@@ -197,38 +196,67 @@ fun GrayButton(
 @OptIn(ExperimentalMaterialApi::class)
 @Preview
 @Composable
-fun LittleAddButton(onClick: (() -> Unit)? = null) {
-    Box(
-        modifier = Modifier
-            .size(52.dp)
-            .background(
-                alpha = 0.7f,
-                brush = Brush.radialGradient(
-                    colors = listOf(
-                        GreenStrong,
-                        GreenTransparent
-                    )
-                ), shape = RoundedCornerShape(20.dp)
+fun MinimumAddButton(
+    modifier: Modifier = Modifier,
+    onClick: (() -> Unit)? = null
+) {
+    Card(
+        modifier = modifier
+            .drawColoredShadow(
+                color = GreenTransparent, alpha = 1f, borderRadius = 10.dp,
+                offsetY = 3.dp, offsetX = 3.dp, blurRadius = 10.dp
             )
-            .padding(bottom = 4.dp),
-        contentAlignment = Alignment.Center
+            .size(30.dp),
+        backgroundColor = GreenStrong,
+        shape = RoundedCornerShape(3.dp),
+        onClick = {
+            onClick?.invoke()
+        }
     ) {
-        Card(
-            shape = RoundedCornerShape(5.dp),
-            modifier = Modifier
-                .size(40.dp)
-                .background(Color.Transparent),
-            backgroundColor = GreenStrong, elevation = 0.dp,
-            onClick = { onClick?.invoke() }
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
         ) {
-            Box(contentAlignment = Alignment.Center) {
-                Icon(
-                    modifier = Modifier.size(15.dp),
-                    imageVector = ImageVector.Companion.vectorResource(id = R.drawable.ic_more_icon),
-                    contentDescription = "moreIcon",
-                    tint = White
-                )
-            }
+            Icon(
+                modifier = Modifier.size(13.dp),
+                imageVector = ImageVector.Companion.vectorResource(id = R.drawable.ic_more_icon),
+                contentDescription = "moreIcon",
+                tint = White
+            )
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Preview
+@Composable
+fun LittleAddButton(
+    modifier: Modifier = Modifier,
+    onClick: (() -> Unit)? = null
+) {
+    Card(
+        modifier = modifier
+            .drawColoredShadow(
+                color = GreenTransparent, alpha = 1f, borderRadius = 10.dp,
+                offsetY = 3.dp, offsetX = 3.dp, blurRadius = 10.dp
+            )
+            .size(40.dp),
+        backgroundColor = GreenStrong,
+        shape = RoundedCornerShape(3.dp),
+        onClick = {
+            onClick?.invoke()
+        }
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Icon(
+                modifier = Modifier.size(15.dp),
+                imageVector = ImageVector.Companion.vectorResource(id = R.drawable.ic_more_icon),
+                contentDescription = "moreIcon",
+                tint = White
+            )
         }
     }
 }

@@ -27,6 +27,7 @@ import androidx.constraintlayout.compose.layoutId
 import androidx.navigation.NavController
 import com.boreal.allen.R
 import com.boreal.allen.components.*
+import com.boreal.allen.domain.RESULT_BY_SELLER_CLIENT_GRAPH
 import com.boreal.allen.domain.SHOPPING_CART_GRAPH
 import com.boreal.allen.extensions.drawColoredShadow
 import com.boreal.allen.theme.*
@@ -266,7 +267,9 @@ fun ViewProductCompose(navController: NavController) {
                 }
             }
             item {
-                SellerItem()
+                SellerItem {
+                    navController.navigate(RESULT_BY_SELLER_CLIENT_GRAPH)
+                }
             }
             item {
                 SellerItemsItem()
