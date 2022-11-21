@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -37,8 +38,9 @@ import com.boreal.allen.ui.productgraph.ratinggraph.RATING_PRODUCT_GRAPH
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @OptIn(ExperimentalMaterialApi::class)
+@Preview
 @Composable
-fun ViewProductCompose(navController: NavController) {
+fun ViewProductCompose(navController: NavController? = null) {
     val systemUiController = rememberSystemUiController()
     if (isSystemInDarkTheme()) {
         systemUiController.setSystemBarsColor(
@@ -83,210 +85,255 @@ fun ViewProductCompose(navController: NavController) {
                 .layoutId("content")
         ) {
             item {
-                Row(
+                Card(
                     modifier = Modifier
-                        .background(White)
-                        .padding(end = 30.dp, start = 30.dp)
-                        .fillMaxSize()
+                        .fillMaxWidth(),
+                    elevation = 5.dp
                 ) {
-                    Card(
-                        modifier = Modifier
-                            .padding(
-                                top = 49.dp,
-                                bottom = 32.dp
-                            )
-                            .fillMaxWidth(0.75f)
-                            .height(240.dp),
-                        backgroundColor = GrayBackgroundDrawerDismiss,
-                        elevation = 0.dp,
-                        shape = RoundedCornerShape(20.dp)
-                    ) {
-
-                    }
-                    LazyColumn(
-                        modifier = Modifier
-                            .width(100.dp)
-                            .height(289.dp)
-                    ) {
-                        items(5) {
+                    Column {
+                        Row(
+                            modifier = Modifier
+                                .background(White)
+                                .padding(end = 30.dp, start = 30.dp)
+                                .fillMaxSize()
+                        ) {
                             Card(
                                 modifier = Modifier
-                                    .padding(start = 30.dp, top = 20.dp)
-                                    .size(53.dp),
+                                    .padding(
+                                        top = 49.dp,
+                                        bottom = 32.dp
+                                    )
+                                    .fillMaxWidth(0.75f)
+                                    .height(240.dp),
                                 backgroundColor = GrayBackgroundDrawerDismiss,
                                 elevation = 0.dp,
-                                shape = RoundedCornerShape(10.dp)
+                                shape = RoundedCornerShape(20.dp)
                             ) {
 
                             }
-                        }
-                    }
-                }
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .background(White)
-                        .padding(end = 30.dp, start = 30.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    FreeShipping(modifier = Modifier.padding())
-                    MediumText(
-                        text = "Comprando 4 articulos",
-                        size = 10.sp,
-                        color = GrayLetterShipping
-                    )
-                    FavoriteButton(
-                        modifier = Modifier.padding(start = 20.dp)
-                    )
-                    ShareButton()
-                }
-                Row(
-                    modifier = Modifier
-                        .background(White)
-                        .padding(top = 21.dp, end = 30.dp, start = 30.dp)
-                        .fillMaxWidth()
-                ) {
-                    BoldText(text = "Miniesmeriladora Angular")
-                }
-                StarStatus(
-                    modifier = Modifier
-                        .background(White)
-                        .fillMaxWidth()
-                        .padding(end = 30.dp, start = 30.dp)
-                )
-                SemiBoldText(
-                    modifier = Modifier
-                        .background(White)
-                        .fillMaxWidth()
-                        .padding(end = 30.dp, top = 38.dp, start = 30.dp),
-                    text = "Información del articulo",
-                    size = 13.sp
-                )
-                SemiBoldText(
-                    modifier = Modifier
-                        .background(White)
-                        .fillMaxWidth()
-                        .padding(end = 30.dp, start = 30.dp),
-                    color = GrayLetterShipping,
-                    text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit." +
-                            "Integer tempus consectetur augue, ac pretium ipsum faucibus sit amet.",
-                    size = 13.sp,
-                    align = TextAlign.Justify
-                )
-                SemiBoldText(
-                    modifier = Modifier
-                        .background(White)
-                        .fillMaxWidth()
-                        .padding(
-                            end = 30.dp, start = 30.dp, top = 23.dp
-                        ), text = "Seleccione version"
-                )
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .background(White)
-                        .padding(end = 30.dp, bottom = 45.dp),
-                    verticalAlignment = Alignment.Bottom,
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    LazyRow(
-                        modifier = Modifier
-                            .padding(
-                                end = 30.dp,
-                                start = 30.dp,
-                                top = 23.dp
-                            ),
-                    ) {
-                        itemsIndexed(listOf("", "")) { index, item ->
-                            Column(
+                            LazyColumn(
                                 modifier = Modifier
-                                    .padding(end = 30.dp)
-                                    .width(43.dp)
-                                    .wrapContentHeight()
+                                    .width(100.dp)
+                                    .height(289.dp)
                             ) {
-                                Surface(
-                                    modifier = Modifier
-                                        .size(43.dp),
-                                    color = if (index % 2 != 0) {
-                                        Purple700
-                                    } else White,
-                                    border = if (index % 2 == 0) {
-                                        BorderStroke(
-                                            width = 1.dp,
-                                            color = StarColor
-                                        )
-                                    } else null,
-                                    shape = RoundedCornerShape(10.dp),
-                                    onClick = {}
-                                ) {
+                                items(5) {
+                                    Card(
+                                        modifier = Modifier
+                                            .padding(start = 30.dp, top = 20.dp)
+                                            .size(53.dp),
+                                        backgroundColor = GrayBackgroundDrawerDismiss,
+                                        elevation = 0.dp,
+                                        shape = RoundedCornerShape(10.dp)
+                                    ) {
+
+                                    }
                                 }
-                                BoldText(
-                                    modifier = Modifier.padding(top = 5.dp),
-                                    size = 10.sp,
-                                    text = "115v Amarillo"
-                                )
                             }
                         }
-                    }
-                    SelectorCounter()
-                }
-                SelectorDetail(
-                    text = "Detalles del producto",
-                    iconRes = R.drawable.ic_detail_icon
-                ) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .background(White)
+                                .padding(end = 30.dp, start = 30.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            FreeShipping(modifier = Modifier.padding())
+                            MediumText(
+                                text = "Comprando 4 articulos",
+                                size = 10.sp,
+                                color = GrayLetterShipping
+                            )
+                            FavoriteButton(
+                                modifier = Modifier.padding(start = 20.dp)
+                            )
+                            ShareButton()
+                        }
+                        Row(
+                            modifier = Modifier
+                                .background(White)
+                                .padding(top = 21.dp, end = 30.dp, start = 30.dp)
+                                .fillMaxWidth()
+                        ) {
+                            BoldText(text = "Miniesmeriladora Angular")
+                        }
+                        StarStatus(
+                            modifier = Modifier
+                                .background(White)
+                                .fillMaxWidth()
+                                .padding(end = 30.dp, start = 30.dp)
+                        )
+                        SemiBoldText(
+                            modifier = Modifier
+                                .background(White)
+                                .fillMaxWidth()
+                                .padding(end = 30.dp, top = 38.dp, start = 30.dp),
+                            text = "Información del articulo",
+                            size = 13.sp
+                        )
+                        SemiBoldText(
+                            modifier = Modifier
+                                .background(White)
+                                .fillMaxWidth()
+                                .padding(end = 30.dp, start = 30.dp),
+                            color = GrayLetterShipping,
+                            text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit." +
+                                    "Integer tempus consectetur augue, ac pretium ipsum faucibus sit amet.",
+                            size = 13.sp,
+                            align = TextAlign.Justify
+                        )
+                        SemiBoldText(
+                            modifier = Modifier
+                                .background(White)
+                                .fillMaxWidth()
+                                .padding(
+                                    end = 30.dp, start = 30.dp, top = 23.dp
+                                ), text = "Seleccione version"
+                        )
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .background(White)
+                                .padding(end = 30.dp, bottom = 45.dp),
+                            verticalAlignment = Alignment.Bottom,
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            LazyRow(
+                                modifier = Modifier
+                                    .padding(
+                                        end = 30.dp,
+                                        start = 30.dp,
+                                        top = 23.dp
+                                    ),
+                            ) {
+                                itemsIndexed(listOf("", "")) { index, item ->
+                                    Column(
+                                        modifier = Modifier
+                                            .padding(end = 30.dp)
+                                            .width(43.dp)
+                                            .wrapContentHeight()
+                                    ) {
+                                        Surface(
+                                            modifier = Modifier
+                                                .size(43.dp),
+                                            color = if (index % 2 != 0) {
+                                                Purple700
+                                            } else White,
+                                            border = if (index % 2 == 0) {
+                                                BorderStroke(
+                                                    width = 1.dp,
+                                                    color = StarColor
+                                                )
+                                            } else null,
+                                            shape = RoundedCornerShape(10.dp),
+                                            onClick = {}
+                                        ) {
+                                        }
+                                        BoldText(
+                                            modifier = Modifier.padding(top = 5.dp),
+                                            size = 10.sp,
+                                            text = "115v Amarillo"
+                                        )
+                                    }
+                                }
+                            }
+                            SelectorCounter()
+                        }
+                        SelectorDetail(
+                            text = "Detalles del producto",
+                            iconRes = R.drawable.ic_detail_icon
+                        ) {
 
+                        }
+                        SeparatorGray(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .background(White)
+                                .padding(start = 30.dp, end = 30.dp)
+                        )
+                        SelectorDetail(
+                            text = "Calificaciones",
+                            iconRes = R.drawable.ic_comment_icon
+                        ) {
+                            navController?.navigate(RATING_PRODUCT_GRAPH)
+                        }
+                        SeparatorGray(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .background(White)
+                                .padding(start = 30.dp, end = 30.dp)
+                        )
+                        SelectorDetail(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .background(White)
+                                .padding(bottom = 17.dp),
+                            text = "Preguntas",
+                            iconRes = R.drawable.ic_questions_icon
+                        ) {
+                            navController?.navigate(QUESTION_GRAPH)
+                        }
+                    }
                 }
-                SeparatorGray(
+
+            }
+            item {
+                Card(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .background(White)
-                        .padding(start = 30.dp, end = 30.dp)
-                )
-                SelectorDetail(
-                    text = "Calificaciones",
-                    iconRes = R.drawable.ic_comment_icon
+                        .padding(vertical = 45.dp),
+                    elevation = 5.dp
                 ) {
-                    navController.navigate(RATING_PRODUCT_GRAPH)
+                    SellerItem {
+                        navController?.navigate(RESULT_BY_SELLER_CLIENT_GRAPH)
+                    }
                 }
-                SeparatorGray(
+            }
+            item {
+                Card(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .background(White)
-                        .padding(start = 30.dp, end = 30.dp)
-                )
-                SelectorDetail(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .background(White)
-                        .padding(bottom = 17.dp),
-                    text = "Preguntas",
-                    iconRes = R.drawable.ic_questions_icon
+                        .padding(bottom = 45.dp),
+                    elevation = 5.dp
                 ) {
-                    navController.navigate(QUESTION_GRAPH)
+                    SellerItemsItem()
                 }
             }
             item {
-                SellerItem {
-                    navController.navigate(RESULT_BY_SELLER_CLIENT_GRAPH)
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 45.dp),
+                    elevation = 5.dp
+                ) {
+                    CategorySeller(
+                        innerModifier = Modifier
+                            .padding(
+                                top = 20.dp,
+                                end = 30.dp,
+                                bottom = 30.dp
+                            )
+                    )
                 }
+
             }
             item {
-                SellerItemsItem()
-            }
-            item {
-                CategorySeller()
-            }
-            item {
-                SellersItem()
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 100.dp),
+                    elevation = 5.dp
+                ) {
+                    SellersItem()
+                }
             }
         }
         ToolbarTitle(
             modifier = Modifier.layoutId("toolbarTitle"),
             titleText = "Articulo", backClicked = {
-                navController.navigateUp()
+                navController?.navigateUp()
             }, cartClicked = {
-                navController.navigate(SHOPPING_CART_GRAPH)
+                navController?.navigate(SHOPPING_CART_GRAPH)
             }
         )
 

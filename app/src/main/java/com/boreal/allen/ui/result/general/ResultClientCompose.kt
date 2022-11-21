@@ -151,7 +151,7 @@ fun ViewResultClientCompose(
         textPlaceHolder = "Ropa",
         leftIcon = R.drawable.ic_back_arrow,
         menuClicked = {
-
+            navController?.navigateUp()
         }, cartClicked = {
             navController?.navigate(SHOPPING_CART_GRAPH)
         }, searchClicked = {

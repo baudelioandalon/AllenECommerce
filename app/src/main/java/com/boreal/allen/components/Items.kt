@@ -229,7 +229,6 @@ fun SellerItem(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 45.dp)
             .background(White),
         verticalAlignment = Alignment.Bottom,
         horizontalArrangement = Arrangement.SpaceBetween
@@ -511,12 +510,15 @@ fun ShowSellerItem(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun CategorySeller(onClicked: (() -> Unit)? = null) {
+fun CategorySeller(
+    modifier: Modifier = Modifier,
+    innerModifier: Modifier = Modifier,
+    onClicked: (() -> Unit)? = null
+) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .wrapContentHeight()
-            .padding(top = 45.dp)
             .background(White)
             .clickable {
                 onClicked?.invoke()
@@ -525,14 +527,15 @@ fun CategorySeller(onClicked: (() -> Unit)? = null) {
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Column(
-            modifier = Modifier
+            modifier = innerModifier
                 .fillMaxWidth()
-//                .padding(top = 20.dp, start = 30.dp, end = 30.dp)
         ) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-//                    .padding(bottom = 35.dp, top = 22.dp)
+                    .padding(
+                        start = 30.dp
+                    )
                     .wrapContentHeight()
                     .clickable { },
                 verticalAlignment = Alignment.CenterVertically,
@@ -561,24 +564,25 @@ fun CategorySeller(onClicked: (() -> Unit)? = null) {
                 }
                 RightRoundedButton()
             }
+            LazyRow(
+                modifier = Modifier
+                    .background(White)
+                    .fillMaxWidth()
+                    .padding(top = 36.dp)
+            ) {
+                items(10) {
+                    ProductItem()
+                }
+            }
         }
     }
-    LazyRow(
-        modifier = Modifier
-            .background(White)
-            .padding(bottom = 35.dp)
-    ) {
-        items(10) {
-            ProductItem()
-        }
-    }
+
 }
 
 @Composable
 fun SellersItem(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
-            .padding(top = 30.dp, bottom = 100.dp)
             .fillMaxWidth()
             .background(White)
     ) {

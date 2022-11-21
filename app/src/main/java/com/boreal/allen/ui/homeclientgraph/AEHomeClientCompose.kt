@@ -1,9 +1,13 @@
 package com.boreal.allen.ui.homeclientgraph
 
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.*
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.Card
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
@@ -153,6 +157,7 @@ fun AEHomeClientComposable(navController: NavHostController? = null, closeApp: (
                     .background(White), constraintSet = ConstraintSet {
                     val search = createRefFor("searchHome")
                     val content = createRefFor("content")
+                    val guideLine = createGuidelineFromTop(0.09f)
                     constrain(search) {
                         top.linkTo(parent.top)
                         start.linkTo(parent.start)
@@ -161,14 +166,71 @@ fun AEHomeClientComposable(navController: NavHostController? = null, closeApp: (
                         height = Dimension.wrapContent
                     }
                     constrain(content) {
-                        top.linkTo(search.bottom, margin = 5.dp)
-                        start.linkTo(parent.start)
-                        end.linkTo(parent.end)
+                        top.linkTo(guideLine)
                         bottom.linkTo(parent.bottom)
-                        width = Dimension.fillToConstraints
+                        width = Dimension.matchParent
                         height = Dimension.fillToConstraints
                     }
+
                 }) {
+
+
+                    LazyColumn(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .background(GrayBackgroundMain)
+                            .layoutId("content")
+                    ) {
+                        item {
+                            Card(
+                                modifier = Modifier
+                                    .fillMaxWidth(),
+                                elevation = 5.dp
+                            ) {
+                                TopContainer()
+                            }
+                        }
+                        item {
+                            Card(
+                                modifier = Modifier
+                                    .padding(top = 30.dp)
+                                    .fillMaxWidth(),
+                                elevation = 5.dp
+                            ) {
+                                BrandingContainer()
+                            }
+                        }
+                        item {
+                            Card(
+                                modifier = Modifier
+                                    .padding(top = 30.dp)
+                                    .fillMaxWidth(),
+                                elevation = 5.dp
+                            ) {
+                                LastItemsContainer(navController)
+                            }
+                        }
+                        item {
+                            Card(
+                                modifier = Modifier
+                                    .padding(top = 30.dp)
+                                    .fillMaxWidth(),
+                                elevation = 5.dp
+                            ) {
+                                CategoryListContainer()
+                            }
+                        }
+                        item {
+                            Card(
+                                modifier = Modifier
+                                    .padding(top = 30.dp, bottom = 50.dp)
+                                    .fillMaxWidth(),
+                                elevation = 5.dp
+                            ) {
+                                OffersItemsContainer()
+                            }
+                        }
+                    }
 
                     Card(
                         modifier = Modifier
@@ -186,19 +248,6 @@ fun AEHomeClientComposable(navController: NavHostController? = null, closeApp: (
                             navController?.navigate(SEARCH_CLIENT_GRAPH)
                         })
                     }
-                    Column(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .layoutId("content")
-                            .background(GrayBackgroundMain)
-                            .verticalScroll(scrollState)
-                    ) {
-                        TopContainer()
-                        BrandingContainer()
-                        LastItemsContainer(navController)
-                        CategoryListContainer()
-                        OffersItemsContainer()
-                    }
                 }
                 it.calculateBottomPadding()
             })
@@ -208,12 +257,14 @@ fun AEHomeClientComposable(navController: NavHostController? = null, closeApp: (
 
 @Composable
 fun TopContainer() {
-    AutoSliding()
-    LazyRow(
-        modifier = Modifier.background(White)
-    ) {
-        items(4) {
-            CategoryItem()
+    Column {
+        AutoSliding()
+        LazyRow(
+            modifier = Modifier.background(White)
+        ) {
+            items(4) {
+                CategoryItem()
+            }
         }
     }
 }
@@ -225,7 +276,6 @@ fun BrandingContainer(
 ) {
     Column(
         modifier = modifier
-            .padding(top = 30.dp)
             .background(White)
     ) {
         if (!hideTitle) {
@@ -246,7 +296,6 @@ fun BrandingContainer(
 fun LastItemsContainer(navController: NavHostController? = null) {
     Column(
         modifier = Modifier
-            .padding(top = 30.dp)
             .background(White)
     ) {
         Row(
@@ -283,7 +332,6 @@ fun LastItemsContainer(navController: NavHostController? = null) {
 fun CategoryListContainer() {
     Column(
         modifier = Modifier
-            .padding(top = 30.dp)
             .background(White)
     ) {
         Row(
@@ -317,7 +365,6 @@ fun CategoryListContainer() {
 fun OffersItemsContainer() {
     Column(
         modifier = Modifier
-            .padding(top = 30.dp, bottom = 100.dp)
             .background(White)
     ) {
         Row(

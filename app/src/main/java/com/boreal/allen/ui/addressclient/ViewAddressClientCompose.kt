@@ -86,7 +86,6 @@ fun ViewAddressClientCompose(navController: NavHostController? = null) {
                 .layoutId("listContent")
         ) {
             item {
-
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()

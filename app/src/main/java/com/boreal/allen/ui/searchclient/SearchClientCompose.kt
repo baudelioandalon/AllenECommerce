@@ -22,9 +22,12 @@ import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import androidx.constraintlayout.compose.layoutId
 import androidx.navigation.NavHostController
+import androidx.navigation.NavOptions
 import com.boreal.allen.R
 import com.boreal.allen.components.RegularText
 import com.boreal.allen.components.ToolbarSearch
+import com.boreal.allen.domain.ClientScreen
+import com.boreal.allen.domain.RESULT_CLIENT_GRAPH
 import com.boreal.allen.theme.GrayBackgroundMain
 import com.boreal.allen.theme.GrayLetterHint
 import com.google.accompanist.flowlayout.FlowRow
@@ -91,7 +94,18 @@ fun ViewSearchClientCompose(
                                             bounded = true,
                                             color = GrayLetterHint.copy(alpha = 0.1f)
                                         )
-                                    ) { }
+                                    ) {
+                                        navController?.navigate(
+                                            route = RESULT_CLIENT_GRAPH,
+                                            navOptions = NavOptions
+                                                .Builder()
+                                                .setPopUpTo(
+                                                    route = ClientScreen.HomeClientLoginScreen.route,
+                                                    inclusive = false
+                                                )
+                                                .build()
+                                        )
+                                    }
                                     .padding(
                                         start = 30.dp,
                                         end = 30.dp
