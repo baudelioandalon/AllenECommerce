@@ -313,7 +313,8 @@ fun ToolbarSellerStore(
     modifier: Modifier = Modifier,
     backClicked: (() -> Unit)? = null,
     optionClicked: (() -> Unit)? = null,
-    iconIdRes: Int = R.drawable.ic_cart_icon
+    firstIcon: Int = R.drawable.ic_back_arrow,
+    endIcon: Int = R.drawable.ic_dots_options
 ) {
     Card(
         modifier = Modifier
@@ -358,7 +359,7 @@ fun ToolbarSellerStore(
                     shape = CircleShape, onClick = { backClicked?.invoke() }) {
                     Image(
                         modifier = Modifier.wrapContentSize(),
-                        painter = painterResource(id = R.drawable.ic_back_arrow),
+                        painter = painterResource(id = firstIcon),
                         contentDescription = ""
                     )
                 }
@@ -376,7 +377,7 @@ fun ToolbarSellerStore(
                     shape = CircleShape, onClick = { optionClicked?.invoke() }) {
                     Image(
                         modifier = Modifier.wrapContentSize(),
-                        painter = painterResource(id = R.drawable.ic_dots_options),
+                        painter = painterResource(id = endIcon),
                         contentDescription = ""
                     )
                 }

@@ -13,7 +13,7 @@ const val SHOPPING_DETAIL_CLIENT_GRAPH = "SHOPPING_DETAIL_CLIENT_GRAPH"
 const val STATUS_GRAPH = "STATUS_GRAPH"
 
 sealed class ClientScreen(val route: String) {
-    object HomeClientLoginScreen : ClientScreen("home_client_screen")
+    object HomeClientScreen : ClientScreen("home_client_screen")
     object SearchClientScreen : ClientScreen("search_client_screen")
     object ResultClientScreen : ClientScreen("result_client_screen")
     object ResultBySellerClientScreen : ClientScreen("result_by_seller_client_screen")

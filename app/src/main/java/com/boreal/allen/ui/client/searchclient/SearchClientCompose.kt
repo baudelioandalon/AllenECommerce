@@ -100,7 +100,7 @@ fun ViewSearchClientCompose(
                                             navOptions = NavOptions
                                                 .Builder()
                                                 .setPopUpTo(
-                                                    route = ClientScreen.HomeClientLoginScreen.route,
+                                                    route = ClientScreen.HomeClientScreen.route,
                                                     inclusive = false
                                                 )
                                                 .build()

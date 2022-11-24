@@ -1,21 +1,26 @@
-package com.boreal.allen.ui.seller.homesellergraph
+package com.boreal.allen.ui.seller.home
 
+import androidx.compose.material.ScaffoldState
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.navigation
-import com.boreal.allen.domain.ClientScreen
-import com.boreal.allen.domain.HOME_CLIENT_GRAPH
+import androidx.navigation.navigation
 import com.boreal.allen.domain.HOME_SELLER_GRAPH
 import com.boreal.allen.domain.SellerScreen
+import kotlinx.coroutines.CoroutineScope
 
-fun NavGraphBuilder.homeSellerGraph(navController: NavHostController, closeApp: () -> Unit) {
+fun NavGraphBuilder.homeSellerGraph(
+    navController: NavHostController,
+    scaffoldState: ScaffoldState,
+    scope: CoroutineScope,
+    closeApp: () -> Unit
+) {
     navigation(
         startDestination = SellerScreen.HomeSellerScreen.route,
         route = HOME_SELLER_GRAPH
     ) {
         composable(route = SellerScreen.HomeSellerScreen.route) {
-            ViewHomeSellerCompose(navController, closeApp)
+            ViewHomeSellerCompose(scaffoldState, scope, navController)
         }
     }
 }

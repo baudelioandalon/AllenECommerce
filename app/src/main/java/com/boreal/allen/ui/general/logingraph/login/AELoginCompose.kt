@@ -16,6 +16,7 @@ import androidx.navigation.NavHostController
 import com.boreal.allen.R
 import com.boreal.allen.components.*
 import com.boreal.allen.domain.HOME_CLIENT_GRAPH
+import com.boreal.allen.domain.HOME_CONTAINER_SELLER_GRAPH
 import com.boreal.allen.domain.LoginScreen
 import com.boreal.allen.theme.SemiBold
 
@@ -99,7 +100,7 @@ fun AELoginCompose(navController: NavHostController) {
                 modifier = Modifier.padding(top = 25.dp),
                 labelId = R.string.welcome_button_enter
             ){
-                navController.navigate(HOME_CLIENT_GRAPH)
+                navController.navigate(HOME_CONTAINER_SELLER_GRAPH)
             }
 
             RegularText(

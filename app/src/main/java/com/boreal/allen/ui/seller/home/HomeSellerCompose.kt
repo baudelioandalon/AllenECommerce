@@ -1,6 +1,8 @@
-package com.boreal.allen.ui.seller.homesellergraph
+package com.boreal.allen.ui.seller.home
 
-import androidx.compose.foundation.*
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
@@ -9,16 +11,12 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Divider
-import androidx.compose.material.Scaffold
-import androidx.compose.material.rememberScaffoldState
+import androidx.compose.material.ScaffoldState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Color.Companion.Black
-import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -31,190 +29,87 @@ import androidx.constraintlayout.compose.layoutId
 import androidx.navigation.NavHostController
 import com.boreal.allen.R
 import com.boreal.allen.components.*
-import com.boreal.allen.domain.*
+import com.boreal.allen.domain.SEARCH_CLIENT_GRAPH
+import com.boreal.allen.domain.SHOPPING_CART_GRAPH
 import com.boreal.allen.domain.enum.SellerOptions
 import com.boreal.allen.theme.*
-import com.boreal.allen.ui.general.logingraph.welcome.DrawerBody
-import com.boreal.allen.ui.general.logingraph.welcome.DrawerHeader
-import com.boreal.allen.ui.general.logingraph.welcome.DrawerOptions
-import com.boreal.allen.ui.general.logingraph.welcome.MenuItem
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+
 
 @Preview
 @Composable
-fun ViewHomeSellerCompose(navController: NavHostController? = null, closeApp: () -> Unit = {}) {
-    val systemUiController = rememberSystemUiController()
-    if (isSystemInDarkTheme()) {
-        systemUiController.setSystemBarsColor(
-            color = Color.Transparent
-        )
-    } else {
-        systemUiController.setSystemBarsColor(
-            color = White
-        )
-    }
-    val scrollState = rememberScrollState()
-    val scaffoldState = rememberScaffoldState()
-    val scope = rememberCoroutineScope()
-    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Scaffold(modifier = Modifier
-            .fillMaxWidth(),
-            drawerGesturesEnabled = scaffoldState.drawerState.isOpen,
-            scaffoldState = scaffoldState,
-            drawerContent = {
-                DrawerHeader {
-                    scope.launch {
-                        scaffoldState.drawerState.close()
-                    }
-                }
-                DrawerBody(
-                    items = listOf(
-                        MenuItem(
-                            "Productos",
-                            icon = R.drawable.ic_cart_icon,
-                            contentDescription = "Products",
-                            option = DrawerOptions.MyProducts
-                        ),
-                        MenuItem(
-                            "Ventas",
-                            icon = R.drawable.ic_cart_icon,
-                            contentDescription = "Cart",
-                            option = DrawerOptions.Sales
-                        ),
-                        MenuItem(
-                            "Sucursales",
-                            icon = R.drawable.ic_stores_icon,
-                            contentDescription = "My stores",
-                            option = DrawerOptions.MyStores
-                        ),
-                        MenuItem(
-                            "Notificaciónes",
-                            icon = R.drawable.ic_bell_icon,
-                            contentDescription = "Notifications",
-                            option = DrawerOptions.Notifications
-                        ),
-                        MenuItem(
-                            "Salir",
-                            icon = R.drawable.ic_arrow_right,
-                            contentDescription = "Exit",
-                            option = DrawerOptions.Exit,
-                            close = 0
-                        ),
-                        MenuItem(
-                            "Cerrar sesión",
-                            icon = R.drawable.ic_close_session_icon,
-                            contentDescription = "Close session",
-                            option = DrawerOptions.CloseSession
-                        )
-                    ),
+fun ViewHomeSellerCompose(
+    scaffoldState: ScaffoldState? = null,
+    scope: CoroutineScope? = null,
+    navController: NavHostController? = null
+) {
+    ConstraintLayout(modifier = Modifier
+        .fillMaxSize()
+        .background(Color.White), constraintSet = ConstraintSet {
+        val search = createRefFor("searchHome")
+        val content = createRefFor("content")
+        val guideLine = createGuidelineFromTop(0.09f)
+        constrain(search) {
+            top.linkTo(parent.top)
+            start.linkTo(parent.start)
+            end.linkTo(parent.end)
+            width = Dimension.fillToConstraints
+            height = Dimension.wrapContent
+        }
+        constrain(content) {
+            top.linkTo(guideLine)
+            bottom.linkTo(parent.bottom)
+            width = Dimension.matchParent
+            height = Dimension.fillToConstraints
+        }
+
+    }) {
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(GrayBackgroundMain)
+                .layoutId("content")
+        ) {
+
+            item {
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    elevation = 5.dp
                 ) {
-                    println("Clicked on ${it.option.name}")
-                    when (it.option) {
-                        DrawerOptions.Exit -> {
-                            closeApp()
-                        }
-                        DrawerOptions.MyProducts -> {
-//                            navController?.navigate(SHOPPING_CLIENT_GRAPH)
-                            scope.launch {
-                                scaffoldState.drawerState.close()
-                            }
-                        }
-                        DrawerOptions.Sales -> {
-//                            navController?.navigate(SHOPPING_CLIENT_GRAPH)
-                            scope.launch {
-                                scaffoldState.drawerState.close()
-                            }
-                        }
-                        DrawerOptions.MyStores -> {
-//                            navController?.navigate(FAVORITES_GRAPH)
-                            scope.launch {
-                                scaffoldState.drawerState.close()
-                            }
-                        }
-                        DrawerOptions.Notifications -> {
-                            navController?.navigate(NOTIFICATION_CLIENT_GRAPH)
-                            scope.launch {
-                                scaffoldState.drawerState.close()
-                            }
-                        }
-                        else -> {
-
-                        }
-                    }
+                    TopInformationContainer()
                 }
-            },
-            content = {
-                ConstraintLayout(modifier = Modifier
-                    .fillMaxSize()
-                    .background(White), constraintSet = ConstraintSet {
-                    val search = createRefFor("searchHome")
-                    val content = createRefFor("content")
-                    val guideLine = createGuidelineFromTop(0.09f)
-                    constrain(search) {
-                        top.linkTo(parent.top)
-                        start.linkTo(parent.start)
-                        end.linkTo(parent.end)
-                        width = Dimension.fillToConstraints
-                        height = Dimension.wrapContent
-                    }
-                    constrain(content) {
-                        top.linkTo(guideLine)
-                        bottom.linkTo(parent.bottom)
-                        width = Dimension.matchParent
-                        height = Dimension.fillToConstraints
-                    }
-
-                }) {
-                    LazyColumn(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .background(GrayBackgroundMain)
-                            .layoutId("content")
-                    ) {
-
-                        item {
-                            Card(
-                                modifier = Modifier
-                                    .fillMaxWidth(),
-                                elevation = 5.dp
-                            ) {
-                                TopInformationContainer()
-                            }
-                        }
-                        item {
-                            Card(
-                                modifier = Modifier
-                                    .padding(top = 30.dp)
-                                    .fillMaxWidth(),
-                                elevation = 5.dp
-                            ) {
-                                OptionsContainer(navController)
-                            }
-                        }
-
-                    }
-
-                    Card(
-                        modifier = Modifier
-                            .layoutId("searchHome")
-                            .wrapContentSize(),
-                        elevation = 5.dp
-                    ) {
-                        ToolbarSearchHome(menuClicked = {
-                            scope.launch {
-                                scaffoldState.drawerState.open()
-                            }
-                        }, cartClicked = {
-                            navController?.navigate(SHOPPING_CART_GRAPH)
-                        }, searchClicked = {
-                            navController?.navigate(SEARCH_CLIENT_GRAPH)
-                        })
-                    }
+            }
+            item {
+                Card(
+                    modifier = Modifier
+                        .padding(top = 30.dp)
+                        .fillMaxWidth(),
+                    elevation = 5.dp
+                ) {
+                    OptionsContainer(navController)
                 }
-                it.calculateBottomPadding()
+            }
+
+        }
+
+        Card(
+            modifier = Modifier
+                .layoutId("searchHome")
+                .wrapContentSize(),
+            elevation = 5.dp
+        ) {
+            ToolbarSearchHome(menuClicked = {
+                scope?.launch {
+                    scaffoldState?.drawerState?.open()
+                }
+            }, cartClicked = {
+                navController?.navigate(SHOPPING_CART_GRAPH)
+            }, searchClicked = {
+                navController?.navigate(SEARCH_CLIENT_GRAPH)
             })
-
+        }
     }
 }
 
@@ -225,7 +120,7 @@ fun TopInformationContainer(
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .background(White)
+            .background(Color.White)
             .padding(start = 30.dp, end = 30.dp, top = 35.dp)
     ) {
         Row(
@@ -241,7 +136,7 @@ fun TopInformationContainer(
                 Row {
                     MediumText(
                         text = "Ferreteria",
-                        color = Black,
+                        color = Color.Black,
                         size = 22.sp
                     )
                     MediumText(
@@ -267,7 +162,7 @@ fun TopInformationContainer(
             modifier = Modifier
                 .height(300.dp)
                 .fillMaxWidth()
-                .background(White)
+                .background(Color.White)
                 .padding(top = 42.dp, bottom = 10.dp)
         ) {
             Column(
@@ -360,7 +255,7 @@ fun TopInformationContainer(
                         .weight(2f)
                         .padding(bottom = 15.dp),
                     elevation = 0.dp, shape = RoundedCornerShape(10.dp),
-                    backgroundColor = Black
+                    backgroundColor = Color.Black
                 ) {
                     Column(
                         verticalArrangement = Arrangement.SpaceBetween,
@@ -368,7 +263,7 @@ fun TopInformationContainer(
                     ) {
                         SemiBoldText(
                             text = "Tus ganancias",
-                            color = White,
+                            color = Color.White,
                             size = 15.sp
                         )
                         Row(
@@ -382,7 +277,7 @@ fun TopInformationContainer(
                             )
                             MediumText(
                                 text = "834.72",
-                                color = White,
+                                color = Color.White,
                                 size = 28.sp
                             )
                         }
@@ -400,7 +295,7 @@ fun TopInformationContainer(
 fun OptionsContainer(navController: NavHostController? = null) {
     Column(
         modifier = Modifier
-            .background(White)
+            .background(Color.White)
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -440,7 +335,7 @@ fun OptionsContainer(navController: NavHostController? = null) {
         ) {
             val list = SellerOptions.values()
             itemsIndexed(items = list) { index, item ->
-                OptionItem(item,list.lastIndex == index)
+                OptionItem(item, list.lastIndex == index)
             }
         }
     }
@@ -457,13 +352,15 @@ fun OptionItem(item: SellerOptions, lastIndex: Boolean = false) {
     ) {
         Row(
             modifier = Modifier
-                .fillMaxWidth().fillMaxHeight()
+                .fillMaxWidth()
+                .fillMaxHeight()
                 .padding(start = 18.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
             Column(
-                modifier = Modifier.fillMaxHeight()
+                modifier = Modifier
+                    .fillMaxHeight()
                     .wrapContentWidth(),
                 verticalArrangement = Arrangement.SpaceBetween
             ) {

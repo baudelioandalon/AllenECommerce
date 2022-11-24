@@ -9,10 +9,10 @@ import com.boreal.allen.domain.HOME_CLIENT_GRAPH
 
 fun NavGraphBuilder.homeClientGraph(navController: NavHostController, closeApp: () -> Unit) {
     navigation(
-        startDestination = ClientScreen.HomeClientLoginScreen.route,
+        startDestination = ClientScreen.HomeClientScreen.route,
         route = HOME_CLIENT_GRAPH
     ) {
-        composable(route = ClientScreen.HomeClientLoginScreen.route) {
+        composable(route = ClientScreen.HomeClientScreen.route) {
             AEHomeClientComposable(navController, closeApp)
         }
     }
