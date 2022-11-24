@@ -101,7 +101,7 @@ fun ViewHomeSellerCompose(
 
             ToolbarSellerStore(
                 firstIcon = R.drawable.ic_menu_icon,
-                endIcon = R.drawable.ic_dots_options,
+                endIcon = R.drawable.ic_notification,
                 backClicked = {
                     scope?.launch {
                         scaffoldState?.drawerState?.open()

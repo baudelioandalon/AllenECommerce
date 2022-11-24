@@ -454,6 +454,8 @@
         <entry key="app/src/main/res/drawable/ic_favorite_unselected.xml" value="0.4295" />
         <entry key="app/src/main/res/drawable/ic_house.xml" value="0.3965" />
         <entry key="app/src/main/res/drawable/ic_line.xml" value="0.4715" />
+        <entry key="app/src/main/res/drawable/ic_notification.xml" value="0.4025" />
+        <entry key="app/src/main/res/drawable/ic_notification_badge.xml" value="0.3965" />
         <entry key="app/src/main/res/drawable/ic_on_way_traffic_circle.xml" value="0.418" />
         <entry key="app/src/main/res/drawable/ic_search_icon.xml" value="0.4395" />
       </map>
