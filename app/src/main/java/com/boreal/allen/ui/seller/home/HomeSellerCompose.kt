@@ -29,8 +29,6 @@ import androidx.constraintlayout.compose.layoutId
 import androidx.navigation.NavHostController
 import com.boreal.allen.R
 import com.boreal.allen.components.*
-import com.boreal.allen.domain.SEARCH_CLIENT_GRAPH
-import com.boreal.allen.domain.SHOPPING_CART_GRAPH
 import com.boreal.allen.domain.enum.SellerOptions
 import com.boreal.allen.theme.*
 import kotlinx.coroutines.CoroutineScope
@@ -100,15 +98,17 @@ fun ViewHomeSellerCompose(
                 .wrapContentSize(),
             elevation = 5.dp
         ) {
-            ToolbarSearchHome(menuClicked = {
-                scope?.launch {
-                    scaffoldState?.drawerState?.open()
-                }
-            }, cartClicked = {
-                navController?.navigate(SHOPPING_CART_GRAPH)
-            }, searchClicked = {
-                navController?.navigate(SEARCH_CLIENT_GRAPH)
-            })
+
+            ToolbarSellerStore(
+                firstIcon = R.drawable.ic_menu_icon,
+                endIcon = R.drawable.ic_dots_options,
+                backClicked = {
+                    scope?.launch {
+                        scaffoldState?.drawerState?.open()
+                    }
+                }, optionClicked = {
+
+                })
         }
     }
 }

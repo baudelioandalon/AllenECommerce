@@ -29,7 +29,7 @@ fun MainCompose(closeApp: () -> Unit) {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = HOME_CONTAINER_SELLER_GRAPH,
+        startDestination = LOGIN_GRAPH,
         route = ROOT_GRAPH
     ) {
         //General

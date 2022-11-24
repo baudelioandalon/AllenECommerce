@@ -100,7 +100,7 @@ fun AELoginCompose(navController: NavHostController) {
                 modifier = Modifier.padding(top = 25.dp),
                 labelId = R.string.welcome_button_enter
             ){
-                navController.navigate(HOME_CONTAINER_SELLER_GRAPH)
+                navController.navigate(HOME_CLIENT_GRAPH)
             }
 
             RegularText(

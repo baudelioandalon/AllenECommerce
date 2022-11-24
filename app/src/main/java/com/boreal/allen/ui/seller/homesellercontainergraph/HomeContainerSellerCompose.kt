@@ -9,6 +9,7 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -52,7 +53,7 @@ fun ViewHomeContainerSellerCompose(
     }
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
-    val currentScreen = mutableStateOf<SellerScreen>(SellerScreen.HomeSellerScreen)
+    val currentScreen = remember{mutableStateOf<SellerScreen>(SellerScreen.HomeSellerScreen)}
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         Scaffold(modifier = Modifier
             .fillMaxWidth(),
