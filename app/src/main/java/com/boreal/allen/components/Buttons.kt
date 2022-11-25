@@ -396,8 +396,9 @@ fun BlueButton(
 
 @Composable
 fun CornerButton(
-    @StringRes labelId: Int,
     modifier: Modifier = Modifier,
+    text: String? = null,
+    @StringRes labelId: Int? = null,
     onClick: (() -> Unit)? = null
 ) {
     Card(
@@ -419,7 +420,7 @@ fun CornerButton(
             colors = ButtonDefaults.buttonColors(backgroundColor = White)
         ) {
             Text(
-                text = stringResource(id = labelId),
+                text = text ?: stringResource(id = labelId ?: R.string.empty_string),
                 fontSize = 15.sp,
                 color = Black,
                 fontWeight = SemiBold,
@@ -427,6 +428,56 @@ fun CornerButton(
                 textAlign = TextAlign.Center,
                 fontFamily = MaterialTheme.typography.caption.fontFamily
             )
+        }
+    }
+}
+
+@Composable
+fun ScannerButton(
+    modifier: Modifier = Modifier,
+    text: String? = null,
+    @StringRes labelId: Int? = null,
+    onClick: (() -> Unit)? = null
+) {
+    Card(
+        modifier = modifier
+            .fillMaxWidth(), elevation = 0.dp,
+        border = BorderStroke(1.dp, PrimaryColor)
+    ) {
+        Button(
+            modifier = Modifier
+                .background(color = White)
+                .height(54.dp),
+            elevation = ButtonDefaults.elevation(
+                defaultElevation = 0.dp,
+                pressedElevation = 5.dp,
+                disabledElevation = 0.dp
+            ),
+            shape = RoundedCornerShape(corner = CornerSize(5.dp)),
+            onClick = { onClick?.invoke() },
+            colors = ButtonDefaults.buttonColors(backgroundColor = White)
+        ) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(
+                    modifier = Modifier.padding(end = 10.dp),
+                    painter = painterResource(id = R.drawable.bar_code),
+                    contentDescription = "bar code"
+                )
+                Text(
+                    text = text ?: stringResource(id = labelId ?: R.string.empty_string),
+                    fontSize = 15.sp,
+                    color = PrimaryColor,
+                    fontWeight = SemiBold,
+                    letterSpacing = 0.sp,
+                    textAlign = TextAlign.Center,
+                    fontFamily = MaterialTheme.typography.caption.fontFamily
+                )
+                Icon(
+                    modifier = Modifier.padding(start = 10.dp),
+                    painter = painterResource(id = R.drawable.qr_code),
+                    contentDescription = "qr code"
+                )
+            }
         }
     }
 }

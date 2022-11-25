@@ -780,7 +780,7 @@ fun ShoppingCartStoreItem(
     selector: Boolean = true,
     elevation: Dp = 0.dp,
     hideTopLine: Boolean = false,
-    bottomSeparator: Boolean = false
+    check: Boolean = false
 ) {
 
     Card(
@@ -874,7 +874,8 @@ fun ShoppingCartStoreItem(
                         ShoppingCartItem(
                             productShoppingCart = it,
                             counter = counter,
-                            deleteOptions = deleteOptions
+                            deleteOptions = deleteOptions,
+                            check = check
                         )
                     }
                 }
@@ -882,9 +883,9 @@ fun ShoppingCartStoreItem(
 
         }
     }
-
 }
 
+@Preview
 @Composable
 fun ShoppingCartItem(
     productShoppingCart: ProductShoppingCart = ProductShoppingCart(
@@ -899,7 +900,8 @@ fun ShoppingCartItem(
         price = 588880.0
     ),
     counter: Boolean = true,
-    deleteOptions: Boolean = true
+    deleteOptions: Boolean = true,
+    check: Boolean = false
 ) {
     Column(
         modifier = if (deleteOptions)
@@ -1009,7 +1011,7 @@ fun ShoppingCartItem(
                         verticalAlignment = Alignment.Bottom
                     ) {
                         SemiBoldText(
-                            modifier = Modifier.padding(end = 34.dp, bottom = 5.dp),
+                            modifier = Modifier.padding(end = 14.dp, bottom = 5.dp, start = 10.dp),
                             text = "Cantidad", size = 15.sp
                         )
                         SemiBoldText(
@@ -1018,6 +1020,13 @@ fun ShoppingCartItem(
                         )
                     }
                 }
+            }
+            if(check){
+                Image(
+                    modifier = Modifier.padding(start = 30.dp),
+                    painter = painterResource(id = R.drawable.ic_checked),
+                    contentDescription = "check"
+                )
             }
         }
         if (deleteOptions) {
@@ -1344,6 +1353,135 @@ fun NotificationItem(
                     ) {
 
                     }
+                }
+            }
+        }
+    }
+}
+
+@Preview
+@Composable
+fun NotificationNewSaleItem(
+    shippingType: String = "SHIPPING",
+    shippingStatus: String = "OK",
+    onClicked: (() -> Unit)? = null
+) {
+    Column(
+        modifier =
+        Modifier
+            .fillMaxWidth()
+            .background(White)
+            .padding(start = 30.dp, end = 30.dp, top = 14.dp, bottom = 20.dp)
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+
+            Column(
+                modifier = Modifier.wrapContentWidth()
+            ) {
+                Card(
+                    modifier = Modifier
+                        .size(81.dp),
+                    backgroundColor = GrayBackgroundDrawerDismiss,
+                    elevation = 0.dp,
+                    shape = RoundedCornerShape(10.dp)
+                ) {
+
+                }
+
+            }
+            Column(
+                modifier = Modifier
+                    .wrapContentHeight()
+                    .padding(start = 22.dp)
+                    .fillMaxWidth()
+                    .background(White),
+                verticalArrangement = Arrangement.Top
+            ) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    SemiBoldText(
+                        text = if (shippingType == "SHIPPING" && shippingStatus == "WAITING") "Preparar pedido" else if (
+                            shippingType == "PICKUP" && shippingStatus == "WAITING"
+                        ) "Preparar pedido" else "Cancelado por el cliente",
+                        size = 15.sp,
+                        maxLines = 3,
+                        textOverflow = TextOverflow.Ellipsis
+                    )
+                }
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 7.dp)
+                        .background(
+                            brush = Brush.horizontalGradient(
+                                colors = if (shippingStatus == "WAITING") listOf(
+                                    PrimaryColor,
+                                    PrimaryEndColor
+                                ) else listOf(
+                                    RedStartColor,
+                                    RedEndColor
+                                )
+                            ),
+                            shape = RoundedCornerShape(10.dp)
+                        )
+                        .clickable {
+                            onClicked?.invoke()
+                        }
+                ) {
+                    Row(
+                        modifier = Modifier.padding(vertical = 9.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Start
+                    ) {
+                        Icon(
+                            modifier = Modifier
+                                .wrapContentHeight()
+                                .padding(horizontal = 16.dp),
+                            painter = painterResource(id = if (shippingType == "PICKUP") R.drawable.ic_on_way_walking else R.drawable.ic_on_way_traffic),
+                            contentDescription = "on way",
+                            tint = White
+                        )
+                        Column(modifier = Modifier.wrapContentWidth()) {
+                            MediumText(
+                                text = if (shippingType == "SHIPPING" && shippingStatus == "WAITING") "Preparar pedido" else if (
+                                    shippingType == "PICKUP" && shippingStatus == "WAITING"
+                                ) "4 Articulos" else "No recolectar",
+                                color = White,
+                                size = 15.sp
+                            )
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween
+                            ) {
+                                MediumText(
+                                    text = if (shippingType == "SHIPPING" || shippingStatus == "PICKUP") "Recolectar" else "Cancelado",
+                                    color = White,
+                                    size = 12.sp
+                                )
+                                MediumText(
+                                    modifier = Modifier.padding(end = 20.dp),
+                                    text = "Ene 8, 9:30 am",
+                                    color = White,
+                                    size = 12.sp
+                                )
+                            }
+                        }
+                    }
+                }
+                BoldText(
+                    modifier = Modifier.padding(top = 10.dp),
+                    text = "Contactar",
+                    size = 12.sp,
+                    color = OrangeStrong
+                ) {
+
                 }
             }
         }

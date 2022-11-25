@@ -9,7 +9,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -20,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.boreal.allen.components.BoldText
 import com.boreal.allen.domain.SellerScreen
+import com.boreal.allen.theme.GrayLetterShipping
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
@@ -59,7 +59,7 @@ fun CustomBottomNavigationItem(item: SellerScreen, isSelected: Boolean, onClick:
     val background =
         if (isSelected) MaterialTheme.colors.primary.copy(alpha = 0.1f) else Color.Transparent
     val contentColor =
-        if (isSelected) MaterialTheme.colors.primary else MaterialTheme.colors.onBackground
+        if (isSelected) MaterialTheme.colors.primary else GrayLetterShipping
 
     Box(
         modifier = Modifier

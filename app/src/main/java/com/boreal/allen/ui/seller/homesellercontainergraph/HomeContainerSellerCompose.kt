@@ -22,6 +22,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.boreal.allen.R
 import com.boreal.allen.domain.NOTIFICATION_CLIENT_GRAPH
+import com.boreal.allen.domain.SALES_SELLER_GRAPH
 import com.boreal.allen.domain.SellerScreen
 import com.boreal.allen.ui.general.logingraph.welcome.DrawerBody
 import com.boreal.allen.ui.general.logingraph.welcome.DrawerHeader
@@ -74,12 +75,6 @@ fun ViewHomeContainerSellerCompose(
                 DrawerBody(
                     items = listOf(
                         MenuItem(
-                            "Productos",
-                            icon = R.drawable.ic_cart_icon,
-                            contentDescription = "Products",
-                            option = DrawerOptions.MyProducts
-                        ),
-                        MenuItem(
                             "Ventas",
                             icon = R.drawable.ic_cart_icon,
                             contentDescription = "Cart",
@@ -124,7 +119,7 @@ fun ViewHomeContainerSellerCompose(
                             }
                         }
                         DrawerOptions.Sales -> {
-//                            navController?.navigate(SHOPPING_CLIENT_GRAPH)
+                            navController?.navigate(SALES_SELLER_GRAPH)
                             scope.launch {
                                 scaffoldState.drawerState.close()
                             }

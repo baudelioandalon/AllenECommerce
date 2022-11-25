@@ -117,7 +117,6 @@ fun ViewMyProductsSellerCompose(
                             color = GrayBorder
                         )
                     }
-                    ShowSellerItem(modifier = Modifier.padding(start = 50.dp))
                 }
 
             }
