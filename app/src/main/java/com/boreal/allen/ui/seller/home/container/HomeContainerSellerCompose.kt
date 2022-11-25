@@ -1,4 +1,4 @@
-package com.boreal.allen.ui.seller.homesellercontainergraph
+package com.boreal.allen.ui.seller.home.container
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -28,7 +28,7 @@ import com.boreal.allen.ui.general.logingraph.welcome.DrawerBody
 import com.boreal.allen.ui.general.logingraph.welcome.DrawerHeader
 import com.boreal.allen.ui.general.logingraph.welcome.DrawerOptions
 import com.boreal.allen.ui.general.logingraph.welcome.MenuItem
-import com.boreal.allen.ui.seller.bottomnavigation.CustomBottomNavigation
+import com.boreal.allen.components.bottomnavigation.CustomBottomNavigation
 import com.boreal.allen.ui.seller.home.ViewHomeSellerCompose
 import com.boreal.allen.ui.seller.products.ViewMyProductsSellerCompose
 import com.google.accompanist.systemuicontroller.rememberSystemUiController

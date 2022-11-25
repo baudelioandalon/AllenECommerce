@@ -1,4 +1,4 @@
-package com.boreal.allen.ui.seller.bottomnavigation
+package com.boreal.allen.components.bottomnavigation
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi

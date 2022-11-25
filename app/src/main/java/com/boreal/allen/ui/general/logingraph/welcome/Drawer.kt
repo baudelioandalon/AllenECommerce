@@ -13,18 +13,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.boreal.allen.BuildConfig
 import com.boreal.allen.R
 import com.boreal.allen.components.BoldText
-import com.boreal.allen.components.LogoBlue
-import com.boreal.allen.components.MediumText
+import com.boreal.allen.components.Selector
+import com.boreal.allen.components.SemiBoldText
 import com.boreal.allen.theme.*
 
 data class MenuItem(
@@ -50,9 +48,15 @@ sealed class DrawerOptions(val name: String) {
     object Notifications : DrawerOptions("NOTIFICATIONS")
     object Exit : DrawerOptions("EXIT")
     object CloseSession : DrawerOptions("CLOSE_SESSION")
+
+    //BussinessInformation
+    object Main : DrawerOptions("MAIN")
+    object Contact : DrawerOptions("CONTACT")
+    object ShippingAndPayments : DrawerOptions("SHIPPING_AND_PAYMENTS")
+    object Promotion : DrawerOptions("Promotion")
+    object Save : DrawerOptions("Save")
 }
 
-@Preview(showBackground = true)
 @Composable
 fun TestDrawer() {
     Column(
@@ -103,7 +107,107 @@ fun TestDrawer() {
 
         })
     }
+}
 
+@Preview(showBackground = true)
+@Composable
+fun TestDrawerBussinessInformation() {
+    Column(
+        modifier = Modifier
+            .wrapContentSize()
+            .background(GrayBackgroundMain)
+    ) {
+        BussinessInformationDrawerBody(items = listOf(
+            MenuItem(
+                "Compras",
+                icon = R.drawable.ic_cart_icon,
+                contentDescription = "Cart",
+                option = DrawerOptions.Buys
+            ),
+            MenuItem(
+                "Favoritos",
+                icon = R.drawable.ic_heart_icon,
+                contentDescription = "Favorites",
+                option = DrawerOptions.Favorites
+            ),
+            MenuItem(
+                "Tiendas",
+                icon = R.drawable.ic_stores_icon,
+                contentDescription = "Stores",
+                option = DrawerOptions.Stores
+            ),
+            MenuItem(
+                "Notificaciónes",
+                icon = R.drawable.ic_bell_icon,
+                contentDescription = "Notifications",
+                option = DrawerOptions.Notifications
+            ),
+            MenuItem(
+                "Salir",
+                icon = R.drawable.ic_arrow_right,
+                contentDescription = "Exit",
+                option = DrawerOptions.Exit,
+                close = 0
+            ),
+            MenuItem(
+                "Cerrar sesión",
+                icon = R.drawable.ic_close_session_icon,
+                contentDescription = "Close session",
+                option = DrawerOptions.CloseSession
+            )
+        ), onItemClick = {
+
+        })
+    }
+}
+
+@Composable
+fun BussinessInformationDrawer(onItemClicked: (MenuItem) -> Unit = {}) {
+    Column(modifier = Modifier.fillMaxWidth()) {
+        BussinessInformationDrawerBody(
+            items = listOf(
+                MenuItem(
+                    "Principal",
+                    icon = R.drawable.ic_menu_icon,
+                    contentDescription = "main",
+                    option = DrawerOptions.Main
+                ),
+                MenuItem(
+                    "Contacto",
+                    icon = R.drawable.ic_user,
+                    contentDescription = "Contact",
+                    option = DrawerOptions.Contact
+                ),
+                MenuItem(
+                    "Envíos \n Y Pagos",
+                    icon = R.drawable.ic_bell_icon,
+                    contentDescription = "envios y pagos",
+                    option = DrawerOptions.ShippingAndPayments
+                ),
+                MenuItem(
+                    "Promo\nción",
+                    icon = R.drawable.ic_arrow_right,
+                    contentDescription = "promoción",
+                    option = DrawerOptions.Promotion,
+                    close = 0
+                ),
+                MenuItem(
+                    "Guardar",
+                    icon = R.drawable.ic_check_mark,
+                    contentDescription = "guardar",
+                    option = DrawerOptions.CloseSession
+                ),
+                MenuItem(
+                    "Salir",
+                    icon = R.drawable.ic_arrow_right,
+                    contentDescription = "salir",
+                    option = DrawerOptions.CloseSession
+                )
+            )
+        ) {
+            onItemClicked.invoke(it)
+        }
+    }
 }
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -179,7 +283,11 @@ fun DrawerHeader(closeClicked: (() -> Unit)? = null) {
 }
 
 @Composable
-fun StarStatus(modifier: Modifier = Modifier,text: String = "(12 Compras)", stars: String = "4.6") {
+fun StarStatus(
+    modifier: Modifier = Modifier,
+    text: String = "(12 Compras)",
+    stars: String = "4.6"
+) {
     Row(
         modifier = modifier
             .padding(top = 4.dp)
@@ -233,15 +341,7 @@ fun DrawerBody(
                     },
                 verticalAlignment = CenterVertically
             ) {
-                Icon(
-                    modifier = Modifier
-                        .padding(top = 12.dp, bottom = 12.dp, start = 15.dp)
-                        .width(25.dp)
-                        .height(25.dp),
-                    painter = painterResource(id = item.icon),
-                    tint = GrayLetterDrawer,
-                    contentDescription = item.contentDescription
-                )
+
                 Text(
                     text = item.title,
                     style = TextStyle(
@@ -253,47 +353,55 @@ fun DrawerBody(
                         .padding(top = 12.dp, bottom = 12.dp, start = 12.dp)
                         .weight(1f)
                 )
-                Card(
-                    modifier = Modifier
-                        .padding(top = 12.dp, bottom = 12.dp, end = 12.dp)
-                        .width(40.dp)
-                        .height(40.dp),
-                    backgroundColor = GrayBackgroundDrawerDismiss,
-                    elevation = 0.dp,
-                    shape = CircleShape
-                ) {
-                    Image(
-                        modifier = Modifier
-                            .padding(13.dp)
-                            .height(50.dp)
-                            .rotate(180f),
-                        painter = painterResource(id = R.drawable.ic_right_arrow_simbol),
-                        contentDescription = ""
-                    )
-                }
             }
         }
+    }
 
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun BussinessInformationDrawerBody(
+    items: List<MenuItem>,
+    onItemClick: (MenuItem) -> Unit
+) {
+
+    LazyColumn(
+        modifier = Modifier
+            .padding(top = 5.dp)
+            .fillMaxSize()
+            .background(GrayBackgroundMain)
+    ) {
         item {
+            SemiBoldText(
+                modifier = Modifier.padding(start = 30.dp, top = 28.dp, bottom = 30.dp),
+                text = "Menu"
+            )
+        }
+        itemsIndexed(items) { index, item ->
             Row(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 25.dp),
-                verticalAlignment = CenterVertically,
-                horizontalArrangement = Arrangement.Center
+                    .padding(top = 20.dp, start = 16.dp)
+                    .fillMaxWidth(),
+                verticalAlignment = CenterVertically
             ) {
-                LogoBlue(
+                Card(
                     modifier = Modifier
-                        .padding(end = 8.dp)
-                        .align(CenterVertically)
-                        .width(38.dp)
-                        .fillMaxHeight()
-                )
-                MediumText(
-                    text = "v. ${BuildConfig.VERSION_NAME}",
-                    color = GrayLetterDrawer,
-                    size = 13.sp
-                )
+                        .height(56.dp),
+                    backgroundColor = GrayBackgroundMain,
+                    elevation = 0.dp,
+                    onClick = {
+                        onItemClick.invoke(item)
+                    }
+                ) {
+                    Selector(
+                        roundDp = 15.dp,
+                        backgroundColor = OrangeBackground,
+                        text = item.title,
+                        textColor = OrangeStrong,
+                        onClicked = null
+                    )
+                }
             }
         }
     }

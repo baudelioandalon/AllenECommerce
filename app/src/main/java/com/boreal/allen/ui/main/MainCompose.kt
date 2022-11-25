@@ -3,10 +3,9 @@ package com.boreal.allen.ui.main
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import com.boreal.allen.domain.HOME_CONTAINER_SELLER_GRAPH
+import com.boreal.allen.domain.BUSSINESS_INFORMATION_SELLER_GRAPH
 import com.boreal.allen.domain.PREPARE_SHOPPING_SELLER_GRAPH
 import com.boreal.allen.domain.ROOT_GRAPH
-import com.boreal.allen.domain.SALES_SELLER_GRAPH
 import com.boreal.allen.ui.client.addressclient.clientAddressGraph
 import com.boreal.allen.ui.client.favorites.favoritesGraph
 import com.boreal.allen.ui.client.homeclientgraph.homeClientGraph
@@ -24,7 +23,8 @@ import com.boreal.allen.ui.client.shoppingcart.shoppingCartGraph
 import com.boreal.allen.ui.client.shoppingdetail.shoppingDetail
 import com.boreal.allen.ui.general.logingraph.loginGraph
 import com.boreal.allen.ui.general.storesmap.storesMapGeneralGraph
-import com.boreal.allen.ui.seller.homesellercontainergraph.homeContainerSellerGraph
+import com.boreal.allen.ui.seller.businessinformation.container.bussinessInformationContainerGraph
+import com.boreal.allen.ui.seller.home.container.homeContainerSellerGraph
 import com.boreal.allen.ui.seller.prepareshopping.prepareShoppingSellerGraph
 import com.boreal.allen.ui.seller.sales.salesSellerGraph
 import com.boreal.allen.ui.status.statusGraph
@@ -34,7 +34,7 @@ fun MainCompose(closeApp: () -> Unit) {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = PREPARE_SHOPPING_SELLER_GRAPH,
+        startDestination = BUSSINESS_INFORMATION_SELLER_GRAPH,
         route = ROOT_GRAPH
     ) {
         //General
@@ -45,6 +45,7 @@ fun MainCompose(closeApp: () -> Unit) {
         homeContainerSellerGraph(navController, closeApp)
         salesSellerGraph(navController, closeApp)
         prepareShoppingSellerGraph(navController, closeApp)
+        bussinessInformationContainerGraph(navController, closeApp)
 
         //Client
         homeClientGraph(navController, closeApp)

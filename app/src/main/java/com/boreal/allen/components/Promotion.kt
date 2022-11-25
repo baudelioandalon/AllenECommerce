@@ -15,6 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.boreal.allen.R
@@ -125,22 +126,33 @@ fun PriceBeforeDiscount(
     }
 }
 
+@Preview
 @Composable
 fun Selector(
     modifier: Modifier = Modifier,
     text: String = "",
     backgroundColor: Color = GreenTransparent,
     textColor: Color = GreenStrong,
-    onClicked: () -> Unit = {}
+    roundDp: Dp = 10.dp,
+    onClicked: (() -> Unit)? = {}
 ) {
     Row(
-        modifier = modifier
-            .background(
-                color = backgroundColor,
-                shape = RoundedCornerShape(10.dp)
-            )
-            .wrapContentSize()
-            .clickable { onClicked() },
+        modifier = if (onClicked != null) {
+            modifier
+                .background(
+                    color = backgroundColor,
+                    shape = RoundedCornerShape(roundDp)
+                )
+                .wrapContentSize()
+                .clickable { onClicked() }
+        } else {
+            modifier
+                .background(
+                    color = backgroundColor,
+                    shape = RoundedCornerShape(roundDp)
+                )
+                .wrapContentSize()
+        },
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
     ) {
