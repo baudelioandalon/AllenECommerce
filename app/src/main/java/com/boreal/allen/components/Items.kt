@@ -97,7 +97,6 @@ fun CategoryItem() {
 
         Text(
             modifier = Modifier
-                .padding(top = 9.dp)
                 .fillMaxWidth(),
             text = "Ferreteria",
             fontSize = 13.sp,

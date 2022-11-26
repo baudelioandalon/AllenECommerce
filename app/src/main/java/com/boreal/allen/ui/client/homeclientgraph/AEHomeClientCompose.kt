@@ -61,7 +61,6 @@ fun AEHomeClientComposable(navController: NavHostController? = null, closeApp: (
             color = White
         )
     }
-    val scrollState = rememberScrollState()
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
@@ -259,12 +258,18 @@ fun AEHomeClientComposable(navController: NavHostController? = null, closeApp: (
 fun TopContainer() {
     Column {
         AutoSliding()
-        LazyRow(
-            modifier = Modifier.background(White)
-        ) {
-            items(4) {
-                CategoryItem()
-            }
+        CategoryHorizontal()
+    }
+}
+
+@Composable
+fun CategoryHorizontal(){
+    LazyRow(
+        modifier = Modifier
+            .background(White)
+    ) {
+        items(4) {
+            CategoryItem()
         }
     }
 }

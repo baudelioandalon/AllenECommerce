@@ -1,12 +1,10 @@
 package com.boreal.allen.ui.seller.businessinformation.main
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.background
-import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Card
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,18 +21,18 @@ import androidx.navigation.NavHostController
 import com.boreal.allen.R
 import com.boreal.allen.components.*
 import com.boreal.allen.extensions.drawColoredShadow
-import com.boreal.allen.theme.BlueTransparent
-import com.boreal.allen.theme.GrayBackgroundMain
-import com.boreal.allen.theme.GrayLetterShipping
+import com.boreal.allen.theme.*
+import com.boreal.allen.ui.client.homeclientgraph.CategoryHorizontal
 import com.boreal.allen.ui.general.logingraph.welcome.*
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
+@OptIn(ExperimentalMaterialApi::class)
 @SuppressLint("UnrememberedMutableState")
 @Preview
 @Composable
 fun ViewBussinessInformationMainCompose(
     navController: NavHostController? = null,
-    closeApp: () -> Unit = {}
+    menuClicked: () -> Unit = {}
 ) {
     val systemUiController = rememberSystemUiController()
     if (isSystemInDarkTheme()) {
@@ -125,23 +123,40 @@ fun ViewBussinessInformationMainCompose(
 
             BoldText(
                 modifier = Modifier.padding(start = 30.dp),
+                text = "Color principal",
+                size = 20.sp
+            )
+
+            Column(
+                modifier = Modifier
+                    .padding(start = 30.dp, end = 30.dp, top = 20.dp, bottom = 30.dp)
+                    .wrapContentWidth()
+                    .wrapContentHeight(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                ColorSelector()
+                BoldText(
+                    modifier = Modifier.padding(top = 5.dp),
+                    size = 10.sp,
+                    text = "Cambiar"
+                )
+            }
+
+            BoldText(
+                modifier = Modifier.padding(start = 30.dp),
                 text = "Categoria",
                 size = 20.sp
             )
 
-            BrandingHorizontal(
-                modifier = Modifier.padding(
-                    end = 30.dp,
-                    top = 35.dp
-                )
-            )
+            CategoryHorizontal()
 
         }
 
         ToolbarTitle(
             modifier = Modifier.layoutId("toolbarTitle"),
             titleText = "Datos negocio", backClicked = {
-                navController?.navigateUp()
+                menuClicked()
             }, firstIcon = R.drawable.ic_menu_icon,
             endIcon = R.drawable.ic_bell_icon
         )
@@ -150,7 +165,7 @@ fun ViewBussinessInformationMainCompose(
             modifier = Modifier
                 .fillMaxWidth()
                 .layoutId("bottomQuestion"),
-            elevation = 9.dp
+            elevation = 20.dp
         ) {
             Row(
                 modifier = Modifier

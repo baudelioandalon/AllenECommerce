@@ -333,7 +333,7 @@ fun BussinessImageSelector(
     ) {
         Canvas(modifier = Modifier.fillMaxSize()) {
             drawRoundRect(
-                color = GraySinceTo, style = stroke,
+                color = GrayHomeSellerLetter, style = stroke,
                 cornerRadius = CornerRadius(20.dp.toPx())
             )
         }
@@ -366,6 +366,54 @@ fun BussinessImageSelector(
                     color = GrayBorder,
                     size = 25.sp
                 )
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun ColorSelector(
+    modifier: Modifier = Modifier,
+    onClicked: (() -> Unit)? = null
+) {
+
+    val stroke = Stroke(
+        width = 10f,
+        pathEffect = PathEffect.dashPathEffect(floatArrayOf(15f, 15f), 0f)
+    )
+
+    Box(
+        modifier = modifier
+            .size(35.dp), contentAlignment = Alignment.Center
+    ) {
+        Canvas(modifier = Modifier.fillMaxSize()) {
+            drawRoundRect(
+                color = GrayHomeSellerLetter, style = stroke,
+                cornerRadius = CornerRadius(10.dp.toPx())
+            )
+        }
+        Card(
+            modifier = Modifier
+                .size(35.dp),
+            elevation = 0.dp,
+            shape = RoundedCornerShape(10.dp),
+            backgroundColor = White,
+            onClick = {
+                onClicked?.invoke()
+            }
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_more_icon),
+                    contentDescription = "hide shipping options",
+                    tint = GraySinceTo
+                )
+
             }
         }
     }

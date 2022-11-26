@@ -7,8 +7,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -20,12 +18,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.boreal.allen.domain.BusinessInformationScreen
-import com.boreal.allen.domain.NOTIFICATION_CLIENT_GRAPH
-import com.boreal.allen.domain.SALES_SELLER_GRAPH
-import com.boreal.allen.domain.SellerScreen
 import com.boreal.allen.ui.general.logingraph.welcome.*
 import com.boreal.allen.ui.seller.businessinformation.main.ViewBussinessInformationMainCompose
-import com.boreal.allen.ui.seller.home.ViewHomeSellerCompose
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import kotlinx.coroutines.launch
 
@@ -47,7 +41,8 @@ fun ViewBussinessInformationContainerCompose(
             color = White
         )
     }
-    val scaffoldState = rememberScaffoldState(drawerState = DrawerState(initialValue = DrawerValue.Closed))
+    val scaffoldState =
+        rememberScaffoldState(drawerState = DrawerState(initialValue = DrawerValue.Closed))
     val scope = rememberCoroutineScope()
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         Scaffold(modifier = Modifier
@@ -92,7 +87,11 @@ fun ViewBussinessInformationContainerCompose(
                     composable(route = BusinessInformationScreen.MainScreen.route) {
                         ViewBussinessInformationMainCompose(
                             navController = innerBussinessNavController
-                        )
+                        ) {
+                            scope.launch {
+                                scaffoldState.drawerState.open()
+                            }
+                        }
                     }
                 }
                 it.calculateBottomPadding()
