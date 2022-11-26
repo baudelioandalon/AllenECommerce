@@ -22,9 +22,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import androidx.constraintlayout.compose.layoutId
-import com.boreal.allen.theme.GrayBorderLight
-import com.boreal.allen.theme.GrayLetterHint
-import com.boreal.allen.theme.SemiBold
+import com.boreal.allen.theme.*
 
 @Preview(showBackground = true)
 @Composable
@@ -49,6 +47,7 @@ fun TestPreviewTextField() {
             isError = true
         )
         OutlinedTextField(value = "holl", onValueChange = {})
+        TextField(value = "holl", onValueChange = {})
     }
 }
 
@@ -163,6 +162,128 @@ fun OutlinedTextField(
     }
 }
 
+@Composable
+fun TextField(
+    modifier: Modifier = Modifier,
+    placeHolder: String = "",
+    value: String,
+    onValueChange: (String) -> Unit,
+    isError: Boolean = false,
+    errorMessage: String = "",
+    keyboardOptions: KeyboardOptions = KeyboardOptions(
+        capitalization = KeyboardCapitalization.Words,
+        keyboardType = KeyboardType.Text
+    ),
+    keyboardActions: KeyboardActions = KeyboardActions { },
+    trailingIcon: @Composable (() -> Unit)? = null,
+    enabled: Boolean = true,
+    helperText: String = "",
+    enabledHelper: Boolean = false,
+    enabledCounter: Boolean = false,
+    maxLength: Int = 0,
+    singleLine: Boolean = false,
+    colors: TextFieldColors = TextFieldDefaults.outlinedTextFieldColors(
+        focusedBorderColor = MaterialTheme.colors.primary.copy(
+            alpha = 0f
+        ),
+        unfocusedBorderColor = MaterialTheme.colors.onSurface.copy(
+            alpha = 0f
+        ),
+        disabledBorderColor = MaterialTheme.colors.onSurface.copy(
+            alpha = 0f
+        ),
+        errorBorderColor = MaterialTheme.colors.error
+    ),
+    visualTransformation: VisualTransformation = VisualTransformation.None,
+    hideText: Boolean = true
+) {
+    val interactionSource = remember { MutableInteractionSource() }
+    Column(modifier = modifier, verticalArrangement = Arrangement.Top) {
+        if (!hideText) {
+            Text(
+                modifier = Modifier.padding(bottom = 9.dp),
+                text = helperText,
+                color = Black,
+                fontWeight = SemiBold,
+                fontFamily = MaterialTheme.typography.caption.fontFamily,
+                fontSize = 15.sp
+            )
+        }
+
+        OutlinedTextField(
+            modifier = Modifier
+                .fillMaxWidth(),
+            textStyle = TextStyle(
+                color = GrayBorder,
+                fontWeight = Bold,
+                fontSize = 25.sp
+            ),
+            interactionSource = interactionSource,
+            value = value,
+            onValueChange = {
+                if (enabledCounter) {
+                    if (it.length <= maxLength) {
+                        onValueChange(it)
+                    }
+                } else
+                    onValueChange(it)
+            }, placeholder = {
+                Text(
+                    text = placeHolder,
+                    color = GrayLetterHint,
+                    fontWeight = SemiBold,
+                    fontSize = 15.sp
+                )
+            },
+            colors = colors,
+            isError = isError,
+            keyboardOptions = keyboardOptions,
+            keyboardActions = keyboardActions,
+            trailingIcon = trailingIcon,
+            enabled = enabled,
+            singleLine = singleLine,
+            visualTransformation = visualTransformation
+        )
+
+        ConstraintLayout(
+            modifier = Modifier.fillMaxWidth(),
+            constraintSet = buildHelperCounterConstraints()
+        ) {
+            Box(
+                modifier = Modifier
+                    .layoutId("helperText")
+            ) {
+                if (isError) {
+                    Text(
+                        text = errorMessage,
+                        color = MaterialTheme.colors.error,
+                        style = MaterialTheme.typography.caption
+                    )
+                } else if (enabledHelper && helperText.isNotEmpty()) {
+                    Text(
+                        text = helperText,
+                        color = GrayBorderLight,
+                        style = MaterialTheme.typography.caption
+                    )
+                }
+            }
+            Box(
+                modifier = Modifier
+                    .layoutId("counter")
+            ) {
+                if (enabledCounter) {
+                    Text(
+                        text = "${value.length}/${maxLength}",
+                        color = GrayLetterHint,
+                        fontWeight = SemiBold,
+                        fontSize = 15.sp
+                    )
+                }
+            }
+        }
+
+    }
+}
 
 fun buildHelperCounterConstraints(): ConstraintSet {
     return ConstraintSet {

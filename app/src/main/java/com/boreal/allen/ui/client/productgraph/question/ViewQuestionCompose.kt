@@ -42,7 +42,6 @@ fun ViewQuestionCompose(navController: NavHostController? = null) {
             color = White
         )
     }
-    val scrollState = rememberScrollState()
 
     ConstraintLayout(modifier = Modifier
         .fillMaxSize()

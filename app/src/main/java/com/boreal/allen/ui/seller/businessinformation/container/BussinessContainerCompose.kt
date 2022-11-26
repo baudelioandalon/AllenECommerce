@@ -47,7 +47,7 @@ fun ViewBussinessInformationContainerCompose(
             color = White
         )
     }
-    val scaffoldState = rememberScaffoldState(drawerState = DrawerState(initialValue = DrawerValue.Open))
+    val scaffoldState = rememberScaffoldState(drawerState = DrawerState(initialValue = DrawerValue.Closed))
     val scope = rememberCoroutineScope()
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         Scaffold(modifier = Modifier

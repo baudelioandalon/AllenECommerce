@@ -269,7 +269,7 @@ fun ViewShoppingCompose(navController: NavHostController? = null) {
                 navController?.navigateUp()
             },
             showEndImage = false,
-            iconIdRes = R.drawable.ic_coupon,
+            endIcon = R.drawable.ic_coupon,
         )
 
     }

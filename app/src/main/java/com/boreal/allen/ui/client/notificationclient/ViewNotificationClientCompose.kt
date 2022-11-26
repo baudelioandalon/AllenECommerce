@@ -101,7 +101,7 @@ fun ViewNotificationClientCompose(navController: NavHostController? = null) {
             titleText = "Notificaciones", backClicked = {
                 navController?.navigateUp()
             },
-            iconIdRes = R.drawable.ic_bell_icon
+            endIcon = R.drawable.ic_bell_icon
         )
     }
 }

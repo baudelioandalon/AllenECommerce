@@ -315,6 +315,64 @@ fun NewAddressSelector(
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
+fun BussinessImageSelector(
+    modifier: Modifier = Modifier,
+    onClicked: (() -> Unit)? = null
+) {
+
+    val stroke = Stroke(
+        width = 5f,
+        pathEffect = PathEffect.dashPathEffect(floatArrayOf(25f, 25f), 0f)
+    )
+
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(240.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        Canvas(modifier = Modifier.fillMaxSize()) {
+            drawRoundRect(
+                color = GraySinceTo, style = stroke,
+                cornerRadius = CornerRadius(20.dp.toPx())
+            )
+        }
+        Card(
+            modifier = Modifier
+                .fillMaxSize(),
+            elevation = 0.dp,
+            shape = RoundedCornerShape(20.dp),
+            backgroundColor = White,
+            onClick = {
+                onClicked?.invoke()
+            }
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Icon(
+                    modifier = Modifier.size(25.dp),
+                    painter = painterResource(id = R.drawable.ic_more_icon),
+                    contentDescription = "hide shipping options",
+                    tint = GraySinceTo
+                )
+                BoldText(
+                    modifier = Modifier.padding(top = 10.dp),
+                    text = "Logotipo",
+                    color = GrayBorder,
+                    size = 25.sp
+                )
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
 fun UserSelector(
     modifier: Modifier = Modifier,
     text: String = "Yo",

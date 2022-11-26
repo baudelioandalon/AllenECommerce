@@ -184,7 +184,8 @@ fun ToolbarTitle(
     backClicked: (() -> Unit)? = null,
     cartClicked: (() -> Unit)? = null,
     showEndImage: Boolean = true,
-    iconIdRes: Int = R.drawable.ic_cart_icon
+    firstIcon: Int = R.drawable.ic_back_arrow,
+    endIcon: Int = R.drawable.ic_cart_icon
 ) {
     Card(
         modifier = Modifier
@@ -229,7 +230,7 @@ fun ToolbarTitle(
                     shape = CircleShape, onClick = { backClicked?.invoke() }) {
                     Image(
                         modifier = Modifier.wrapContentSize(),
-                        painter = painterResource(id = R.drawable.ic_back_arrow),
+                        painter = painterResource(id = firstIcon),
                         contentDescription = ""
                     )
                 }
@@ -249,7 +250,7 @@ fun ToolbarTitle(
                         shape = CircleShape, onClick = { cartClicked?.invoke() }) {
                         Image(
                             modifier = Modifier.wrapContentSize(),
-                            painter = painterResource(id = iconIdRes),
+                            painter = painterResource(id = endIcon),
                             contentDescription = ""
                         )
                     }

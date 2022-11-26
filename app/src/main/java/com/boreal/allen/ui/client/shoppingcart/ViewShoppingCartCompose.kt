@@ -151,7 +151,7 @@ fun ViewShoppingCartCompose(navController: NavHostController ? = null) {
             titleText = "Mi carrito", backClicked = {
                 navController?.navigateUp()
             },
-            iconIdRes = R.drawable.ic_coupon
+            endIcon = R.drawable.ic_coupon
         )
 
         Card(

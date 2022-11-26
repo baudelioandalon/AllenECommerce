@@ -123,7 +123,7 @@ fun ViewFavoritesCompose(navController: NavHostController? = null) {
             titleText = "Favoritos", backClicked = {
                 navController?.navigateUp()
             },
-            iconIdRes = R.drawable.ic_favorite_unselected
+            endIcon = R.drawable.ic_favorite_unselected
         )
     }
 }
