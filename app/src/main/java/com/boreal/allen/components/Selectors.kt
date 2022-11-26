@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.sp
 import com.boreal.allen.R
 import com.boreal.allen.theme.*
 
-@Preview(showBackground = true)
+//@Preview(showBackground = true)
 @Composable
 fun TestSelectors() {
     Column(modifier = Modifier.fillMaxSize()) {
@@ -126,6 +126,7 @@ fun ShippingSelector(
     }
 }
 
+@Preview
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun AddressSelector(
@@ -183,6 +184,63 @@ fun AddressSelector(
                     .wrapContentSize()
                     .padding(end = 15.dp),
                 painter = painterResource(id = R.drawable.ic_selector_right),
+                contentDescription = "right selector"
+            )
+        }
+    }
+}
+
+@Preview
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun PaymentMethodSelector(
+    modifier: Modifier = Modifier,
+    text: String = "Contra entrega\nen efectivo",
+    iconRes: Int = R.drawable.cash_symbol,
+    selected: Boolean = false,
+    onClicked: (() -> Unit)? = null
+) {
+    Card(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(60.dp),
+        elevation = 0.dp,
+        shape = RoundedCornerShape(10.dp),
+        border = BorderStroke(1.dp, if (selected) PrimaryColor else GrayBorderThin),
+        backgroundColor = White,
+        onClick = {
+            onClicked?.invoke()
+        }
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Start,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                modifier = Modifier
+                    .padding(end = 13.dp, start = 16.dp)
+                    .size(20.dp),
+                painter = painterResource(id = iconRes),
+                contentDescription = "hide shipping options",
+                tint = if (selected) PrimaryColor else GraySinceTo
+            )
+            Column(
+                modifier = Modifier.weight(1f),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                MediumText(
+                    text = text,
+                    color = GraySinceTo,
+                    size = 15.sp,
+                    align = TextAlign.Center
+                )
+            }
+            Image(
+                modifier = Modifier
+                    .wrapContentSize()
+                    .padding(end = 15.dp),
+                painter = painterResource(id = R.drawable.ic_check),
                 contentDescription = "right selector"
             )
         }

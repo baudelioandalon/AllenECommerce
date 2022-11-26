@@ -21,6 +21,7 @@ import com.boreal.allen.domain.BusinessInformationScreen
 import com.boreal.allen.ui.general.logingraph.welcome.*
 import com.boreal.allen.ui.seller.businessinformation.contact.ViewBussinessInformationContactCompose
 import com.boreal.allen.ui.seller.businessinformation.main.ViewBussinessInformationMainCompose
+import com.boreal.allen.ui.seller.businessinformation.shippingandpayments.ViewBussinessInformationShippingAndPaymentsCompose
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import kotlinx.coroutines.launch
 
@@ -83,7 +84,7 @@ fun ViewBussinessInformationContainerCompose(
 
                 NavHost(
                     navController = innerBussinessNavController,
-                    startDestination = BusinessInformationScreen.ContactInformationScreen.route
+                    startDestination = BusinessInformationScreen.ShippingAndPaymentsScreen.route
                 ) {
                     composable(route = BusinessInformationScreen.MainScreen.route) {
                         ViewBussinessInformationMainCompose(
@@ -96,6 +97,15 @@ fun ViewBussinessInformationContainerCompose(
                     }
                     composable(route = BusinessInformationScreen.ContactInformationScreen.route) {
                         ViewBussinessInformationContactCompose(
+                            navController = innerBussinessNavController
+                        ) {
+                            scope.launch {
+                                scaffoldState.drawerState.open()
+                            }
+                        }
+                    }
+                    composable(route = BusinessInformationScreen.ShippingAndPaymentsScreen.route) {
+                        ViewBussinessInformationShippingAndPaymentsCompose(
                             navController = innerBussinessNavController
                         ) {
                             scope.launch {
