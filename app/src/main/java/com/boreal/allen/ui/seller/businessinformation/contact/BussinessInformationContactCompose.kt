@@ -1,11 +1,8 @@
-package com.boreal.allen.ui.client.productgraph.ratinggraph
+package com.boreal.allen.ui.seller.businessinformation.contact
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.isSystemInDarkTheme
+import android.annotation.SuppressLint
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -22,14 +19,18 @@ import androidx.constraintlayout.compose.layoutId
 import androidx.navigation.NavHostController
 import com.boreal.allen.R
 import com.boreal.allen.components.*
-import com.boreal.allen.domain.model.QuestionModel
 import com.boreal.allen.extensions.drawColoredShadow
 import com.boreal.allen.theme.*
+import com.boreal.allen.ui.general.logingraph.welcome.*
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
+@SuppressLint("UnrememberedMutableState")
 @Preview
 @Composable
-fun ViewRatingProductCompose(navController: NavHostController) {
+fun ViewBussinessInformationContactCompose(
+    navController: NavHostController? = null,
+    menuClicked: () -> Unit = {}
+) {
     val systemUiController = rememberSystemUiController()
     if (isSystemInDarkTheme()) {
         systemUiController.setSystemBarsColor(
@@ -40,6 +41,7 @@ fun ViewRatingProductCompose(navController: NavHostController) {
             color = White
         )
     }
+
     val scrollState = rememberScrollState()
 
     ConstraintLayout(modifier = Modifier
@@ -47,29 +49,29 @@ fun ViewRatingProductCompose(navController: NavHostController) {
         .background(GrayBackgroundMain),
         constraintSet = ConstraintSet {
             val toolbarTitle = createRefFor("toolbarTitle")
-            val container = createRefFor("container")
+            val search = createRefFor("search")
             val bottomQuestion = createRefFor("bottomQuestion")
             val content = createRefFor("content")
             val guideLine = createGuidelineFromTop(0.09f)
 
-            val guideLineSearch = createGuidelineFromTop(0.20f)
+            val guideLineSearch = createGuidelineFromTop(0.24f)
 
             constrain(toolbarTitle) {
                 top.linkTo(parent.top)
                 width = Dimension.matchParent
                 height = Dimension.fillToConstraints
             }
-            constrain(container) {
+            constrain(search) {
                 top.linkTo(guideLine)
                 start.linkTo(parent.start)
                 end.linkTo(parent.end)
                 bottom.linkTo(guideLineSearch)
                 width = Dimension.matchParent
-                height = Dimension.fillToConstraints
+                height = Dimension.wrapContent
             }
             constrain(content) {
-                top.linkTo(guideLineSearch, 0.dp)
-                bottom.linkTo(bottomQuestion.top, margin = 30.dp)
+                top.linkTo(guideLine, 0.dp)
+                bottom.linkTo(bottomQuestion.top)
                 width = Dimension.matchParent
                 height = Dimension.fillToConstraints
             }
@@ -79,85 +81,59 @@ fun ViewRatingProductCompose(navController: NavHostController) {
                 height = Dimension.fillToConstraints
             }
         }) {
-        Row(
+
+        Column(
             modifier = Modifier
-                .background(White)
-                .padding(
-                    top = 30.dp, end = 30.dp,
-                    start = 30.dp
-                )
                 .fillMaxSize()
-                .layoutId("container"),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            Selector(
-                backgroundColor = GrayBrandingBackground,
-                text = "Todos",
-                textColor = PrimaryColor
-            )
-            Selector(
-                backgroundColor = GreenTransparent,
-                text = "Positivas",
-                textColor = GreenStrong
-            )
-            Selector(
-                backgroundColor = GrayBrandingBackground,
-                text = "Negativas",
-                textColor = PrimaryColor
-            )
-        }
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight()
-                .background(GrayBackgroundMain)
+                .background(White)
                 .layoutId("content")
+                .verticalScroll(scrollState),
+            verticalArrangement = Arrangement.Top
         ) {
 
-            itemsIndexed(
-                listOf(
-                    QuestionModel(
-                        question = "¿Sirve para 220v?",
-                        imageUser = "",
-                        likesList = listOf("33", "33333", "33332"),
-                        answerList = listOf("Si, incluso para 110v")
-                    ), QuestionModel(
-                        question = "¿Es nuevo el articulo?",
-                        imageUser = "",
-                        likesList = listOf("33", "333"),
-                        answerList = listOf(
-                            "¡Asi es, todos nuestros " +
-                                    "articulos son nuevos " +
-                                    "completamente!", "A precios bajos"
-                        )
-                    ), QuestionModel(
-                        question = "¿Costo de envio?",
-                        imageUser = "",
-                        answerList = listOf(
-                            "¡Comprando 4 el envio es gratis¡"
-                        )
-                    )
-                )
-            ) { index, item ->
-                RatingByUserItem(
-                    text = item.question,
-                    likesList = item.likesList
-                )
-            }
+            BoldText(
+                modifier = Modifier.padding(start = 30.dp, top = 30.dp),
+                text = "Telefono",
+                size = 20.sp
+            )
+            ColorSelector(text = "Añadir")
+
+            BoldText(
+                modifier = Modifier.padding(start = 30.dp),
+                text = "WhatsApp",
+                size = 20.sp
+            )
+            ColorSelector(text = "Añadir")
+
+            BoldText(
+                modifier = Modifier.padding(start = 30.dp),
+                text = "Correo",
+                size = 20.sp
+            )
+            ColorSelector(text = "Añadir")
+
+            BoldText(
+                modifier = Modifier.padding(start = 30.dp),
+                text = "Redes sociales",
+                size = 20.sp
+            )
+            ColorSelector(text = "Añadir")
+
         }
+
         ToolbarTitle(
             modifier = Modifier.layoutId("toolbarTitle"),
-            titleText = "Calificaciones", backClicked = {
-                navController.navigateUp()
-            },
-            endIcon = R.drawable.ic_questions_icon
+            titleText = "Contacto", backClicked = {
+                menuClicked()
+            }, firstIcon = R.drawable.ic_menu_icon,
+            endIcon = R.drawable.ic_bell_icon
         )
 
         Card(
             modifier = Modifier
                 .fillMaxWidth()
                 .layoutId("bottomQuestion"),
-            elevation = 9.dp
+            elevation = 20.dp
         ) {
             Row(
                 modifier = Modifier
@@ -176,25 +152,19 @@ fun ViewRatingProductCompose(navController: NavHostController) {
                     horizontalAlignment = Alignment.Start
                 ) {
                     RegularText(
-                        text = "Calificar",
+                        text = "2 de 4 completados",
                         color = GrayLetterShipping,
                         size = 18.sp
                     )
-                    OutlinedTextField(
-                        modifier = Modifier.padding(bottom = 30.dp, top = 18.dp),
-                        value = "",
-                        onValueChange = {},
-                        placeHolder = "Califica el producto",
-                    )
                     ShadowButton(
                         modifier = Modifier
-                            .padding(bottom = 18.dp)
+                            .padding(bottom = 18.dp, top = 16.dp)
                             .fillMaxWidth()
                             .drawColoredShadow(
                                 color = BlueTransparent, alpha = 1f, borderRadius = 10.dp,
                                 offsetY = 6.dp, offsetX = 5.dp, blurRadius = 10.dp
                             ),
-                        text = "Enviar calificación"
+                        text = "Siguiente"
                     )
                 }
             }

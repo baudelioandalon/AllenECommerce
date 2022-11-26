@@ -19,6 +19,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.boreal.allen.domain.BusinessInformationScreen
 import com.boreal.allen.ui.general.logingraph.welcome.*
+import com.boreal.allen.ui.seller.businessinformation.contact.ViewBussinessInformationContactCompose
 import com.boreal.allen.ui.seller.businessinformation.main.ViewBussinessInformationMainCompose
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import kotlinx.coroutines.launch
@@ -60,7 +61,7 @@ fun ViewBussinessInformationContainerCompose(
                             innerBussinessNavController.navigate(BusinessInformationScreen.MainScreen.route)
                         }
                         DrawerOptions.Contact -> {
-                            innerBussinessNavController.navigate(BusinessInformationScreen.MainScreen.route)
+                            innerBussinessNavController.navigate(BusinessInformationScreen.ContactInformationScreen.route)
                         }
                         DrawerOptions.ShippingAndPayments -> {
                             innerBussinessNavController.navigate(BusinessInformationScreen.MainScreen.route)
@@ -82,10 +83,19 @@ fun ViewBussinessInformationContainerCompose(
 
                 NavHost(
                     navController = innerBussinessNavController,
-                    startDestination = BusinessInformationScreen.MainScreen.route
+                    startDestination = BusinessInformationScreen.ContactInformationScreen.route
                 ) {
                     composable(route = BusinessInformationScreen.MainScreen.route) {
                         ViewBussinessInformationMainCompose(
+                            navController = innerBussinessNavController
+                        ) {
+                            scope.launch {
+                                scaffoldState.drawerState.open()
+                            }
+                        }
+                    }
+                    composable(route = BusinessInformationScreen.ContactInformationScreen.route) {
+                        ViewBussinessInformationContactCompose(
                             navController = innerBussinessNavController
                         ) {
                             scope.launch {

@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -26,7 +25,6 @@ import com.boreal.allen.ui.client.homeclientgraph.CategoryHorizontal
 import com.boreal.allen.ui.general.logingraph.welcome.*
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
-@OptIn(ExperimentalMaterialApi::class)
 @SuppressLint("UnrememberedMutableState")
 @Preview
 @Composable
@@ -127,21 +125,7 @@ fun ViewBussinessInformationMainCompose(
                 size = 20.sp
             )
 
-            Column(
-                modifier = Modifier
-                    .padding(start = 30.dp, end = 30.dp, top = 20.dp, bottom = 30.dp)
-                    .wrapContentWidth()
-                    .wrapContentHeight(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
-                ColorSelector()
-                BoldText(
-                    modifier = Modifier.padding(top = 5.dp),
-                    size = 10.sp,
-                    text = "Cambiar"
-                )
-            }
+            ColorSelector()
 
             BoldText(
                 modifier = Modifier.padding(start = 30.dp),

@@ -134,7 +134,7 @@ fun ViewQuestionCompose(navController: NavHostController? = null) {
             titleText = "Preguntas", backClicked = {
                 navController?.navigateUp()
             },
-            iconIdRes = R.drawable.ic_questions_icon
+            endIcon = R.drawable.ic_questions_icon
         )
 
         Card(
