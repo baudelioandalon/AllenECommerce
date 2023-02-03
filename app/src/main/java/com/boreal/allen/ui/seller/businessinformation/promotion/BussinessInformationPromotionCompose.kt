@@ -1,4 +1,4 @@
-package com.boreal.allen.ui.seller.businessinformation.shippingandpayments
+package com.boreal.allen.ui.seller.businessinformation.promotion
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.*
@@ -27,7 +27,7 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 @SuppressLint("UnrememberedMutableState")
 @Preview
 @Composable
-fun ViewBussinessInformationShippingAndPaymentsCompose(
+fun ViewBussinessInformationPromotionCompose(
     navController: NavHostController? = null,
     menuClicked: () -> Unit = {}
 ) {
@@ -53,6 +53,7 @@ fun ViewBussinessInformationShippingAndPaymentsCompose(
             val bottomQuestion = createRefFor("bottomQuestion")
             val content = createRefFor("content")
             val guideLine = createGuidelineFromTop(0.09f)
+
             val guideLineSearch = createGuidelineFromTop(0.24f)
 
             constrain(toolbarTitle) {
@@ -92,30 +93,7 @@ fun ViewBussinessInformationShippingAndPaymentsCompose(
 
             BoldText(
                 modifier = Modifier.padding(start = 30.dp, top = 30.dp),
-                text = "Opciones de envio",
-                size = 20.sp
-            )
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 30.dp, start = 30.dp, end = 30.dp, top = 20.dp),
-                horizontalArrangement = Arrangement.SpaceBetween,
-            ) {
-                ShippingSelector(
-                    modifier = Modifier
-                        .padding(end = 25.dp)
-                        .weight(1f), shipping = true
-                )
-                ShippingSelector(
-                    modifier = Modifier
-                        .padding(start = 25.dp)
-                        .weight(1f)
-                )
-            }
-
-            BoldText(
-                modifier = Modifier.padding(start = 30.dp),
-                text = "Formas de pago",
+                text = "Cupones",
                 size = 20.sp
             )
             Column(
@@ -123,17 +101,7 @@ fun ViewBussinessInformationShippingAndPaymentsCompose(
                     .fillMaxWidth()
                     .padding(bottom = 30.dp, start = 30.dp, end = 30.dp, top = 20.dp),
             ) {
-                PaymentMethodSelector(
-                    modifier = Modifier.padding(bottom = 30.dp)
-                )
-                PaymentMethodSelector(
-                    iconRes = R.drawable.transfer_symbol,
-                    text = "Contra entrega\npor tarjeta / transferencia",
-                    modifier = Modifier.padding(bottom = 30.dp)
-                )
-                PaymentMethodSelector(
-                    iconRes = R.drawable.card_symbol,
-                    text = "Tarjeta",
+                NewCouponSelector(
                     modifier = Modifier.padding(bottom = 30.dp)
                 )
             }
@@ -141,7 +109,7 @@ fun ViewBussinessInformationShippingAndPaymentsCompose(
 
         ToolbarTitle(
             modifier = Modifier.layoutId("toolbarTitle"),
-            titleText = "Envios y pagos", backClicked = {
+            titleText = "Promoción", backClicked = {
                 menuClicked()
             }, firstIcon = R.drawable.ic_menu_icon,
             endIcon = R.drawable.ic_bell_icon
@@ -170,7 +138,7 @@ fun ViewBussinessInformationShippingAndPaymentsCompose(
                     horizontalAlignment = Alignment.Start
                 ) {
                     RegularText(
-                        text = "3 de 4 completados",
+                        text = "4 de 4 completados",
                         color = GrayLetterShipping,
                         size = 18.sp
                     )

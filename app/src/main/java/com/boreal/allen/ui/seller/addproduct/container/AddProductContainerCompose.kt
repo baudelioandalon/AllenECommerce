@@ -1,4 +1,4 @@
-package com.boreal.allen.ui.seller.businessinformation.container
+package com.boreal.allen.ui.seller.addproduct.container
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -7,8 +7,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -20,11 +18,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.boreal.allen.components.bottomnavigation.currentRoute
-import com.boreal.allen.domain.BusinessInformationScreen
+import com.boreal.allen.domain.AddProductScreen
 import com.boreal.allen.ui.general.logingraph.welcome.*
+import com.boreal.allen.ui.seller.addproduct.main.ViewAddProductMainCompose
 import com.boreal.allen.ui.seller.businessinformation.ViewOtherCompose
-import com.boreal.allen.ui.seller.businessinformation.contact.ViewBussinessInformationContactCompose
-import com.boreal.allen.ui.seller.businessinformation.main.ViewBussinessInformationMainCompose
 import com.boreal.allen.ui.seller.businessinformation.promotion.ViewBussinessInformationPromotionCompose
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import kotlinx.coroutines.launch
@@ -32,7 +29,7 @@ import kotlinx.coroutines.launch
 @SuppressLint("UnrememberedMutableState")
 @Preview
 @Composable
-fun ViewBussinessInformationContainerCompose(
+fun ViewAddProductContainerCompose(
     navController: NavHostController? = null, closeApp: () -> Unit = {}
 ) {
     val innerBussinessNavController = rememberNavController()
@@ -50,7 +47,6 @@ fun ViewBussinessInformationContainerCompose(
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
     val currentRoute = currentRoute(navController = innerBussinessNavController)
-    val currentScreen = remember { mutableStateOf<DrawerOptions>(DrawerOptions.Main) }
 
     currentRoute
 
@@ -65,16 +61,16 @@ fun ViewBussinessInformationContainerCompose(
                     }
                     when (it.option) {
                         DrawerOptions.Main -> {
-                            innerBussinessNavController.navigate(BusinessInformationScreen.MainScreen.route)
+                            innerBussinessNavController.navigate(AddProductScreen.MainScreen.route)
                         }
-                        DrawerOptions.Contact -> {
-                            innerBussinessNavController.navigate(BusinessInformationScreen.ContactInformationScreen.route)
+                        DrawerOptions.Details -> {
+                            innerBussinessNavController.navigate(AddProductScreen.DetailScreen.route)
                         }
-                        DrawerOptions.ShippingAndPayments -> {
-                            innerBussinessNavController.navigate(BusinessInformationScreen.ShippingAndPaymentsScreen.route)
+                        DrawerOptions.Price -> {
+                            innerBussinessNavController.navigate(AddProductScreen.PriceScreen.route)
                         }
-                        DrawerOptions.Promotion -> {
-                            innerBussinessNavController.navigate(BusinessInformationScreen.PromotionScreen.route)
+                        DrawerOptions.Tags -> {
+                            innerBussinessNavController.navigate(AddProductScreen.TagsScreen.route)
                         }
                         DrawerOptions.Save -> {
                             //Save data
@@ -90,11 +86,11 @@ fun ViewBussinessInformationContainerCompose(
 
                 NavHost(
                     navController = innerBussinessNavController,
-                    startDestination = BusinessInformationScreen.MainScreen.route,
+                    startDestination = AddProductScreen.MainScreen.route,
                     route = "BUSSINESS"
                 ) {
-                    composable(route = BusinessInformationScreen.MainScreen.route) {
-                        ViewBussinessInformationMainCompose(
+                    composable(route = AddProductScreen.MainScreen.route) {
+                        ViewAddProductMainCompose(
                             navController = innerBussinessNavController
                         ) {
                             scope.launch {
@@ -102,8 +98,8 @@ fun ViewBussinessInformationContainerCompose(
                             }
                         }
                     }
-                    composable(route = BusinessInformationScreen.ContactInformationScreen.route) {
-                        ViewBussinessInformationContactCompose(
+                    composable(route = AddProductScreen.DetailScreen.route) {
+                        ViewAddProductMainCompose(
                             navController = innerBussinessNavController
                         ) {
                             scope.launch {
@@ -112,14 +108,14 @@ fun ViewBussinessInformationContainerCompose(
                         }
 
                     }
-                    composable(route = BusinessInformationScreen.ShippingAndPaymentsScreen.route) {
+                    composable(route = AddProductScreen.PriceScreen.route) {
                         ViewOtherCompose {
                             scope.launch {
                                 scaffoldState.drawerState.open()
                             }
                         }
                     }
-                    composable(route = BusinessInformationScreen.PromotionScreen.route) {
+                    composable(route = AddProductScreen.TagsScreen.route) {
                         ViewBussinessInformationPromotionCompose(
                             navController = innerBussinessNavController
                         ) {
@@ -130,29 +126,6 @@ fun ViewBussinessInformationContainerCompose(
                     }
                 }
 
-//                when (currentScreen.value) {
-//                    DrawerOptions.Main -> {
-//                        innerBussinessNavController.navigate(BusinessInformationScreen.MainScreen.route)
-//                    }
-//                    DrawerOptions.Contact -> {
-//                        innerBussinessNavController.navigate(BusinessInformationScreen.ContactInformationScreen.route)
-//                    }
-//                    DrawerOptions.ShippingAndPayments -> {
-//                        innerBussinessNavController.navigate(BusinessInformationScreen.ShippingAndPaymentsScreen.route)
-//                    }
-//                    DrawerOptions.Promotion -> {
-//                        innerBussinessNavController.navigate(BusinessInformationScreen.PromotionScreen.route)
-//                    }
-//                    DrawerOptions.Save -> {
-//                        //Save data
-//                        Log.e("ddd", "2ddd")
-//                    }
-//                    else -> {
-//                        //Exit
-//                        Log.e("ddd", "2ddd")
-////                            navController?.navigateUp()
-//                    }
-//                }
                 it.calculateBottomPadding()
             })
 

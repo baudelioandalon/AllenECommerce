@@ -53,8 +53,14 @@ sealed class DrawerOptions(val name: String) {
     object Main : DrawerOptions("MAIN")
     object Contact : DrawerOptions("CONTACT")
     object ShippingAndPayments : DrawerOptions("SHIPPING_AND_PAYMENTS")
-    object Promotion : DrawerOptions("Promotion")
+    object Promotion : DrawerOptions("PROMOTION")
     object Save : DrawerOptions("Save")
+
+    //Add product
+    object Category: DrawerOptions("CATEGORY")
+    object Details: DrawerOptions("DETAILS")
+    object Price: DrawerOptions("PRICE")
+    object Tags: DrawerOptions("TAGS")
 }
 
 @Composable
@@ -201,7 +207,7 @@ fun BussinessInformationDrawer(onItemClicked: (MenuItem) -> Unit = {}) {
                     "Salir",
                     icon = R.drawable.ic_arrow_right,
                     contentDescription = "salir",
-                    option = DrawerOptions.CloseSession
+                    option = DrawerOptions.Exit
                 )
             )
         ) {

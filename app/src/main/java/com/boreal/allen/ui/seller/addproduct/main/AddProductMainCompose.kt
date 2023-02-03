@@ -1,4 +1,4 @@
-package com.boreal.allen.ui.seller.businessinformation.shippingandpayments
+package com.boreal.allen.ui.seller.addproduct.main
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.*
@@ -21,13 +21,14 @@ import com.boreal.allen.R
 import com.boreal.allen.components.*
 import com.boreal.allen.extensions.drawColoredShadow
 import com.boreal.allen.theme.*
+import com.boreal.allen.ui.client.homeclientgraph.CategoryHorizontal
 import com.boreal.allen.ui.general.logingraph.welcome.*
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @SuppressLint("UnrememberedMutableState")
 @Preview
 @Composable
-fun ViewBussinessInformationShippingAndPaymentsCompose(
+fun ViewAddProductMainCompose(
     navController: NavHostController? = null,
     menuClicked: () -> Unit = {}
 ) {
@@ -53,6 +54,7 @@ fun ViewBussinessInformationShippingAndPaymentsCompose(
             val bottomQuestion = createRefFor("bottomQuestion")
             val content = createRefFor("content")
             val guideLine = createGuidelineFromTop(0.09f)
+
             val guideLineSearch = createGuidelineFromTop(0.24f)
 
             constrain(toolbarTitle) {
@@ -89,59 +91,55 @@ fun ViewBussinessInformationShippingAndPaymentsCompose(
                 .verticalScroll(scrollState),
             verticalArrangement = Arrangement.Top
         ) {
-
-            BoldText(
-                modifier = Modifier.padding(start = 30.dp, top = 30.dp),
-                text = "Opciones de envio",
-                size = 20.sp
-            )
-            Row(
+            BussinessImageSelector(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 30.dp, start = 30.dp, end = 30.dp, top = 20.dp),
-                horizontalArrangement = Arrangement.SpaceBetween,
-            ) {
-                ShippingSelector(
-                    modifier = Modifier
-                        .padding(end = 25.dp)
-                        .weight(1f), shipping = true
-                )
-                ShippingSelector(
-                    modifier = Modifier
-                        .padding(start = 25.dp)
-                        .weight(1f)
-                )
-            }
+                    .padding(
+                        start = 30.dp,
+                        end = 30.dp,
+                        top = 30.dp
+                    )
+            )
+
+            TextField(modifier = Modifier.padding(
+                start = 10.dp,
+                end = 10.dp,
+                top = 10.dp
+            ), value = "Nombre del negocio", onValueChange = {})
+
+            SemiBoldText(
+                modifier = Modifier.padding(start = 30.dp, end = 30.dp),
+                text = "Mensaje de bienvenida al cliente",
+                size = 15.sp
+            )
+
+            OutlinedTextField(
+                modifier = Modifier.padding(start = 30.dp, end = 30.dp, bottom = 30.dp),
+                value = "",
+                onValueChange = {},
+                placeHolder = "Escribe un mensaje corto"
+            )
 
             BoldText(
                 modifier = Modifier.padding(start = 30.dp),
-                text = "Formas de pago",
+                text = "Color principal",
                 size = 20.sp
             )
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 30.dp, start = 30.dp, end = 30.dp, top = 20.dp),
-            ) {
-                PaymentMethodSelector(
-                    modifier = Modifier.padding(bottom = 30.dp)
-                )
-                PaymentMethodSelector(
-                    iconRes = R.drawable.transfer_symbol,
-                    text = "Contra entrega\npor tarjeta / transferencia",
-                    modifier = Modifier.padding(bottom = 30.dp)
-                )
-                PaymentMethodSelector(
-                    iconRes = R.drawable.card_symbol,
-                    text = "Tarjeta",
-                    modifier = Modifier.padding(bottom = 30.dp)
-                )
-            }
+
+            ColorSelector()
+
+            BoldText(
+                modifier = Modifier.padding(start = 30.dp),
+                text = "Categoria",
+                size = 20.sp
+            )
+
+            CategoryHorizontal()
+
         }
 
         ToolbarTitle(
             modifier = Modifier.layoutId("toolbarTitle"),
-            titleText = "Envios y pagos", backClicked = {
+            titleText = "Añadir producto", backClicked = {
                 menuClicked()
             }, firstIcon = R.drawable.ic_menu_icon,
             endIcon = R.drawable.ic_bell_icon
@@ -170,7 +168,7 @@ fun ViewBussinessInformationShippingAndPaymentsCompose(
                     horizontalAlignment = Alignment.Start
                 ) {
                     RegularText(
-                        text = "3 de 4 completados",
+                        text = "1 de 4 completados",
                         color = GrayLetterShipping,
                         size = 18.sp
                     )

@@ -21,6 +21,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.boreal.allen.R
+import com.boreal.allen.components.bottomnavigation.CustomBottomNavigation
 import com.boreal.allen.domain.NOTIFICATION_CLIENT_GRAPH
 import com.boreal.allen.domain.SALES_SELLER_GRAPH
 import com.boreal.allen.domain.SellerScreen
@@ -28,7 +29,6 @@ import com.boreal.allen.ui.general.logingraph.welcome.DrawerBody
 import com.boreal.allen.ui.general.logingraph.welcome.DrawerHeader
 import com.boreal.allen.ui.general.logingraph.welcome.DrawerOptions
 import com.boreal.allen.ui.general.logingraph.welcome.MenuItem
-import com.boreal.allen.components.bottomnavigation.CustomBottomNavigation
 import com.boreal.allen.ui.seller.home.ViewHomeSellerCompose
 import com.boreal.allen.ui.seller.products.ViewMyProductsSellerCompose
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
@@ -54,7 +54,7 @@ fun ViewHomeContainerSellerCompose(
     }
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
-    val currentScreen = remember{mutableStateOf<SellerScreen>(SellerScreen.HomeSellerScreen)}
+    val currentScreen = remember { mutableStateOf<SellerScreen>(SellerScreen.HomeSellerScreen) }
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         Scaffold(modifier = Modifier
             .fillMaxWidth(),

@@ -373,6 +373,67 @@ fun NewAddressSelector(
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
+fun NewCouponSelector(
+    modifier: Modifier = Modifier,
+    onClicked: (() -> Unit)? = null
+) {
+
+    val stroke = Stroke(
+        width = 10f,
+        pathEffect = PathEffect.dashPathEffect(floatArrayOf(35f, 35f), 0f)
+    )
+
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(55.dp), contentAlignment = Alignment.Center
+    ) {
+        Canvas(modifier = Modifier.fillMaxSize()) {
+            drawRoundRect(
+                color = GrayBorderThin, style = stroke,
+                cornerRadius = CornerRadius(10.dp.toPx())
+            )
+        }
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(55.dp),
+            elevation = 0.dp,
+            shape = RoundedCornerShape(10.dp),
+            backgroundColor = White,
+            onClick = {
+                onClicked?.invoke()
+            }
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Start,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Image(
+                    modifier = Modifier.padding(end = 13.dp, start = 16.dp),
+                    painter = painterResource(id = R.drawable.ic_coupon),
+                    contentDescription = "coupon",
+                )
+                MediumText(
+                    text = "Nuevo cupón",
+                    color = GraySinceTo,
+                    size = 15.sp
+                )
+
+                Spacer(modifier = Modifier.weight(1f))
+                MinimumAddButton(
+                    modifier = Modifier
+                        .wrapContentSize()
+                        .padding(end = 15.dp),
+                )
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
 fun BussinessImageSelector(
     modifier: Modifier = Modifier,
     onClicked: (() -> Unit)? = null

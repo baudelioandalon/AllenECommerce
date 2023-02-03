@@ -17,4 +17,5 @@ sealed class SellerScreen(
     object ProductsSellerScreen : SellerScreen("products_seller_screen", R.drawable.ic_cart_icon, "Productos")
     object SalesSellerScreen : SellerScreen("sales_seller_screen")
     object PrepareShoppingSellerScreen : SellerScreen("prepare_shopping_seller_screen")
+    object AddProductContainerScreen : SellerScreen("add_product_container_seller_screen")
 }
