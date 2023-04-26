@@ -19,16 +19,18 @@ import androidx.navigation.NavHostController
 import com.boreal.allen.R
 import com.boreal.allen.components.SemiBoldText
 import com.boreal.allen.domain.enum.StatusEnum
+import com.boreal.allen.theme.ErrorColor
 import com.boreal.allen.theme.SuccessColor
+import com.boreal.allen.theme.WarningColor
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @Preview(showBackground = true)
 @Composable
 fun ViewStatusCompose(
-    navController: NavHostController? = null,
     titleText: String = "",
     type: StatusEnum = StatusEnum.SUCCESS,
-    subtitleText: String = "", bottomText: String = ""
+    subtitleText: String = "",
+    bottomText: String = ""
 ) {
     val systemUiController = rememberSystemUiController()
     if (isSystemInDarkTheme()) {
@@ -37,7 +39,11 @@ fun ViewStatusCompose(
         )
     } else {
         systemUiController.setSystemBarsColor(
-            color = SuccessColor
+            color = when (type) {
+                StatusEnum.SUCCESS -> SuccessColor
+                StatusEnum.WARNING -> WarningColor
+                else -> ErrorColor
+            }
         )
     }
     val scrollState = rememberScrollState()
@@ -45,30 +51,42 @@ fun ViewStatusCompose(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(scrollState)
-            .background(SuccessColor),
+            .background(
+                when (type) {
+                    StatusEnum.SUCCESS -> SuccessColor
+                    StatusEnum.WARNING -> WarningColor
+                    else -> ErrorColor
+                }
+            ),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
         SemiBoldText(
-            text = "Pagarás\n $148",
+            text = titleText,
             align = TextAlign.Center,
             color = White,
             size = 30.sp
         )
         Image(
             modifier = Modifier.padding(vertical = 150.dp),
-            painter = painterResource(id = R.drawable.ic_success_status),
-            contentDescription = "success"
+            painter = painterResource(
+                id = when (type) {
+                    StatusEnum.SUCCESS -> R.drawable.ic_success_status
+                    StatusEnum.WARNING -> R.drawable.ic_warning_status
+                    else -> R.drawable.ic_error_status
+                }
+            ),
+            contentDescription = "imgType"
         )
         SemiBoldText(
-            text = "Compra exitosa",
+            text = subtitleText,
             align = TextAlign.Center,
             color = White,
             size = 25.sp
         )
         SemiBoldText(
-            text = "Disfruta de tu compra",
+            text = bottomText,
             align = TextAlign.Center,
             color = White,
             size = 14.sp
