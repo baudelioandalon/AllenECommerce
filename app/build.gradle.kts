@@ -57,6 +57,67 @@ android {
             )
         }
     }
+
+    flavorDimensions += "version"
+    productFlavors {
+        create("client") {
+            dimension = "version"
+
+            val versionMajor = 1
+            val versionMinor = 0
+            val versionBuild = 0
+            versionCode = 1
+
+            versionName = "$versionMajor.$versionMinor.$versionBuild"
+            applicationIdSuffix = ".client"
+            versionNameSuffix = "-client"
+
+            setProperty("archivesBaseName", versionName)
+        }
+        create("partner") {
+            dimension = "version"
+
+            val versionMajor = 1
+            val versionMinor = 0
+            val versionBuild = 0
+            versionCode = 1
+
+            versionName = "$versionMajor.$versionMinor.$versionBuild"
+            applicationIdSuffix = ".partner"
+            versionNameSuffix = "-partner"
+
+            setProperty("archivesBaseName", versionName)
+        }
+        create("pointOfSale") {
+            dimension = "version"
+
+            val versionMajor = 1
+            val versionMinor = 0
+            val versionBuild = 0
+            versionCode = 1
+
+            versionName = "$versionMajor.$versionMinor.$versionBuild"
+            applicationIdSuffix = ".pointOfSale"
+            versionNameSuffix = "-pointOfSale"
+
+            setProperty("archivesBaseName", versionName)
+        }
+        create("delivery") {
+            dimension = "version"
+
+            val versionMajor = 1
+            val versionMinor = 0
+            val versionBuild = 0
+            versionCode = 1
+
+            versionName = "$versionMajor.$versionMinor.$versionBuild"
+            applicationIdSuffix = ".delivery"
+            versionNameSuffix = "-delivery"
+
+            setProperty("archivesBaseName", versionName)
+        }
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
