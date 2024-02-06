@@ -18,7 +18,7 @@ fun NavGraphBuilder.statusGraph(
         route = STATUS_GRAPH
     ) {
         composable(route = ClientScreen.StatusClientScreen.route) {
-            ViewStatusCompose(navController, titleText, type, subtitleText, bottomText)
+//            ViewStatusCompose(navController, titleText, type, subtitleText, bottomText)
         }
     }
 }
