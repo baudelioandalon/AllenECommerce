@@ -41,6 +41,7 @@ import com.boreal.allen.theme.*
 import com.google.accompanist.flowlayout.FlowColumn
 import com.google.accompanist.flowlayout.FlowRow
 
+@Preview
 @Composable
 fun TestItems() {
     Column(
@@ -1751,6 +1752,7 @@ fun StepIndicatorNotification(
 
 }
 
+@Preview
 @Composable
 fun ShoppingCategoryHistoryItem(
     modifier: Modifier = Modifier,

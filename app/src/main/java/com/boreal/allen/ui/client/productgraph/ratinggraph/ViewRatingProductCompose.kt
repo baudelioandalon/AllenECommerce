@@ -29,7 +29,7 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @Preview
 @Composable
-fun ViewRatingProductCompose(navController: NavHostController) {
+fun ViewRatingProductCompose(navController: NavHostController? = null) {
     val systemUiController = rememberSystemUiController()
     if (isSystemInDarkTheme()) {
         systemUiController.setSystemBarsColor(
@@ -148,7 +148,7 @@ fun ViewRatingProductCompose(navController: NavHostController) {
         ToolbarTitle(
             modifier = Modifier.layoutId("toolbarTitle"),
             titleText = "Calificaciones", backClicked = {
-                navController.navigateUp()
+                navController?.navigateUp()
             },
             endIcon = R.drawable.ic_questions_icon
         )

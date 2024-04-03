@@ -38,6 +38,7 @@ fun MainCompose(closeApp: () -> Unit) {
         route = ROOT_GRAPH
     ) {
         //General
+
         loginGraph(navController, closeApp)
         storesMapGeneralGraph(navController, closeApp)
 
